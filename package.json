@@ -1,5 +1,5 @@
 {
-  "name": "koala",
+  "name": "koala-utils",
   "version": "1.0.3",
   "description": "Biblioteca com validadores, conversores e abstrações de algumas problemáticas",
   "main": "dist/index.js",
