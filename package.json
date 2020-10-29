@@ -22,6 +22,8 @@
   },
   "keywords": [
     "koala",
+    "utils",
+    "number",
     "string",
     "date",
     "validator",

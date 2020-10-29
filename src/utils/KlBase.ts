@@ -1,8 +1,8 @@
-import { KlObject } from "./KlObject";
-import { KlString } from "./KlString";
-import { KlArray } from "./KlArray";
-import { KlDate } from "./KlDate";
-import { KlNumber } from "./KlNumber";
+import { KlObject } from './KlObject';
+import { KlString } from './KlString';
+import { KlArray } from './KlArray';
+import { KlDate } from './KlDate';
+import { KlNumber } from './KlNumber';
 
 export abstract class KlBase {
   protected constructor(protected value: any) {}

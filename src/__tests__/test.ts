@@ -1,12 +1,21 @@
-import { koala } from "../index";
-import { KlDateDay } from "../enums/KlDateDay";
-import { KlDelay } from "../utils/KlDelay";
+import { koala } from '../index';
+import { KlDateDay } from '../enums/KlDateDay';
+import { KlDelay } from '../utils/KlDelay';
 
 jest.setTimeout(10000000);
 test('Array Utils', async () => {
   expect(koala([1]).array<number>().merge([2]).getValue()).toStrictEqual([1, 2]);
-  expect(koala([{teste: 123}, {teste2: 543}]).array().filter('123', 'teste').getValue()).toStrictEqual([{teste: 123}]);
-  expect(koala([{teste: 123}, {teste: 123}]).array().getIndex('teste', 123)).toBe(0);
+  expect(
+    koala([{teste: 123}, {teste2: 543}])
+      .array()
+      .filter('123', 'teste')
+      .getValue(),
+  ).toStrictEqual([{teste: 123}]);
+  expect(
+    koala([{teste: 123}, {teste: 123}])
+      .array()
+      .getIndex('teste', 123),
+  ).toBe(0);
   expect(koala([1, 2, 3, 4]).array().split(2).getValue()).toStrictEqual([
     [1, 2],
     [3, 4],
@@ -18,7 +27,10 @@ test('Array Utils', async () => {
       {date: new Date('2020-06-15')},
       {date: new Date('2020-06-17')},
       {date: new Date('2020-06-20')},
-    ]).array().orderBy('date').getValue(),
+    ])
+      .array()
+      .orderBy('date')
+      .getValue(),
   ).toStrictEqual([
     {date: new Date('2020-06-15')},
     {date: new Date('2020-06-17')},
@@ -31,7 +43,10 @@ test('Array Utils', async () => {
       {date: new Date('2020-06-15')},
       {date: new Date('2020-06-17')},
       {date: new Date('2020-06-20')},
-    ]).array().orderBy('date', true).getValue(),
+    ])
+      .array()
+      .orderBy('date', true)
+      .getValue(),
   ).toStrictEqual([
     {date: new Date('2020-06-20')},
     {date: new Date('2020-06-18')},
@@ -58,13 +73,19 @@ test('Date Utils', () => {
   expect(koala('1993-11-02').date().format('DD/MM/YYYY').getValue()).toBe('02/11/1993');
   expect(koala('2020-06-20 00:00:00').date().format('HH:mm:ss').getValue()).toBe('00:00:00');
   expect(koala('2020-06-20 00:00:00').date().format().getValue()).toBe('20/06/2020 00:00:00');
-  expect(koala('2020-01-01').date().add({qtd: 1, type: "days"}).format('DD/MM/YYYY').getValue()).toBe('02/01/2020');
-  expect(koala('2020-01-02').date().sub({qtd: 1, type: "days"}).format('DD/MM/YYYY').getValue()).toBe('01/01/2020');
-  expect(koala('2020-10-26').date().sub({
-    qtd: 1,
-    type: "days",
-    ignoreDays: [KlDateDay.saturday, KlDateDay.sunday]
-  }).format('DD/MM/YYYY').getValue()).toBe('23/10/2020');
+  expect(koala('2020-01-01').date().add({qtd: 1, type: 'days'}).format('DD/MM/YYYY').getValue()).toBe('02/01/2020');
+  expect(koala('2020-01-02').date().sub({qtd: 1, type: 'days'}).format('DD/MM/YYYY').getValue()).toBe('01/01/2020');
+  expect(
+    koala('2020-10-26')
+      .date()
+      .sub({
+        qtd: 1,
+        type: 'days',
+        ignoreDays: [KlDateDay.saturday, KlDateDay.sunday],
+      })
+      .format('DD/MM/YYYY')
+      .getValue(),
+  ).toBe('23/10/2020');
 });
 
 test('Delay Util', async () => {
@@ -74,8 +95,13 @@ test('Delay Util', async () => {
 
 test('Object Util', () => {
   expect(koala({teste: 1}).object().merge({teste2: 2}).getValue()).toStrictEqual({teste: 1, teste2: 2});
-  expect(koala({
-    param1: 'Hello',
-    param2: 'World'
-  }).object().toString(['param1', 'param2']).getValue()).toBe('Hello World');
+  expect(
+    koala({
+      param1: 'Hello',
+      param2: 'World',
+    })
+      .object()
+      .toString(['param1', 'param2'])
+      .getValue(),
+  ).toBe('Hello World');
 });

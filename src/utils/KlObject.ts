@@ -27,7 +27,7 @@ export class KlObject<T> extends KlAbstract<T> {
         name += `${delimiter}` + obj[paramName];
       }
     });
-  
+    
     return new KlString(name);
   }
 }

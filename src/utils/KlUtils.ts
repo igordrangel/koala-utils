@@ -1,4 +1,4 @@
-import { KlBase } from "./KlBase";
+import { KlBase } from './KlBase';
 
 export class KlUtils extends KlBase {
   constructor(value: any) {

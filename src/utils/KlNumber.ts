@@ -1,7 +1,6 @@
-import { KlAbstract } from "./KlAbstract";
+import { KlAbstract } from './KlAbstract';
 
 export class KlNumber extends KlAbstract<number> {
-	
 	constructor(value: number) {
 		super(value);
 	}

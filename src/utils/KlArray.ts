@@ -105,7 +105,7 @@ export class KlArray<T> extends KlAbstract<T[]> {
               return false;
             }
           });
-        
+  
         return find;
       }
     });

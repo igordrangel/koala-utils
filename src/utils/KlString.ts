@@ -2,7 +2,7 @@ import * as lodash from 'lodash';
 
 import { KlArray } from './KlArray';
 import { KlAbstract } from './KlAbstract';
-import { KlNumber } from "./KlNumber";
+import { KlNumber } from './KlNumber';
 
 export class KlString extends KlAbstract<string> {
 	constructor(value: string) {
@@ -39,15 +39,19 @@ export class KlString extends KlAbstract<string> {
 	}
 	
 	public unmaskCoin() {
-		return new KlNumber(parseFloat(
-			Number(this.value
-			           .replace('R$', '')
-			           .replace(/\s(?=\s)/g, '')
-			           .replace(/[\n\r\t]/g, '')
-			           .replace(/[^0-9a-zA-Z\(,\@\-\!\#\\$\%\&\*\(\)\_\+\=\{\[\}\]\/\?\;\:\.\|)\.]+/g, '')
-			           .replace(/\./g, '')
-			           .replace(/,/g, '.')
-			).toFixed(2)));
+		return new KlNumber(
+			parseFloat(
+				Number(
+					this.value
+					    .replace('R$', '')
+					    .replace(/\s(?=\s)/g, '')
+					    .replace(/[\n\r\t]/g, '')
+					    .replace(/[^0-9a-zA-Z\(,\@\-\!\#\\$\%\&\*\(\)\_\+\=\{\[\}\]\/\?\;\:\.\|)\.]+/g, '')
+					    .replace(/\./g, '')
+					    .replace(/,/g, '.'),
+				).toFixed(2),
+			),
+		);
 	}
 	
 	public random(
