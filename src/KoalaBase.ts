@@ -1,10 +1,9 @@
-import { KlString } from "./models/KlString";
-import { KlArray } from "./models/KlArray";
-import { KlDate } from "./models/KlDate";
-import { KlObject } from "./models/KlObject";
+import { KlString } from './models/KlString';
+import { KlArray } from './models/KlArray';
+import { KlDate } from './models/KlDate';
+import { KlObject } from './models/KlObject';
 
 export abstract class KoalaBase {
-	
 	protected constructor(protected value: any) {}
 	
 	public string() {

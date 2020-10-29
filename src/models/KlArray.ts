@@ -1,8 +1,7 @@
-import { KlString } from "./KlString";
-import { KlAbstract } from "./KlAbstract";
+import { KlString } from './KlString';
+import { KlAbstract } from './KlAbstract';
 
 export class KlArray<T> extends KlAbstract<T[]> {
-	
 	constructor(value: T[]) {
 		super(value);
 	}
@@ -48,7 +47,7 @@ export class KlArray<T> extends KlAbstract<T[]> {
 	}
 	
 	public clearEmptyValues() {
-		this.value = this.value.filter(item => !!item);
+		this.value = this.value.filter((item) => !!item);
 		return this;
 	}
 	
@@ -85,7 +84,7 @@ export class KlArray<T> extends KlAbstract<T[]> {
 	}
 	
 	public merge(value: any[]) {
-		value.forEach(item => {
+		value.forEach((item) => {
 			this.value.push(item);
 		});
 		

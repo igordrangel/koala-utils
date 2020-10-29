@@ -1,7 +1,6 @@
-import { Delay } from "../helpers/delay";
+import { Delay } from '../helpers/delay';
 
 export abstract class KlAbstract<T> {
-	
 	protected constructor(protected value: T) {}
 	
 	public async delay(ms: number) {

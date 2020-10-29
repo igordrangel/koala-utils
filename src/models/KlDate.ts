@@ -1,11 +1,10 @@
-import * as moment from "moment";
+import * as moment from 'moment';
 
-import { KlAbstract } from "./KlAbstract";
-import { KlString } from "./KlString";
-import { DateDayEnum } from "../enums/date-day.enum";
+import { KlAbstract } from './KlAbstract';
+import { KlString } from './KlString';
+import { DateDayEnum } from '../enums/date-day.enum';
 
 export class KlDate extends KlAbstract<Date> {
-	
 	constructor(value: Date) {
 		super(value);
 	}
@@ -14,12 +13,7 @@ export class KlDate extends KlAbstract<Date> {
 		return new KlString(moment(this.value).format(format));
 	}
 	
-	public add(config: {
-		qtd: number,
-		type: 'days' | 'months' | 'years',
-		format?: string,
-		ignoreDays?: DateDayEnum[]
-	}) {
+	public add(config: { qtd: number; type: 'days' | 'months' | 'years'; format?: string; ignoreDays?: DateDayEnum[] }) {
 		let momentDate = moment(this.value).add(config.qtd, config.type);
 		
 		if (!config.ignoreDays) config.ignoreDays = [];
@@ -34,12 +28,7 @@ export class KlDate extends KlAbstract<Date> {
 		}
 	}
 	
-	public sub(config: {
-		qtd: number,
-		type: 'days' | 'months' | 'years',
-		format?: string,
-		ignoreDays?: DateDayEnum[]
-	}) {
+	public sub(config: { qtd: number; type: 'days' | 'months' | 'years'; format?: string; ignoreDays?: DateDayEnum[] }) {
 		let momentDate = moment(this.value).subtract(config.qtd, config.type);
 		
 		if (!config.ignoreDays) config.ignoreDays = [];

@@ -1,8 +1,7 @@
-import { KlAbstract } from "./KlAbstract";
-import { KlString } from "./KlString";
+import { KlAbstract } from './KlAbstract';
+import { KlString } from './KlString';
 
 export class KlObject<T> extends KlAbstract<T> {
-	
 	constructor(value: T) {
 		super(value);
 	}
@@ -18,11 +17,7 @@ export class KlObject<T> extends KlAbstract<T> {
 		return this;
 	}
 	
-	public toString(
-		paramsName: string[],
-		delimiter: string      = ',',
-		delimiterParam: string = '-',
-	) {
+	public toString(paramsName: string[], delimiter: string = ',', delimiterParam: string = '-') {
 		const obj: any = this.value;
 		let stringResult = '';
 		let name = '';
