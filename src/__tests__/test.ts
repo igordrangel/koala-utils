@@ -2,21 +2,6 @@ import { koala } from "../index";
 import { KlDateDay } from "../enums/KlDateDay";
 import { KlDelay } from "../utils/KlDelay";
 
-// const text = 'Recusada\n            \n                    \n                        Recusa automatica - 27/10/2020 15:36:29\n                            \n                                    \n                                        - POLÃTICA DE CRÃ‰DITO DEFINITIVA';
-// const result = koala(text).string()
-//                           .split()
-//                           .map((value) => {
-//                             value = value.trimStart().trimEnd();
-//                             if (value.indexOf('- ') === 0) {
-//                               value = value.replace('- ', '');
-//                             }
-//                             return value;
-//                           })
-//                           .clearEmptyValues()
-//                           .toString(' - ')
-//                           .normalize()
-//                           .getValue();
-
 jest.setTimeout(10000000);
 test('Array Utils', async () => {
   expect(koala([1]).array<number>().merge([2]).getValue()).toStrictEqual([1, 2]);
