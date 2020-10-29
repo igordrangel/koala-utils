@@ -2,6 +2,7 @@ import { KlObject } from "./KlObject";
 import { KlString } from "./KlString";
 import { KlArray } from "./KlArray";
 import { KlDate } from "./KlDate";
+import { KlNumber } from "./KlNumber";
 
 export abstract class KlBase {
   protected constructor(protected value: any) {}
@@ -28,5 +29,9 @@ export abstract class KlBase {
   
   public object() {
     return new KlObject(this.value);
+  }
+  
+  public number() {
+    return new KlNumber(this.value);
   }
 }

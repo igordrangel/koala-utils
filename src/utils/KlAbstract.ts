@@ -1,10 +1,10 @@
-import { Delay } from '../helpers/delay';
+import { KlDelay } from "./KlDelay";
 
 export abstract class KlAbstract<T> {
   protected constructor(protected value: T) {}
   
   public async delay(ms: number) {
-    await Delay.waitFor(ms);
+    await KlDelay.waitFor(ms);
     return this;
   }
   

@@ -17,24 +17,17 @@ export class KlObject<T> extends KlAbstract<T> {
     return this;
   }
   
-  public toString(paramsName: string[], delimiter: string = ',', delimiterParam: string = '-') {
+  public toString(paramsName: string[], delimiter: string = ' ') {
     const obj: any = this.value;
-    let stringResult = '';
     let name = '';
     paramsName.forEach((paramName) => {
       if (!name && obj[paramName]) {
         name = obj[paramName];
       } else if (name && obj[paramName]) {
-        name += `${delimiterParam}` + obj[paramName];
+        name += `${delimiter}` + obj[paramName];
       }
     });
-    
-    if (!stringResult) {
-      stringResult = name;
-    } else {
-      stringResult += `${delimiter}` + name;
-    }
-    
-    return new KlString(`${stringResult}`);
+  
+    return new KlString(name);
   }
 }

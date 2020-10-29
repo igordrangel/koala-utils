@@ -4,3 +4,257 @@
 ```bash
 npm i koala-utils
 ```
+## Usage
+<details>
+ <summary><strong>Array Utils</strong></summary>
+ 
+### merge
+```bash
+let arraySample = [1]
+arraySample = koala(arraySample).array<number>()
+                                .merge([2])
+                                .getValue();
+
+console.log(arraySample);// [1,2]
+```
+### filter
+```bash
+let result = koala([
+   {teste: 123},
+   {teste2: 543}
+]).array().filter("123", "teste").getValue();
+
+console.log(result);// [{teste: 123}]
+```
+### getIndex
+```bash
+let index = koala([
+  {teste: 123},
+  {teste: "123"}
+]).array().getIndex("teste",123);
+
+console.log(index);// 0
+```
+### split
+```bash
+let result = koala([1,2,3,4]).array()
+                             .split(2)
+                             .getValue();
+
+console.log(result);// [[1,2],[3,4]]
+```
+### toString
+```bash
+let result = koala([1,2,3,4]).array()
+                             .toString(',')
+                             .getValue();
+
+console.log(result);// "1,2,3,4"
+```
+### orderBy
+```bash
+let result = koala([
+   {date: new Date('2020-06-18')},
+   {date: new Date('2020-06-15')},
+   {date: new Date('2020-06-17')},
+   {date: new Date('2020-06-20')}
+]).array().orderBy('date').getValue();
+
+// [
+//   {date: new Date('2020-06-15')},
+//   {date: new Date('2020-06-17')},
+//   {date: new Date('2020-06-18')},
+//   {date: new Date('2020-06-20')}
+// ]
+console.log(result);
+
+//inverse
+let result = koala([
+   {date: new Date('2020-06-18')},
+   {date: new Date('2020-06-15')},
+   {date: new Date('2020-06-17')},
+   {date: new Date('2020-06-20')}
+]).array().orderBy('date',true);
+
+// [
+//   {date: new Date('2020-06-20')},
+//   {date: new Date('2020-06-18')},
+//   {date: new Date('2020-06-17')},
+//   {date: new Date('2020-06-15')}
+// ]
+console.log(result);
+```
+</details><br>
+
+<details>
+ <summary><strong>String Utils usage</strong></summary>
+ 
+### clear
+```bash
+let result = koala('Olá Mundo').string()
+                               .clear()
+                               .getValue();
+
+console.log(result);// "Ola Mundo"
+
+let result = koala('Olá Mundo').string()
+                               .clear('-')
+                               .getValue();
+
+console.log(result);// "Ola-Mundo"
+```
+### nbl2br
+```bash
+let result = koala('Olá\nMundo').string()
+                                .nbl2br()
+                                .getValue();
+
+console.log(result);// "Olá<br/>Mundo"
+```
+### maskCpf
+```bash
+let result = koala('47695329037').string()
+                                 .maskCpf()
+                                 .getValue();
+
+console.log(result);// "476.953.290-37"
+```
+### toCamelCase
+```bash
+let result = koala('Olá Mundo').string()
+                               .toCamelCase()
+                               .getValue();
+
+console.log(result);// "olaMundo"
+```
+### split
+```bash
+let result = koala('1,2').string()
+                         .split()
+                         .getValue();
+
+console.log(result);// ['1', '2']
+```
+### unmaskCoin
+```bash
+let result = koala('1.000,00').string()
+                              .unmaskCoin()
+                              .getValue();
+
+console.log(result);// 1000
+```
+### random
+```bash
+let result = koala('').string()
+                      .random(4, true, true, true, true)
+                      .getValue();
+
+console.log(result);// "4Oa@"
+```
+</details><br>
+
+<details>
+ <summary><strong>Number Utils usage</strong></summary>
+ 
+### random
+```bash
+let result = koala(0).number()
+                     .random(1000, 2000)
+                     .getValue();
+
+console.log(result);// 1389
+```
+</details><br>
+
+<details>
+ <summary><strong>Date Util usage</strong></summary>
+ 
+### transform
+```bash
+let result = koala('2020-06-20').date()
+                                .format('DD/MM/YYYY')
+                                .getValue();
+
+console.log(result);// '20/06/2020'
+
+let result = koala('2020-06-20').date()
+                                .format('HH:mm:ss')
+                                .getValue();
+
+console.log(result);// '00:00:00'
+
+let result = koala('2020-06-20').date()
+                                .format()
+                                .getValue();
+
+console.log(result);// '20/06/2020 00:00:00'
+```
+### add
+```bash
+let result = koala('2020-01-01').date()
+                                .add({qtd: 1, type: 'days'})
+                                .getValue();
+
+console.log(result);// Date('2020-01-02')
+
+let result = koala('2020-10-30').date()
+                                .add({qtd: 1, type: 'days', ignoreDays: [
+                                    KlDateDay.saturday, 
+                                    KlDateDay.sunday
+                                ])
+                                .getValue();
+
+console.log(result);// Date('2020-11-02')
+```
+### sub
+```bash
+let result = koala('2020-01-02').date()
+                                .sub({qtd: 1, type: 'days'})
+                                .getValue();
+
+console.log(result);// Date(''2020-01-01')
+
+let result = koala('2020-10-30').date()
+                                .sub({qtd: 1, type: 'days', ignoreDays: [
+                                    KlDateDay.saturday, 
+                                    KlDateDay.sunday
+                                ])
+                                .getValue();
+
+console.log(result);// Date('2020-11-23')
+```
+</details><br>
+
+<details>
+ <summary><strong>Delay Utils usage</strong></summary>
+ 
+### waitFor
+```bash
+public async ForAsyncFunctions(){
+    await KlDelay.waitFor(1000); // wait's 1s after to pass new line
+    // some code
+}
+```
+</details><br>
+
+<details>
+ <summary><strong>KoalaObjectHelper usage</strong></summary>
+ 
+### merge
+```bash
+let result = koala({teste: 1}).object()
+                              .merge({teste2: 2})
+                              .getValue();
+
+console.log(result); // {teste: 1,teste2: 2}
+```
+### toString
+```bash
+let result = koala({
+    param1: "Hello",
+    param2: "World"
+}).object().toString(['param1','param2']).getValue();
+
+console.log(result); // "Hello World"
+```
+</details><br>

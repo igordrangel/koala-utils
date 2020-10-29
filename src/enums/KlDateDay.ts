@@ -1,4 +1,4 @@
-export enum DateDayEnum {
+export enum KlDateDay {
   sunday,
   monday,
   tuesday,
