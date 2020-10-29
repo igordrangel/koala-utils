@@ -85,8 +85,8 @@ export class KlArray<T> extends KlAbstract<T[]> {
 	}
 	
 	public merge(value: any[]) {
-		value.forEach(value => {
-			this.value.push(value);
+		value.forEach(item => {
+			this.value.push(item);
 		});
 		
 		return this;
