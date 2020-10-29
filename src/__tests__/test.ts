@@ -1,10 +1,10 @@
-import { Koala } from '../Koala';
+import { koala } from "../index";
 
 jest.setTimeout(10000000);
 test('KoalaDelayHelper', async () => {
   const text =
           'Recusada\n            \n                    \n                        Recusa automatica - 27/10/2020 15:36:29\n                            \n                                    \n                                        - POLÃTICA DE CRÃ‰DITO DEFINITIVA';
-  const result = new Koala(text)
+  const result = koala(text)
     .string()
     .split()
     .map((value) => {
