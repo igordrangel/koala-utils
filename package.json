@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/igordrangel/koala.git"
+    "url": "git+https://github.com/igordrangel/koala-utils.git"
   },
   "keywords": [
     "koala",
@@ -33,9 +33,9 @@
   "author": "Igor D. Rangel",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/igordrangel/koala/issues"
+    "url": "https://github.com/igordrangel/koala-utils/issues"
   },
-  "homepage": "https://github.com/igordrangel/koala#readme",
+  "homepage": "https://github.com/igordrangel/koala-utils#readme",
   "devDependencies": {
     "@types/jest": "^26.0.0",
     "@types/lodash": "^4.14.155",
