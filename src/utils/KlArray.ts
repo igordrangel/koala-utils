@@ -9,7 +9,7 @@ export class KlArray<T> extends KlAbstract<T[]> {
   public toString(delimiter: string = ',') {
     let stringResult = '';
     
-    this.value.forEach((value: any) => {
+    this.value?.forEach((value: any) => {
       if (value) {
         if (!stringResult) {
           stringResult = value;
