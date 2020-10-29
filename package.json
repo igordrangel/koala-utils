@@ -1,0 +1,55 @@
+{
+  "name": "koala",
+  "version": "1.0.0",
+  "description": "Biblioteca com validadores, conversores e abstrações de algumas problemáticas",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "jest --config jestconfig.json",
+    "build": "tsc && npm run format",
+    "format": "prettier --write \"src/**/*.ts\" \"dist/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "git add -A src",
+    "postversion": "git push && git push --tags",
+    "deploy": "npm version patch && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igordrangel/koala.git"
+  },
+  "keywords": [
+    "koala",
+    "string",
+    "date",
+    "validator",
+    "converter",
+    "abstract"
+  ],
+  "author": "Igor D. Rangel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/igordrangel/koala/issues"
+  },
+  "homepage": "https://github.com/igordrangel/koala#readme",
+  "devDependencies": {
+    "@types/jest": "^26.0.0",
+    "@types/lodash": "^4.14.155",
+    "jest": "^26.0.1",
+    "prettier": "^2.0.5",
+    "ts-jest": "^26.1.0",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.9.5"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "dependencies": {
+    "b64-to-blob": "^1.2.19",
+    "lodash": "^4.17.19",
+    "moment": "^2.26.0"
+  }
+}
