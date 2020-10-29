@@ -4,10 +4,10 @@ import { KlAbstract } from "./KlAbstract";
 import { KlString } from "./KlString";
 import { DateDayEnum } from "../enums/date-day.enum";
 
-export class KlDate extends KlAbstract {
+export class KlDate extends KlAbstract<Date> {
 	
-	constructor(private value: Date) {
-		super();
+	constructor(value: Date) {
+		super(value);
 	}
 	
 	public toFormatString(format = 'DD/MM/YYYY HH:mm:ss') {

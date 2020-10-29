@@ -14,6 +14,7 @@ test('KoalaDelayHelper', async () => {
 	                              })
 	                              .clearEmptyValues()
 	                              .toString(' - ')
+	                              .normalize()
 	                              .getValue();
 	console.log(result);
 	expect(true).toBe(true);
