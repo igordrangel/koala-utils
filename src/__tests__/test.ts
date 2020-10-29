@@ -86,6 +86,7 @@ test('Date Utils', () => {
       .format('DD/MM/YYYY')
       .getValue(),
   ).toBe('23/10/2020');
+  expect(koala('now').date().add({qtd: 1, type: 'days'}).format('DD/MM/YYYY').getValue()).toBe('30/10/2020');
 });
 
 test('Delay Util', async () => {

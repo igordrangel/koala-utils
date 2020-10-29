@@ -17,12 +17,16 @@ export abstract class KlBase {
   
   public date() {
     if (typeof this.value === 'string') {
-      if (this.value.indexOf(':') < 0) {
-        this.value += ' 00:00:00';
-      } else if (this.value.indexOf('T') >= 0) {
-        this.value.replace('T', ' ');
+      if (this.value !== 'now') {
+        if (this.value.indexOf(':') < 0) {
+          this.value += ' 00:00:00';
+        } else if (this.value.indexOf('T') >= 0) {
+          this.value.replace('T', ' ');
+        }
+        this.value = new Date(this.value);
+      } else {
+        this.value = new Date();
       }
-      this.value = new Date(this.value);
     }
     return new KlDate(this.value);
   }
