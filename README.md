@@ -167,7 +167,7 @@ console.log(result);// 1389
 </details><br>
 
 <details>
- <summary><strong>Date Util usage</strong></summary>
+ <summary><strong>Date Utils usage</strong></summary>
  
 ### transform
 ```bash
