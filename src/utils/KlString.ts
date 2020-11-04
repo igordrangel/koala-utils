@@ -66,7 +66,7 @@ export class KlString extends KlAbstract<string> {
     const simb = '@%_-#$%&*!';
     let result = '';
     let characters = '';
-  
+
     if (lowercase) characters += lmin;
     if (uppercase) characters += lmai;
     if (numbers) characters += num;

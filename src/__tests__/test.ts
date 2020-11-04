@@ -63,8 +63,8 @@ test('Array Utils', async () => {
   expect(
     koala([{proposal: '123'}, {proposal: '456'}, {proposal: '789'}])
       .array<{ proposal: string }>()
-      .pipe(klArray => {
-        return klArray.getValue().map(item => parseInt(item.proposal));
+      .pipe((klArray) => {
+        return klArray.getValue().map((item) => parseInt(item.proposal));
       })
       .getValue(),
   ).toStrictEqual([123, 456, 789]);
@@ -72,9 +72,9 @@ test('Array Utils', async () => {
     (
       await koala([{proposal: '123'}, {proposal: '456'}, {proposal: '789'}])
         .array<{ proposal: string }>()
-        .pipeAsync(async klArray => {
+        .pipeAsync(async (klArray) => {
           await KlDelay.waitFor(300);
-          return klArray.getValue().map(item => parseInt(item.proposal));
+          return klArray.getValue().map((item) => parseInt(item.proposal));
         })
     ).getValue(),
   ).toStrictEqual([123, 456, 789]);

@@ -103,7 +103,7 @@ let result = koala([
     {proposal: '789'}
 ]).array<{proposal: string}>()
   .pipe<number>(objProposta => {
-    return parseInt(objProposta.proposal);
+    return klArray.getValue().map((item) => parseInt(item.proposal));
   })
   .getValue();
 
@@ -118,7 +118,7 @@ let result = (await koala([
 ]).array<{proposal: string}>()
   .pipeAsync<number>(async objProposta => {
     await KlDelay.waitfor(300);
-    return parseInt(objProposta.proposal);
+    return klArray.getValue().map((item) => parseInt(item.proposal));
   }))
   .getValue();
 

@@ -22,7 +22,7 @@ export class KlArray<T> extends KlAbstract<T[]> {
 
     return new KlString(stringResult);
   }
-  
+
   public map(callbackFn: (value: T, index: number) => T) {
     this.value = this.value.map(callbackFn);
     return this;
@@ -159,8 +159,6 @@ export class KlArray<T> extends KlAbstract<T[]> {
   }
   
   public async pipeAsync<TypeResult>(callbackFn: (value: this) => Promise<TypeResult[]>) {
-    return new KlArray<TypeResult>(
-      await callbackFn(this)
-    );
+    return new KlArray<TypeResult>(await callbackFn(this));
   }
 }
