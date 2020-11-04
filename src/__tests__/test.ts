@@ -53,7 +53,32 @@ test('Array Utils', async () => {
     {date: new Date('2020-06-17')},
     {date: new Date('2020-06-15')},
   ]);
-  expect((await koala([{nome: 'Teste 1'}, {nome: 'Teste 2'}]).array().toBase64()).getValue()).toBe('bm9tZQpUZXN0ZSAxClRlc3RlIDI=');
+  expect(
+    (
+      await koala([{nome: 'Teste 1'}, {nome: 'Teste 2'}])
+        .array()
+        .toBase64()
+    ).getValue(),
+  ).toBe('bm9tZQpUZXN0ZSAxClRlc3RlIDI=');
+  expect(koala([
+    {proposal: '123'},
+    {proposal: '456'},
+    {proposal: '789'}
+  ]).array<{ proposal: string }>()
+    .pipe<number>(objProposta => {
+      return parseInt(objProposta.proposal);
+    })
+    .getValue()).toStrictEqual([123, 456, 789]);
+  expect((await koala([
+    {proposal: '123'},
+    {proposal: '456'},
+    {proposal: '789'}
+  ]).array<{ proposal: string }>()
+    .pipeAsync<number>(async objProposta => {
+      await KlDelay.waitFor(300);
+      return parseInt(objProposta.proposal);
+    }))
+    .getValue()).toStrictEqual([123, 456, 789]);
 });
 
 test('String Utils', async () => {
@@ -64,7 +89,7 @@ test('String Utils', async () => {
   expect(koala('1,2').string().split().getValue()).toStrictEqual(['1', '2']);
   expect(koala('1.000,00').string().unmaskCoin().getValue()).toBe(1000);
   expect(koala('').string().random(4, true, true, true, true).getValue());
-  expect(koala('teste').string().toBase64().getValue()).toBe('dGVzdGU=')
+  expect(koala('teste').string().toBase64().getValue()).toBe('dGVzdGU=');
 });
 
 test('Number Utils', async () => {

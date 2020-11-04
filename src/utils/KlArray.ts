@@ -1,6 +1,6 @@
 import { KlString } from './KlString';
 import { KlAbstract } from './KlAbstract';
-import { json2csv } from "json-2-csv";
+import { json2csv } from 'json-2-csv';
 
 export class KlArray<T> extends KlAbstract<T[]> {
   constructor(value: T[]) {
@@ -9,7 +9,7 @@ export class KlArray<T> extends KlAbstract<T[]> {
 
   public toString(delimiter: string = ',') {
     let stringResult = '';
-  
+
     this.value?.forEach((value: any) => {
       if (value) {
         if (!stringResult) {
@@ -128,7 +128,7 @@ export class KlArray<T> extends KlAbstract<T[]> {
         return 0;
       }
     });
-  
+    
     return this;
   }
   
@@ -152,5 +152,17 @@ export class KlArray<T> extends KlAbstract<T[]> {
         },
       );
     });
+  }
+  
+  public pipe<TypeResult>(callbackFn: (value: T, index: number) => TypeResult) {
+    return new KlArray<TypeResult>(this.value.map(callbackFn));
+  }
+  
+  public async pipeAsync<TypeResult>(callbackFn: (value: T, index: number) => Promise<TypeResult>) {
+    const result: TypeResult[] = [];
+    for (const [index, value] of this.value.entries()) {
+      result.push(await callbackFn(value, index));
+    }
+    return new KlArray<TypeResult>(result);
   }
 }

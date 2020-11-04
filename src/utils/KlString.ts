@@ -7,12 +7,12 @@ export class KlString extends KlAbstract<string> {
   constructor(value: string) {
     super(value);
   }
-  
+
   public removeSpaces(delimiter: string = '') {
     this.value = this.value.normalize('NFD').replace(/\s/g, delimiter);
     return this;
   }
-  
+
   public split(delimiter: string = ',') {
     if (this.value.indexOf(delimiter) >= 0) {
       return new KlArray<string>(this.value.split(delimiter));
@@ -20,7 +20,7 @@ export class KlString extends KlAbstract<string> {
       return new KlArray<string>(this.value.split(new RegExp(/\r\n|\r|\n/, 'gi')));
     }
   }
-  
+
   public clear(delimiter: string = ' ') {
     this.value = this.value
                      .normalize('NFD')
@@ -28,10 +28,10 @@ export class KlString extends KlAbstract<string> {
                      .replace(/([^\w]+|\s+)/g, delimiter) // Substitui espaço e outros caracteres por hífen
                      .replace(/\-\-+/g, '-') // Substitui multiplos hífens por um único hífen
                      .replace(/(^-+|-+$)/, '');
-    
+  
     return this;
   }
-  
+
   public toCamelCase() {
     this.value = lodash.camelCase(this.clear().getValue());
     return this;
@@ -103,7 +103,7 @@ export class KlString extends KlAbstract<string> {
   }
   
   public toBase64() {
-    this.value = Buffer.from(this.value).toString("base64");
+    this.value = Buffer.from(this.value).toString('base64');
     return this;
   }
   

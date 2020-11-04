@@ -95,6 +95,35 @@ let result = koala([
 
 console.log(result);// "bm9tZQpUZXN0ZSAxClRlc3RlIDI="
 ```
+### pipe
+```bash
+let result = koala([
+    {proposal: '123'},
+    {proposal: '456'},
+    {proposal: '789'}
+]).array<{proposal: string}>()
+  .pipe<number>(objProposta => {
+    return parseInt(objProposta.proposal);
+  })
+  .getValue();
+
+console.log(result);// [123,456,789]
+```
+### pipeAsync
+```bash
+let result = (await koala([
+    {proposal: '123'},
+    {proposal: '456'},
+    {proposal: '789'}
+]).array<{proposal: string}>()
+  .pipeAsync<number>(async objProposta => {
+    await KlDelay.waitfor(300);
+    return parseInt(objProposta.proposal);
+  }))
+  .getValue();
+
+console.log(result);// [123,456,789]
+```
 </details><br>
 
 <details>
