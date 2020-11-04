@@ -19,7 +19,7 @@ export class KlArray<T> extends KlAbstract<T[]> {
         }
       }
     });
-  
+
     return new KlString(stringResult);
   }
   
@@ -154,15 +154,13 @@ export class KlArray<T> extends KlAbstract<T[]> {
     });
   }
   
-  public pipe<TypeResult>(callbackFn: (value: T, index: number) => TypeResult) {
-    return new KlArray<TypeResult>(this.value.map(callbackFn));
+  public pipe<TypeResult>(callbackFn: (value: this) => TypeResult[]) {
+    return new KlArray<TypeResult>(callbackFn(this));
   }
   
-  public async pipeAsync<TypeResult>(callbackFn: (value: T, index: number) => Promise<TypeResult>) {
-    const result: TypeResult[] = [];
-    for (const [index, value] of this.value.entries()) {
-      result.push(await callbackFn(value, index));
-    }
-    return new KlArray<TypeResult>(result);
+  public async pipeAsync<TypeResult>(callbackFn: (value: this) => Promise<TypeResult[]>) {
+    return new KlArray<TypeResult>(
+      await callbackFn(this)
+    );
   }
 }

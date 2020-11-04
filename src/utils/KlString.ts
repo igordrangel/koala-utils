@@ -36,7 +36,7 @@ export class KlString extends KlAbstract<string> {
     this.value = lodash.camelCase(this.clear().getValue());
     return this;
   }
-  
+
   public unmaskCoin() {
     return new KlNumber(
       parseFloat(
@@ -52,7 +52,7 @@ export class KlString extends KlAbstract<string> {
       ),
     );
   }
-  
+
   public random(
     length: number,
     numbers: boolean,
@@ -66,18 +66,18 @@ export class KlString extends KlAbstract<string> {
     const simb = '@%_-#$%&*!';
     let result = '';
     let characters = '';
-    
+  
     if (lowercase) characters += lmin;
     if (uppercase) characters += lmai;
     if (numbers) characters += num;
     if (specialCharacters) characters += simb;
-    
+  
     const len = characters.length;
     for (let n = 1; n <= length; n++) {
       const rand = Math.floor(Math.random() * (len - 1 + 1)) + 1;
       result += characters[rand - 1];
     }
-    
+  
     this.value = result;
     return this;
   }
