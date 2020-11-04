@@ -84,6 +84,17 @@ let result = koala([
 // ]
 console.log(result);
 ```
+### toBase64
+```bash
+let result = koala([
+    {nome: 'Teste 1'},
+    {nome: 'Teste 2'}
+]).array()
+  .toBase64()
+  .getValue();
+
+console.log(result);// "bm9tZQpUZXN0ZSAxClRlc3RlIDI="
+```
 </details><br>
 
 <details>
@@ -150,6 +161,14 @@ let result = koala('').string()
                       .getValue();
 
 console.log(result);// "4Oa@"
+```
+### toBase64
+```bash
+let result = koala('teste').string()
+                           .toBase64()
+                           .getValue();
+
+console.log(result);// "dGVzdGU="
 ```
 </details><br>
 
@@ -238,7 +257,7 @@ public async ForAsyncFunctions(){
 </details><br>
 
 <details>
- <summary><strong>KoalaObjectHelper usage</strong></summary>
+ <summary><strong>Object Utils usage</strong></summary>
  
 ### merge
 ```bash

@@ -51,6 +51,7 @@
   ],
   "dependencies": {
     "b64-to-blob": "^1.2.19",
+    "json-2-csv": "^3.7.8",
     "lodash": "^4.17.19",
     "moment": "^2.26.0"
   }

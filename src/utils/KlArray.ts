@@ -1,14 +1,15 @@
 import { KlString } from './KlString';
 import { KlAbstract } from './KlAbstract';
+import { json2csv } from "json-2-csv";
 
 export class KlArray<T> extends KlAbstract<T[]> {
   constructor(value: T[]) {
     super(value);
   }
-  
+
   public toString(delimiter: string = ',') {
     let stringResult = '';
-    
+  
     this.value?.forEach((value: any) => {
       if (value) {
         if (!stringResult) {
@@ -18,7 +19,7 @@ export class KlArray<T> extends KlAbstract<T[]> {
         }
       }
     });
-    
+  
     return new KlString(stringResult);
   }
   
@@ -127,7 +128,29 @@ export class KlArray<T> extends KlAbstract<T[]> {
         return 0;
       }
     });
-    
+  
     return this;
+  }
+  
+  public toBase64() {
+    return new Promise<KlString>(async (resolve, reject) => {
+      const value = this.value as any[];
+      json2csv(
+        value,
+        (err, csv) => {
+          if (err) reject(err);
+          if (csv) {
+            resolve(new KlString(csv).toBase64());
+          } else {
+            reject(new Error('Invalid data.'));
+          }
+        },
+        {
+          delimiter: {
+            field: ';',
+          },
+        },
+      );
+    });
   }
 }
