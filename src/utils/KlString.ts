@@ -62,7 +62,7 @@ export class KlString extends KlAbstract<string> {
 
     return this;
   }
-  
+
   public random(
     length: number,
     numbers: boolean,
