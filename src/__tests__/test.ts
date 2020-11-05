@@ -72,7 +72,7 @@ test('Array Utils', async () => {
     (
       await koala([{proposal: '123'}, {proposal: '456'}, {proposal: '789'}])
         .array<{ proposal: string }>()
-        .pipeAsync(async (klArray) => {
+        .pipeAsync(async klArray => {
           await KlDelay.waitFor(300);
           return klArray.getValue().map((item) => parseInt(item.proposal));
         })
@@ -93,6 +93,7 @@ test('String Utils', async () => {
 
 test('Number Utils', async () => {
   expect(koala(0).number().random(1000, 2000).getValue());
+  expect(koala(1000).number().maskCoin().getValue()).toBe("R$ 1.000,00");
 });
 
 test('Date Utils', () => {
