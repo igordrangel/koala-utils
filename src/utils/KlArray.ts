@@ -67,9 +67,7 @@ export class KlArray<T> extends KlAbstract<T[]> {
       }
     });
     
-    this.value = result;
-    
-    return this;
+    return new KlArray<T[]>(result);
   }
   
   public getIndex(key: string, value: string | number) {
