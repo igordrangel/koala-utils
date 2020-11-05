@@ -183,6 +183,20 @@ let result = koala('1.000,00').string()
 
 console.log(result);// 1000
 ```
+### concat
+```bash
+let result = koala('teste').string()
+                           .concat('1')
+                           .getValue();
+
+console.log(result);// "teste1"
+
+let result = koala('1').string()
+                       .concat('teste', true)
+                       .getValue();
+
+console.log(result);// "teste1"
+```
 ### random
 ```bash
 let result = koala('').string()
@@ -211,6 +225,14 @@ let result = koala(0).number()
                      .getValue();
 
 console.log(result);// 1389
+```
+### maskCoin
+```bash
+let result = koala(1000).number()
+                        .maskCoin()
+                        .getValue();
+
+console.log(result);// "R$ 1.000,00"
 ```
 </details><br>
 

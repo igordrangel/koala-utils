@@ -89,6 +89,8 @@ test('String Utils', async () => {
   expect(koala('1.000,00').string().unmaskCoin().getValue()).toBe(1000);
   expect(koala('').string().random(4, true, true, true, true).getValue());
   expect(koala('teste').string().toBase64().getValue()).toBe('dGVzdGU=');
+  expect(koala('teste').string().concat('1').getValue()).toBe('teste1');
+  expect(koala('1').string().concat('teste', true).getValue()).toBe('teste1');
 });
 
 test('Number Utils', async () => {
