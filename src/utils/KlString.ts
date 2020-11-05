@@ -52,14 +52,14 @@ export class KlString extends KlAbstract<string> {
       ),
     );
   }
-  
+
   public concat(value: string, toStart: boolean = false) {
     if (toStart) {
       this.value = `${value}${this.value}`;
     } else {
       this.value = `${this.value}${value}`;
     }
-    
+
     return this;
   }
   
