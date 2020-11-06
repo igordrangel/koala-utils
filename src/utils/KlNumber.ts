@@ -12,7 +12,7 @@ export class KlNumber extends KlAbstract<number> {
     }
 
     this.value = Math.floor(Math.random() * (max - min + 1)) + min;
-  
+
     return this;
   }
   

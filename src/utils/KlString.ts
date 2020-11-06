@@ -22,14 +22,14 @@ export class KlString extends KlAbstract<string> {
   }
 
   public clear(delimiter: string = ' ') {
-    this.value = this.value
-                     .normalize('NFD')
-                     .replace(/[\u0300-\u036f]/g, '') // Remove acentos
-                     .replace(/([^\w]+|\s+)/g, delimiter) // Substitui espaço e outros caracteres por hífen
-                     .replace(/\-\-+/g, '-') // Substitui multiplos hífens por um único hífen
-                     .replace(/(^-+|-+$)/, '');
-  
-    return this;
+	  this.value = this.value
+	                   .normalize('NFD')
+	                   .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+	                   .replace(/([^\w]+|\s+)/g, delimiter) // Substitui espaço e outros caracteres por hífen
+	                   .replace(/\-\-+/g, '-') // Substitui multiplos hífens por um único hífen
+	                   .replace(/(^-+|-+$)/, '');
+	
+	  return this;
   }
 
   public toCamelCase() {
@@ -41,13 +41,13 @@ export class KlString extends KlAbstract<string> {
     return new KlNumber(
       parseFloat(
         Number(
-          this.value
-              .replace('R$', '')
-              .replace(/\s(?=\s)/g, '')
-              .replace(/[\n\r\t]/g, '')
-              .replace(/[^0-9a-zA-Z\(,\@\-\!\#\\$\%\&\*\(\)\_\+\=\{\[\}\]\/\?\;\:\.\|)\.]+/g, '')
-              .replace(/\./g, '')
-              .replace(/,/g, '.'),
+	        this.value
+	            .replace('R$', '')
+	            .replace(/\s(?=\s)/g, '')
+	            .replace(/[\n\r\t]/g, '')
+	            .replace(/[^0-9a-zA-Z\(,\@\-\!\#\\$\%\&\*\(\)\_\+\=\{\[\}\]\/\?\;\:\.\|)\.]+/g, '')
+	            .replace(/\./g, '')
+	            .replace(/,/g, '.'),
         ).toFixed(2),
       ),
     );
@@ -64,11 +64,11 @@ export class KlString extends KlAbstract<string> {
   }
 
   public random(
-    length: number,
-    numbers: boolean,
-    uppercase: boolean         = false,
-    lowercase: boolean         = false,
-    specialCharacters: boolean = false,
+	  length: number,
+	  numbers: boolean,
+	  uppercase: boolean         = false,
+	  lowercase: boolean         = false,
+	  specialCharacters: boolean = false,
   ) {
     const lmin = 'abcdefghijklmnopqrstuvwxyz';
     const lmai = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -81,43 +81,43 @@ export class KlString extends KlAbstract<string> {
     if (uppercase) characters += lmai;
     if (numbers) characters += num;
     if (specialCharacters) characters += simb;
-  
+
     const len = characters.length;
     for (let n = 1; n <= length; n++) {
       const rand = Math.floor(Math.random() * (len - 1 + 1)) + 1;
       result += characters[rand - 1];
     }
-  
-    this.value = result;
+	
+	  this.value = result;
     return this;
   }
-  
-  public maskCpf() {
-    this.value = this.leftPad(this.value.replace(/\D/g, ''), 11)
-                     .replace(/\D/g, '')
-                     .replace(/(\d{3})(\d)/, '$1.$2')
-                     .replace(/(\d{3})(\d)/, '$1.$2')
-                     .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-    
-    return this;
-  }
-  
-  public nbl2br() {
+	
+	public maskCpf() {
+		this.value = this.leftPad(this.value.replace(/\D/g, ''), 11)
+		                 .replace(/\D/g, '')
+		                 .replace(/(\d{3})(\d)/, '$1.$2')
+		                 .replace(/(\d{3})(\d)/, '$1.$2')
+		                 .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+		
+		return this;
+	}
+	
+	public nbl2br() {
     this.value = this.value.replace(new RegExp(/\r\n|\r|\n/, 'gi'), '<br/>');
     return this;
   }
-  
-  public normalize() {
+	
+	public normalize() {
     this.value = this.value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     return this;
   }
-  
-  public toBase64() {
+	
+	public toBase64() {
     this.value = Buffer.from(this.value).toString('base64');
     return this;
   }
-  
-  private leftPad(value: string, totalWidth: number, paddingChar?: string) {
+	
+	private leftPad(value: string, totalWidth: number, paddingChar?: string) {
     const length = totalWidth - value.toString().length + 1;
     return Array(length).join(paddingChar || '0') + value;
   }

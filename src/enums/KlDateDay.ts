@@ -6,5 +6,5 @@ export enum KlDateDay {
   thursday,
   friday,
   saturday,
-  holidays
+  holidays,
 }
