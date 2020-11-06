@@ -47,7 +47,7 @@ export class KlDate extends KlAbstract<Date> {
   
   public isHoliday(country: string = 'BR') {
     const hd = new Holidays(country);
-    let date = new Date(this.value.toDateString());
+    const date = new Date(this.value.toDateString());
     date.setHours(1);
     return !!hd.isHoliday(date);
   }
