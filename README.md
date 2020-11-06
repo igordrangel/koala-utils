@@ -293,6 +293,12 @@ let result = koala('2020-10-30').date()
 
 console.log(result);// Date('2020-11-23')
 ```
+### isHoliday
+```bash
+let result = koala('2020-11-02').date().isHoliday();
+
+console.log(result);// true
+```
 </details><br>
 
 <details>

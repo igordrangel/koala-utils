@@ -105,16 +105,16 @@ test('Date Utils', () => {
   expect(koala('2020-01-01').date().add({qtd: 1, type: 'days'}).format('DD/MM/YYYY').getValue()).toBe('02/01/2020');
   expect(koala('2020-01-02').date().sub({qtd: 1, type: 'days'}).format('DD/MM/YYYY').getValue()).toBe('01/01/2020');
   expect(
-    koala('2020-10-26')
+    koala('2020-11-03')
       .date()
       .sub({
         qtd: 1,
         type: 'days',
-        ignoreDays: [KlDateDay.saturday, KlDateDay.sunday],
+        ignoreDays: [KlDateDay.saturday, KlDateDay.sunday, KlDateDay.holidays],
       })
       .format('DD/MM/YYYY')
       .getValue(),
-  ).toBe('23/10/2020');
+  ).toBe('30/10/2020');
 });
 
 test('Delay Util', async () => {
