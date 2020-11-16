@@ -334,3 +334,16 @@ let result = koala({
 console.log(result); // "Hello World"
 ```
 </details><br>
+
+<details>
+ <summary><strong>Http Request Utils usage</strong></summary>
+ 
+### request
+```bash
+let result = await koala('https://exemple.com')
+    .request()
+    .get<Users[]>('/users', {name: 'test'});
+
+console.log(result); // {statusCode: number, data: Users[]}
+```
+</details><br>
