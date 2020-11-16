@@ -37,7 +37,7 @@ export class KlRequest extends KlAbstract<string> {
 	private request<TypeResponse>(type: 'GET' | 'POST' | 'PUT' | 'DELETE', url: string, data: any, formUrlEncoded = false) {
 		return new Promise<KlRequestResponse<TypeResponse>>((resolve, reject) => {
 			let params = '';
-			let body = undefined;
+			let body;
 			switch (type) {
 				case "GET":
 					params = this.getParams(data).toString();
@@ -54,11 +54,11 @@ export class KlRequest extends KlAbstract<string> {
 				headers: this.headers,
 				body
 			}).then(async response => {
-				const data = await response.json();
+				const responseData = await response.json();
 				if (response.status === 200) {
 					resolve({
 						statusCode: response.status,
-						data
+						data: responseData
 					});
 				} else {
 					reject(response);
