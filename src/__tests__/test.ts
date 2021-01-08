@@ -64,7 +64,7 @@ test('Array Utils', async () => {
     koala([{ proposal: '123' }, { proposal: '456' }, { proposal: '789' }])
       .array<{ proposal: string }>()
       .pipe((klArray) => {
-        return klArray.getValue().map((item) => parseInt(item.proposal));
+        return klArray.getValue().map((item) => parseInt(item.proposal, 10));
       })
       .getValue(),
   ).toStrictEqual([123, 456, 789]);
@@ -74,7 +74,7 @@ test('Array Utils', async () => {
         .array<{ proposal: string }>()
         .pipeAsync(async (klArray) => {
           await KlDelay.waitFor(300);
-          return klArray.getValue().map((item) => parseInt(item.proposal));
+          return klArray.getValue().map((item) => parseInt(item.proposal, 10));
         })
     ).getValue(),
   ).toStrictEqual([123, 456, 789]);
@@ -123,7 +123,7 @@ test('Delay Util', async () => {
 });
 
 test('Object Util', () => {
-  expect(koala({ teste: 1 }).object().merge({ teste2: 2 }).getValue()).toStrictEqual({ teste: 1, teste2: 2 });
+  expect(koala({ teste: 1 }).object<any>().merge({ teste2: 2 }).getValue()).toStrictEqual({ teste: 1, teste2: 2 });
   expect(
     koala({
       param1: 'Hello',

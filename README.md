@@ -318,7 +318,7 @@ public async ForAsyncFunctions(){
  
 ### merge
 ```bash
-let result = koala({teste: 1}).object()
+let result = koala({teste: 1}).object<any>()
                               .merge({teste2: 2})
                               .getValue();
 

@@ -32,8 +32,8 @@ export abstract class KlBase {
     return new KlDate(this.value);
   }
 
-  public object() {
-    return new KlObject(this.value);
+  public object<T>() {
+    return new KlObject<T>(this.value);
   }
 
   public number() {

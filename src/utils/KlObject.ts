@@ -6,7 +6,7 @@ export class KlObject<T> extends KlAbstract<T> {
     super(value);
   }
 
-  public merge(object: any) {
+  public merge(object: T) {
     if (!this.value) this.value = {} as T;
     const result: any = this.value;
     for (const [index, value] of Object.entries(object)) {
