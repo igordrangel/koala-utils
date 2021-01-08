@@ -6,13 +6,13 @@ jest.setTimeout(10000000);
 test('Array Utils', async () => {
   expect(koala([1]).array<number>().merge([2]).getValue()).toStrictEqual([1, 2]);
   expect(
-    koala([{teste: 123}, {teste2: 543}])
+    koala([{ teste: 123 }, { teste2: 543 }])
       .array()
       .filter('123', 'teste')
       .getValue(),
-  ).toStrictEqual([{teste: 123}]);
+  ).toStrictEqual([{ teste: 123 }]);
   expect(
-    koala([{teste: 123}, {teste: 123}])
+    koala([{ teste: 123 }, { teste: 123 }])
       .array()
       .getIndex('teste', 123),
   ).toBe(0);
@@ -23,45 +23,45 @@ test('Array Utils', async () => {
   expect(koala([1, 2, 3, 4]).array().toString(',').getValue()).toStrictEqual('1,2,3,4');
   expect(
     koala([
-      {date: new Date('2020-06-18')},
-      {date: new Date('2020-06-15')},
-      {date: new Date('2020-06-17')},
-      {date: new Date('2020-06-20')},
+      { date: new Date('2020-06-18') },
+      { date: new Date('2020-06-15') },
+      { date: new Date('2020-06-17') },
+      { date: new Date('2020-06-20') },
     ])
       .array()
       .orderBy('date')
       .getValue(),
   ).toStrictEqual([
-    {date: new Date('2020-06-15')},
-    {date: new Date('2020-06-17')},
-    {date: new Date('2020-06-18')},
-    {date: new Date('2020-06-20')},
+    { date: new Date('2020-06-15') },
+    { date: new Date('2020-06-17') },
+    { date: new Date('2020-06-18') },
+    { date: new Date('2020-06-20') },
   ]);
   expect(
     koala([
-      {date: new Date('2020-06-18')},
-      {date: new Date('2020-06-15')},
-      {date: new Date('2020-06-17')},
-      {date: new Date('2020-06-20')},
+      { date: new Date('2020-06-18') },
+      { date: new Date('2020-06-15') },
+      { date: new Date('2020-06-17') },
+      { date: new Date('2020-06-20') },
     ])
       .array()
       .orderBy('date', true)
       .getValue(),
   ).toStrictEqual([
-    {date: new Date('2020-06-20')},
-    {date: new Date('2020-06-18')},
-    {date: new Date('2020-06-17')},
-    {date: new Date('2020-06-15')},
+    { date: new Date('2020-06-20') },
+    { date: new Date('2020-06-18') },
+    { date: new Date('2020-06-17') },
+    { date: new Date('2020-06-15') },
   ]);
   expect(
     (
-      await koala([{nome: 'Teste 1'}, {nome: 'Teste 2'}])
+      await koala([{ nome: 'Teste 1' }, { nome: 'Teste 2' }])
         .array()
         .toBase64()
     ).getValue(),
   ).toBe('bm9tZQpUZXN0ZSAxClRlc3RlIDI=');
   expect(
-    koala([{proposal: '123'}, {proposal: '456'}, {proposal: '789'}])
+    koala([{ proposal: '123' }, { proposal: '456' }, { proposal: '789' }])
       .array<{ proposal: string }>()
       .pipe((klArray) => {
         return klArray.getValue().map((item) => parseInt(item.proposal));
@@ -70,7 +70,7 @@ test('Array Utils', async () => {
   ).toStrictEqual([123, 456, 789]);
   expect(
     (
-      await koala([{proposal: '123'}, {proposal: '456'}, {proposal: '789'}])
+      await koala([{ proposal: '123' }, { proposal: '456' }, { proposal: '789' }])
         .array<{ proposal: string }>()
         .pipeAsync(async (klArray) => {
           await KlDelay.waitFor(300);
@@ -102,8 +102,8 @@ test('Date Utils', () => {
   expect(koala('1993-11-02').date().format('DD/MM/YYYY').getValue()).toBe('02/11/1993');
   expect(koala('2020-06-20 00:00:00').date().format('HH:mm:ss').getValue()).toBe('00:00:00');
   expect(koala('2020-06-20 00:00:00').date().format().getValue()).toBe('20/06/2020 00:00:00');
-  expect(koala('2020-01-01').date().add({qtd: 1, type: 'days'}).format('DD/MM/YYYY').getValue()).toBe('02/01/2020');
-  expect(koala('2020-01-02').date().sub({qtd: 1, type: 'days'}).format('DD/MM/YYYY').getValue()).toBe('01/01/2020');
+  expect(koala('2020-01-01').date().add({ qtd: 1, type: 'days' }).format('DD/MM/YYYY').getValue()).toBe('02/01/2020');
+  expect(koala('2020-01-02').date().sub({ qtd: 1, type: 'days' }).format('DD/MM/YYYY').getValue()).toBe('01/01/2020');
   expect(
     koala('2020-11-03')
       .date()
@@ -123,7 +123,7 @@ test('Delay Util', async () => {
 });
 
 test('Object Util', () => {
-  expect(koala({teste: 1}).object().merge({teste2: 2}).getValue()).toStrictEqual({teste: 1, teste2: 2});
+  expect(koala({ teste: 1 }).object().merge({ teste2: 2 }).getValue()).toStrictEqual({ teste: 1, teste2: 2 });
   expect(
     koala({
       param1: 'Hello',

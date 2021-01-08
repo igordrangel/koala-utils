@@ -5,7 +5,7 @@ export class KlObject<T> extends KlAbstract<T> {
   constructor(value: T) {
     super(value);
   }
-  
+
   public merge(object: any) {
     if (!this.value) this.value = {} as T;
     const result: any = this.value;
@@ -13,10 +13,10 @@ export class KlObject<T> extends KlAbstract<T> {
       result[index] = value;
     }
     this.value = result;
-    
+
     return this;
   }
-  
+
   public toString(paramsName: string[], delimiter: string = ' ') {
     const obj: any = this.value;
     let name = '';
@@ -27,7 +27,7 @@ export class KlObject<T> extends KlAbstract<T> {
         name += `${delimiter}` + obj[paramName];
       }
     });
-    
+
     return new KlString(name);
   }
 }

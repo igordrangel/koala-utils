@@ -3,19 +3,19 @@ import { KlString } from './KlString';
 import { KlArray } from './KlArray';
 import { KlDate } from './KlDate';
 import { KlNumber } from './KlNumber';
-import { KlRequest } from "./KlRequest";
+import { KlRequest } from './KlRequest';
 
 export abstract class KlBase {
   protected constructor(protected value: any) {}
-  
+
   public string() {
     return new KlString(this.value);
   }
-  
+
   public array<T>() {
     return new KlArray<T>(this.value);
   }
-  
+
   public date() {
     if (typeof this.value === 'string') {
       if (this.value !== 'now') {
@@ -31,15 +31,15 @@ export abstract class KlBase {
     }
     return new KlDate(this.value);
   }
-  
+
   public object() {
     return new KlObject(this.value);
   }
-  
+
   public number() {
     return new KlNumber(this.value);
   }
-  
+
   public request() {
     return new KlRequest(this.value);
   }
