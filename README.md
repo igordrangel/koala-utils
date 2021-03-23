@@ -17,6 +17,19 @@ arraySample = koala(arraySample).array<number>()
 
 console.log(arraySample);// [1,2]
 ```
+### map
+```bash
+const result = koala([{name: 'test1'}, {name: 'test2'}])
+  .array<any>()
+  .map(item => {
+    if (item.name === 'test2') {
+      item.name = 'Hello World';
+    }    
+    return item;
+  }).getValue();
+
+console.log(result);// [{name: 'test1'}, {name: 'Hello World'}]
+```
 ### filter
 ```bash
 let result = koala([

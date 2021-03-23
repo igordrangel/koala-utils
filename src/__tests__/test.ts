@@ -4,6 +4,12 @@ import { KlDelay } from '../utils/KlDelay';
 
 jest.setTimeout(10000000);
 test('Array Utils', async () => {
+  expect(koala([{name: 'test1'}, {name: 'test2'}]).array<any>().map(item => {
+    if (item.name === 'test2') {
+      item.name = 'Hello World';
+    }
+    return item;
+  }).getValue()).toStrictEqual([{name: 'test1'}, {name: 'Hello World'}])
   expect(koala([1]).array<number>().merge([2]).getValue()).toStrictEqual([1, 2]);
   expect(
     koala([{ teste: 123 }, { teste2: 543 }])
