@@ -90,6 +90,7 @@ test('String Utils', async () => {
   expect(koala('Olá Mundo').string().clear('-').getValue()).toBe('Ola-Mundo');
   expect(koala('Olá\nMundo').string().nbl2br().getValue()).toBe('Olá<br/>Mundo');
   expect(koala('9964085842').string().maskCpf().getValue()).toBe('099.640.858-42');
+  expect(koala('5581451000183').string().maskCnpj().getValue()).toBe('05.581.451/0001-83');
   expect(koala('Olá Mundo').string().toCamelCase().getValue()).toBe('olaMundo');
   expect(koala('1,2').string().split().getValue()).toStrictEqual(['1', '2']);
   expect(koala('1.000,00').string().unmaskCoin().getValue()).toBe(1000);
@@ -108,6 +109,7 @@ test('Date Utils', () => {
   expect(koala('1993-11-02').date().format('DD/MM/YYYY').getValue()).toBe('02/11/1993');
   expect(koala('2020-06-20 00:00:00').date().format('HH:mm:ss').getValue()).toBe('00:00:00');
   expect(koala('2020-06-20 00:00:00').date().format().getValue()).toBe('20/06/2020 00:00:00');
+  expect(koala('2020-06-20T13:51:00').date().format().getValue()).toBe('20/06/2020 10:51:00');
   expect(koala('2020-01-01').date().add({ qtd: 1, type: 'days' }).format('DD/MM/YYYY').getValue()).toBe('02/01/2020');
   expect(koala('2020-01-02').date().sub({ qtd: 1, type: 'days' }).format('DD/MM/YYYY').getValue()).toBe('01/01/2020');
   expect(

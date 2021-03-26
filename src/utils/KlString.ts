@@ -102,6 +102,13 @@ export class KlString extends KlAbstract<string> {
     return this;
   }
 
+  public maskCnpj() {
+    this.value = this.leftPad(this.value.replace(/\D/g, ''), 14)
+      .replace(/^(\d{2})(\d{3})?(\d{3})?(\d{4})?(\d{2})?/, "$1.$2.$3/$4-$5");
+
+    return this;
+  }
+
   public nbl2br() {
     this.value = this.value.replace(new RegExp(/\r\n|\r|\n/, 'gi'), '<br/>');
     return this;

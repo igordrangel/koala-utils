@@ -172,6 +172,14 @@ let result = koala('47695329037').string()
 
 console.log(result);// "476.953.290-37"
 ```
+### maskCnpj
+```bash
+let result = koala('5581451000183').string()
+                                   .maskCnpj()
+                                   .getValue();
+
+console.log(result);// "05.581.451/0001-83"
+```
 ### toCamelCase
 ```bash
 let result = koala('Olá Mundo').string()
