@@ -30,12 +30,16 @@ export class KlRequest extends KlAbstract<string> {
     return this.request<TypeResponse>('PUT', url, data);
   }
 
+  public patch<TypeResponse>(url: string, data: any) {
+    return this.request<TypeResponse>('PATCH', url, data);
+  }
+
   public delete<TypeResponse>(url: string, data?: any) {
     return this.request<TypeResponse>('DELETE', url, data);
   }
 
   private request<TypeResponse>(
-    type: 'GET' | 'POST' | 'PUT' | 'DELETE',
+    type: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE',
     url: string,
     data: any,
     formUrlEncoded = false,
@@ -49,6 +53,7 @@ export class KlRequest extends KlAbstract<string> {
           break;
         case 'POST':
         case 'PUT':
+        case 'PATCH':
         case 'DELETE':
           body = formUrlEncoded ? this.getFormUrlEncoded(data) : data;
           break;
