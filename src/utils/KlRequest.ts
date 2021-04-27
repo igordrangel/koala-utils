@@ -59,7 +59,7 @@ export class KlRequest extends KlAbstract<string> {
           this.headers = koala(this.headers)
             .object()
             .merge({
-              'Content-Type': 'application/json',
+              'Content-Type': formUrlEncoded ? 'application/x-www-form-urlencoded' : 'application/json',
             })
             .getValue();
           body = formUrlEncoded ? this.getFormUrlEncoded(data) : JSON.stringify(data ?? {});
