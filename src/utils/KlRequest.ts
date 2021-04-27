@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import { koala } from '..';
 import { KlAbstract } from './KlAbstract';
 
 interface KlRequestResponse<TypeResponse> {
@@ -55,7 +56,13 @@ export class KlRequest extends KlAbstract<string> {
         case 'PUT':
         case 'PATCH':
         case 'DELETE':
-          body = formUrlEncoded ? this.getFormUrlEncoded(data) : data;
+          this.headers = koala(this.headers)
+            .object()
+            .merge({
+              'Content-Type': 'application/json',
+            })
+            .getValue();
+          body = formUrlEncoded ? this.getFormUrlEncoded(data) : JSON.stringify(data ?? {});
           break;
       }
 
