@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import { koala } from '..';
 import { KlAbstract } from './KlAbstract';
 
-interface KlRequestResponse<TypeResponse> {
+export interface KlRequestResponse<TypeResponse> {
   statusCode: number;
   data: TypeResponse;
 }
