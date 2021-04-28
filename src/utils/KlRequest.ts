@@ -79,7 +79,10 @@ export class KlRequest extends KlAbstract<string> {
               data: responseData,
             });
           } else {
-            reject(response);
+            reject({
+              statusCode: response.status,
+              data: responseData,
+            });
           }
         })
         .catch(async (e) => {
