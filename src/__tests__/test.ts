@@ -103,6 +103,7 @@ test('String Utils', async () => {
   expect(koala('teste').string().toBase64().getValue()).toBe('dGVzdGU=');
   expect(koala('teste').string().concat('1').getValue()).toBe('teste1');
   expect(koala('1').string().concat('teste', true).getValue()).toBe('teste1');
+  expect(koala('Hellow World').string().replace('Hellow', 'Hello').getValue()).toBe('Hello World');
 });
 
 test('Number Utils', async () => {
@@ -114,7 +115,7 @@ test('Date Utils', () => {
   expect(koala('1993-11-02').date().format('DD/MM/YYYY').getValue()).toBe('02/11/1993');
   expect(koala('2020-06-20 00:00:00').date().format('HH:mm:ss').getValue()).toBe('00:00:00');
   expect(koala('2020-06-20 00:00:00').date().format().getValue()).toBe('20/06/2020 00:00:00');
-  expect(koala('2020-06-20T13:51:00').date().format().getValue()).toBe('20/06/2020 10:51:00');
+  expect(koala('2020-06-20T13:51:00').date('+0300').format().getValue()).toBe('20/06/2020 07:51:00');
   expect(koala('2020-01-01').date().add({ qtd: 1, type: 'days' }).format('DD/MM/YYYY').getValue()).toBe('02/01/2020');
   expect(koala('2020-01-02').date().sub({ qtd: 1, type: 'days' }).format('DD/MM/YYYY').getValue()).toBe('01/01/2020');
   expect(

@@ -55,7 +55,7 @@
     "date-holidays": "^1.8.1",
     "json-2-csv": "^3.7.8",
     "lodash": "^4.17.19",
-    "moment": "^2.26.0",
+    "moment": "^2.29.1",
     "node-fetch": "^2.6.1"
   }
 }

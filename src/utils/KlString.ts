@@ -14,7 +14,7 @@ export class KlString extends KlAbstract<string> {
   }
 
   public replace(searchValue: string | RegExp, replaceValue: string) {
-    this.value.replace(searchValue, replaceValue);
+    this.value = this.value.replace(searchValue, replaceValue);
     return this;
   }
 

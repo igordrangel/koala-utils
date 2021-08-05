@@ -287,11 +287,11 @@ let result = koala('2020-06-20').date()
 
 console.log(result);// '20/06/2020 00:00:00'
 
-let result = koala('2020-06-20T15:00:00').date('-0300')
-                                .format()
-                                .getValue();
+let result = koala('2020-06-20T13:51:00').date('+0300')
+                                         .format()
+                                         .getValue();
 
-console.log(result);// '20/06/2020 12:00:00'
+console.log(result);// '20/06/2020 07:51:00'
 ```
 ### add
 ```bash
@@ -316,7 +316,7 @@ let result = koala('2020-01-02').date()
                                 .sub({qtd: 1, type: 'days'})
                                 .getValue();
 
-console.log(result);// Date(''2020-01-01')
+console.log(result);// Date('2020-01-01')
 
 let result = koala('2020-10-30').date()
                                 .sub({qtd: 1, type: 'days', ignoreDays: [
