@@ -22,7 +22,7 @@ export abstract class KlBase {
         if (this.value.indexOf(':') < 0) {
           this.value += ' 00:00:00';
         } else if (this.value.indexOf('T') >= 0) {
-          this.value += (GMT ? GMT : '-0300');
+          this.value += GMT ? GMT : '-0300';
         }
         this.value = new Date(this.value);
       } else {
