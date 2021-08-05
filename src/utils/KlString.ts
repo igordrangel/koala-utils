@@ -13,6 +13,11 @@ export class KlString extends KlAbstract<string> {
     return this;
   }
 
+  public replace(searchValue: string | RegExp, replaceValue: string) {
+    this.value.replace(searchValue, replaceValue);
+    return this;
+  }
+
   public split(delimiter: string = ',') {
     if (this.value.indexOf(delimiter) >= 0) {
       return new KlArray<string>(this.value.split(delimiter));

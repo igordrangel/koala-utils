@@ -234,6 +234,13 @@ let result = koala('teste').string()
 
 console.log(result);// "dGVzdGU="
 ```
+### replace
+```bash
+let result = koala('Hellow World').string()
+                              .replace('Hellow', 'Hello')
+                              .getValue();
+
+console.log(result);// 1000
 </details><br>
 
 <details>
@@ -260,7 +267,7 @@ console.log(result);// "R$ 1.000,00"
 <details>
  <summary><strong>Date Utils usage</strong></summary>
  
-### transform
+### format
 ```bash
 let result = koala('2020-06-20').date()
                                 .format('DD/MM/YYYY')
@@ -279,6 +286,12 @@ let result = koala('2020-06-20').date()
                                 .getValue();
 
 console.log(result);// '20/06/2020 00:00:00'
+
+let result = koala('2020-06-20T15:00:00').date('-0300')
+                                .format()
+                                .getValue();
+
+console.log(result);// '20/06/2020 12:00:00'
 ```
 ### add
 ```bash
