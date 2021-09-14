@@ -56,7 +56,7 @@ export class KlRequest extends KlAbstract<string> {
         case 'PUT':
         case 'PATCH':
         case 'DELETE':
-          this.headers = koala(this.headers)
+          this.headers = koala(this.headers ?? {})
             .object()
             .merge({
               'Content-Type': formUrlEncoded ? 'application/x-www-form-urlencoded' : 'application/json',
