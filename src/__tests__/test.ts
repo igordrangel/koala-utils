@@ -89,6 +89,22 @@ test('Array Utils', async () => {
         })
     ).getValue(),
   ).toStrictEqual([123, 456, 789]);
+  expect(
+    koala([{ proposal: '123' }, { proposal: '456' }, { proposal: '789' }])
+      .array<{ proposal: string }>()
+      .map<string>((item) => item.proposal)
+      .getValue(),
+  ).toStrictEqual(['123', '456', '789']);
+  expect(
+    (
+      await koala([{ proposal: '123' }, { proposal: '456' }, { proposal: '789' }])
+        .array<{ proposal: string }>()
+        .mapAsync<number>(async (item) => {
+          await KlDelay.waitFor(300);
+          return parseInt(item.proposal, 10);
+        })
+    ).getValue(),
+  ).toStrictEqual([123, 456, 789]);
 });
 
 test('String Utils', async () => {
@@ -102,7 +118,7 @@ test('String Utils', async () => {
   expect(koala('').string().random(4, true, true, true, true).getValue());
   expect(koala('teste').string().toBase64().getValue()).toBe('dGVzdGU=');
   expect(koala('teste').string().concat('1').getValue()).toBe('teste1');
-  expect(koala('1').string().concat('teste', true).getValue()).toBe('teste1');
+  expect(koala('').string().concat('Olá').concat(' Mundo').concat(' 123').getValue()).toBe('Olá Mundo 123');
   expect(koala('Hellow World').string().replace('Hellow', 'Hello').getValue()).toBe('Hello World');
 });
 
@@ -137,7 +153,12 @@ test('Delay Util', async () => {
 });
 
 test('Object Util', () => {
-  expect(koala({ teste: 1 }).object<any>().merge({ teste2: 2 }).getValue()).toStrictEqual({ teste: 1, teste2: 2 });
+  expect(
+    koala({ teste: 1 })
+      .object<{ teste: number }>()
+      .merge<any>({ teste2: 2 })
+      .getValue(),
+  ).toStrictEqual({ teste: 1, teste2: 2 });
   expect(
     koala({
       param1: 'Hello',

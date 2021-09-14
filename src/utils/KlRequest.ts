@@ -72,7 +72,7 @@ export class KlRequest extends KlAbstract<string> {
         body,
       })
         .then(async (response) => {
-          const responseData = await response.json();
+          const responseData = await response.json().catch(() => null);
           if (response.status.toString().substr(0, 2) === '20') {
             resolve({
               statusCode: response.status,

@@ -23,16 +23,16 @@ export class KlArray<T> extends KlAbstract<T[]> {
     return new KlString(stringResult);
   }
 
-  public map(callbackFn: (value: T, index: number) => T) {
-    this.value = this.value.map(callbackFn);
-    return this;
+  public map<NewType>(callbackFn: (value: T, index: number) => NewType) {
+    return new KlArray<NewType>(this.value.map(callbackFn));
   }
 
-  public async mapAsync(callbackFn: (value: T, index: number) => Promise<T>) {
+  public async mapAsync<NewType>(callbackFn: (value: T, index: number) => Promise<NewType>) {
+    const newList: NewType[] = [];
     for (const [index, value] of this.value.entries()) {
-      this.value[index] = await callbackFn(value, index);
+      newList[index] = (await callbackFn(value, index)) as any;
     }
-    return this;
+    return new KlArray<NewType>(newList);
   }
 
   public forEach(callbackFn: (value: T, index: number) => T) {

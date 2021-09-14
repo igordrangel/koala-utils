@@ -6,15 +6,17 @@ export class KlObject<T> extends KlAbstract<T> {
     super(value);
   }
 
-  public merge(object: T) {
-    if (!this.value) this.value = {} as T;
+  public clone(): T {
+    return JSON.parse(JSON.stringify(this.value));
+  }
+
+  public merge<ObjectType>(object: ObjectType) {
     const result: any = this.value;
     for (const [index, value] of Object.entries(object)) {
       result[index] = value;
     }
-    this.value = result;
 
-    return this;
+    return new KlObject<ObjectType>(result);
   }
 
   public toString(paramsName: string[], delimiter: string = ' ') {
