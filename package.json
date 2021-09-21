@@ -1,6 +1,6 @@
 {
   "name": "@igordrangel/koala-utils",
-  "version": "1.0.36",
+  "version": "1.0.37",
   "description": "Biblioteca com validadores, conversores e abstrações de algumas problemáticas",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
