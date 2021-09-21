@@ -1,12 +1,10 @@
 {
-  "name": "@igordrangel/koala-utils",
+  "name": "koala-utils",
   "version": "1.0.37",
   "description": "Biblioteca com validadores, conversores e abstrações de algumas problemáticas",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "module": "./esm5/index.js",
-  "es2020": "./esm2020/index.js",
-  "typings": "./index.d.ts",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "tsc && npm run format",
