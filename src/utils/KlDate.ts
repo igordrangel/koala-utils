@@ -1,5 +1,5 @@
-import * as moment from 'moment';
-import * as Holidays from 'date-holidays';
+import moment from 'moment';
+import Holidays from 'date-holidays';
 
 import { KlAbstract } from './KlAbstract';
 import { KlString } from './KlString';
