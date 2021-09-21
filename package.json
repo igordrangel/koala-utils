@@ -1,5 +1,5 @@
 {
-  "name": "koala-utils",
+  "name": "@koalarx/utils",
   "version": "1.0.37",
   "description": "Biblioteca com validadores, conversores e abstrações de algumas problemáticas",
   "main": "dist/index.js",
@@ -15,7 +15,7 @@
     "preversion": "npm run lint",
     "version": "git add -A src",
     "postversion": "git push && git push --tags",
-    "deploy": "npm version patch && npm publish"
+    "deploy": "npm version patch && npm publish --access public"
   },
   "repository": {
     "type": "git",
