@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "./esm5/index.js",
-  "es2020": "./esm2015/index.js",
+  "es2020": "./esm2020/index.js",
   "typings": "./index.d.ts",
   "scripts": {
     "test": "jest --config jestconfig.json",
