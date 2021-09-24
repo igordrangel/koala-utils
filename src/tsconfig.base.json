@@ -5,7 +5,11 @@
     "baseUrl": ".",
     "paths": {
       "@koalarx/utils": ["./"],
-      "@koalarx/utils/*": ["./*"]
+      "@koalarx/utils/*": ["./*"],
+      "@koalarx/utils/operators/date": ["./src/operators/date/*"],
+      "@koalarx/utils/operators/delay": ["./src/operators/delay/*"],
+      "@koalarx/utils/operators/number": ["./src/operators/number/*"],
+      "@koalarx/utils/operators/string": ["./src/operators/string/*"],
     }
   },
   "include": ["./**/*.ts"],
