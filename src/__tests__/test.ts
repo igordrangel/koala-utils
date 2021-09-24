@@ -134,6 +134,7 @@ test('Date Utils', () => {
   expect(koala('2020-06-20T13:51:00').date('+0300').format().getValue()).toBe('20/06/2020 07:51:00');
   expect(koala('2020-01-01').date().add({ qtd: 1, type: 'days' }).format('DD/MM/YYYY').getValue()).toBe('02/01/2020');
   expect(koala('2020-01-02').date().sub({ qtd: 1, type: 'days' }).format('DD/MM/YYYY').getValue()).toBe('01/01/2020');
+  expect(koala('2020-01-02').date().diff('2020-01-03').getValue()).toBe(1);
   expect(
     koala('2020-11-03')
       .date()

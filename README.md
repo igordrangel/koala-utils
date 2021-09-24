@@ -2,7 +2,7 @@
 
 ## Install
 ```bash
-npm i koala-utils
+npm i @koalarx/utils
 ```
 ## Usage
 <details>
@@ -327,6 +327,12 @@ let result = koala('2020-10-30').date()
 
 console.log(result);// Date('2020-11-23')
 ```
+### diff
+```bash
+let result = koala('2020-11-02').date().diff('2020-11-03').getValue();
+
+console.log(result);// 1
+```
 ### isHoliday
 ```bash
 let result = koala('2020-11-02').date().isHoliday();
@@ -379,5 +385,60 @@ let result = await koala('https://exemple.com')
     .get<Users[]>('/users', {name: 'test'});
 
 console.log(result); // {statusCode: number, data: Users[]}
+```
+</details><br>
+
+## Operators
+<details>
+ <summary><strong>String Operators</strong></summary>
+ 
+```bash
+import {
+  maskCpf,
+  maskCnpj,
+  randomString,
+  clear,
+  unmaskCoin,
+  toCamelCase,
+  nbl2br
+} from '@koalarx/utils/operators/string';
+
+maskCpf('11111111111') //111.111.111-11
+maskCnpj('11111111000111') //11.111.111/0001-11
+randomString(4, true, true, true, true) //1Aa$
+clear('Olá Mundo') //Ola Mundo
+unmaskCoin('R$ 1.000,00') //1000
+toCamelCase('Olá Mundo') //olaMundo
+nbl2br('Line1\nLine2') // Line1<br/>Line2
+```
+</details><br>
+
+<details>
+ <summary><strong>Number Operators</strong></summary>
+ 
+```bash
+import { maskCoin } from '@koalarx/utils/operators/number';
+
+maskCoin(1000) //R$ 1.000,00
+```
+</details><br>
+
+<details>
+ <summary><strong>Date Operators</strong></summary>
+ 
+```bash
+import { 
+  format,
+  isHoliday,
+  add,
+  sub,
+  diff
+} from '@koalarx/utils/operators/date';
+
+format('2020-01-01', 'DD/MM/YYYY') //01/01/2020
+isHoliday('2020-01-01') //true
+add('2020-01-01', 2) //2020-01-03
+sub('2020-01-03', 2) //2020-01-01
+diff('2020-01-01', '2020-01-03') //2
 ```
 </details><br>

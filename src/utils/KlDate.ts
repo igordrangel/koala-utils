@@ -5,6 +5,9 @@ import { KlAbstract } from './KlAbstract';
 import { KlString } from './KlString';
 import { KlDateDay } from '../enums/KlDateDay';
 import { koala } from '../index';
+import { KlNumber } from './KlNumber';
+
+export type KlDateDateType = 'days' | 'months' | 'years';
 
 export class KlDate extends KlAbstract<Date> {
   constructor(value: Date) {
@@ -15,7 +18,7 @@ export class KlDate extends KlAbstract<Date> {
     return new KlString(moment(this.value).format(format));
   }
 
-  public add(config: { qtd: number; type: 'days' | 'months' | 'years'; ignoreDays?: KlDateDay[] }) {
+  public add(config: { qtd: number; type: KlDateDateType; ignoreDays?: KlDateDay[] }) {
     let momentDate = moment(this.value).add(config.qtd, config.type);
 
     if (!config.ignoreDays) config.ignoreDays = [];
@@ -30,7 +33,7 @@ export class KlDate extends KlAbstract<Date> {
     return this;
   }
 
-  public sub(config: { qtd: number; type: 'days' | 'months' | 'years'; ignoreDays?: KlDateDay[] }) {
+  public sub(config: { qtd: number; type: KlDateDateType; ignoreDays?: KlDateDay[] }) {
     let momentDate = moment(this.value).subtract(config.qtd, config.type);
 
     if (!config.ignoreDays) config.ignoreDays = [];
@@ -43,6 +46,10 @@ export class KlDate extends KlAbstract<Date> {
 
     this.value = momentDate.toDate();
     return this;
+  }
+
+  public diff(diffDate: string | Date) {
+    return new KlNumber(moment(diffDate).diff(this.value, 'days'));
   }
 
   public isHoliday(country: string = 'BR') {
