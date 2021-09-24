@@ -1,6 +1,6 @@
 {
   "name": "@koalarx/utils",
-  "version": "1.0.52",
+  "version": "1.0.53",
   "description": "Biblioteca com validadores, conversores e abstrações de algumas problemáticas",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm5/index.js",
