@@ -442,3 +442,13 @@ sub('2020-01-03', 2) //2020-01-01
 diff('2020-01-01', '2020-01-03') //2
 ```
 </details><br>
+
+<details>
+ <summary><strong>Delay Operators</strong></summary>
+ 
+```bash
+import { delay } from '@koalarx/utils/operators/delay';
+
+delay(2000).then();
+```
+</details><br>

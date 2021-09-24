@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "baseUrl": ".",
+    "paths": {
+      "@koalarx/utils": ["./"],
+      "@koalarx/utils/*": ["./*"]
+    }
+  },
+  "include": ["./**/*.ts"]
+}

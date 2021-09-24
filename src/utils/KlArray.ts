@@ -103,10 +103,12 @@ export class KlArray<T> extends KlAbstract<T[]> {
               find = true;
               return false;
             }
+            return false;
           });
 
         return find;
       }
+      return false;
     });
 
     return this;
