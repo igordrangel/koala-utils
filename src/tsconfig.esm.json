@@ -5,6 +5,5 @@
     "importHelpers": true,
     "target": "es2015",
     "outDir": "../dist/esm"
-  },
-  "exclude": ["**/__tests__/*"]
+  }
 }

@@ -8,5 +8,6 @@
       "@koalarx/utils/*": ["./*"]
     }
   },
-  "include": ["./**/*.ts"]
+  "include": ["./**/*.ts"],
+  "exclude": ["./__tests__/*"]
 }
