@@ -20,8 +20,8 @@
       "default": "./dist/esm5/index.js"
     },
     "./operators/*": {
-      "node": "./dist/cjs/operators/**/*.js",
-      "default": "./dist/esm5/operators/**/*.js"
+      "node": "./dist/cjs/operators/*.js",
+      "default": "./dist/esm5/operators/*.js"
     },
     "./enums": {
       "node": "./dist/cjs/enums/index.js",
