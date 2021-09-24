@@ -51,6 +51,17 @@
   "files": [
     "dist/**/*"
   ],
+  "exports": {
+    "./operators/date": {
+      "default": "./dist/operators/date/index.js"
+    },
+    "./operators/number": {
+      "default": "./dist/operators/number/index.js"
+    },
+    "./operators/string": {
+      "default": "./dist/operators/string/index.js"
+    }
+  },
   "dependencies": {
     "b64-to-blob": "^1.2.19",
     "date-holidays": "^1.8.1",
