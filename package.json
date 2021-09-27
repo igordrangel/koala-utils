@@ -1,6 +1,6 @@
 {
   "name": "@koalarx/utils",
-  "version": "1.0.64",
+  "version": "1.0.61",
   "description": "Biblioteca com validadores, conversores e abstrações de algumas problemáticas",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm5/index.js",
@@ -10,15 +10,15 @@
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "npm run compile && copy \"./LICENSE\" \"./dist\" && copy \"./README.md\" \"./dist\" && copy \"./package.json\" \"./dist\" && npm run format",
-    "compile": "tsc -b ./src/tsconfig.cjs.json ./src/tsconfig.esm.json ./src/tsconfig.esm5.json ./src/tsconfig.types.json",
-    "format": "prettier --write \"src/**/*.ts\" \"dist/**/*.js\"",
+    "compile": "tsc -b ../src/tsconfig.cjs.json ../src/tsconfig.esm.json ../src/tsconfig.esm5.json ../src/tsconfig.types.json",
+    "format": "prettier --write \"../src/**/*.ts\" \"../dist/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint && cd dist",
+    "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "version": "git add -A src",
     "postversion": "git push && git push --tags",
-    "deploy": "npm version patch && npm publish --access public"
+    "deploy": "npm version patch && npm publish dist --access public"
   },
   "repository": {
     "type": "git",
@@ -58,5 +58,14 @@
     "lodash": "^4.17.19",
     "moment": "^2.29.1",
     "node-fetch": "^2.6.1"
-  }
+  },
+  "files": [
+    "cjs/**/!(*.tsbuildinfo)",
+    "esm/**/!(*.tsbuildinfo)",
+    "esm5/**/!(*.tsbuildinfo)",
+    "types/**/!(*.tsbuildinfo)",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ]
 }
