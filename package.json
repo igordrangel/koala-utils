@@ -12,7 +12,7 @@
     "build": "npm run compile && npm run format",
     "compile": "tsc -b ../src/tsconfig.cjs.json ../src/tsconfig.esm.json ../src/tsconfig.esm5.json ../src/tsconfig.types.json",
     "format": "prettier --write \"../src/**/*.ts\" \"../dist/**/*.js\"",
-    "lint": "tslint -p ../tsconfig.json",
+    "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
