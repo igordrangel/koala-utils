@@ -6,15 +6,34 @@
   "module": "./dist/esm5/index.js",
   "es2015": "./dist/esm/index.js",
   "types": "index.d.ts",
+  "typesVersions": {
+    ">=1.0": {
+      "*": [
+        "dist/types/*"
+      ]
+    }
+  },
   "sideEffects": false,
   "exports": {
     ".": {
       "node": "./dist/cjs/index.js",
       "default": "./dist/esm5/index.js"
     },
-    "./operators/*": {
-      "node": "./dist/cjs/operators/**/*.js",
-      "default": "./dist/esm5/operators/**/*.js"
+    "./operators/date": {
+      "node": "./dist/cjs/operators/date/index.js",
+      "default": "./dist/esm5/operators/date/index.js"
+    },
+    "./operators/delay": {
+      "node": "./dist/cjs/operators/delay/index.js",
+      "default": "./dist/esm5/operators/delay/index.js"
+    },
+    "./operators/number": {
+      "node": "./dist/cjs/operators/number/index.js",
+      "default": "./dist/esm5/operators/number/index.js"
+    },
+    "./operators/string": {
+      "node": "./dist/cjs/operators/string/index.js",
+      "default": "./dist/esm5/operators/string/index.js"
     },
     "./enums": {
       "node": "./dist/cjs/enums/index.js",
