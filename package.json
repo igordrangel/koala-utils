@@ -60,6 +60,6 @@
     "node-fetch": "^2.6.1"
   },
   "files": [
-    "dist/**/!(*.tsbuildinfo)"
+    "dist/**/*"
   ]
 }
