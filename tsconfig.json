@@ -22,7 +22,7 @@
       "@koalarx/utils/operators/delay": ["./src/operators/delay/index"],
       "@koalarx/utils/operators/number": ["./src/operators/number/index"],
       "@koalarx/utils/operators/string": ["./src/operators/string/index"],
-      "@koalarx/utils/enums": ["./src/testing/index"]
+      "@koalarx/utils/enums": ["./src/enums/index"]
     }
   },
   "bazelOptions": {

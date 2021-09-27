@@ -42,8 +42,8 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "test": "jest --config jestconfig.json",
-    "build": "npm run compile && node ./scripts/prepare-package.js && node ./scripts/generate-alias.js && npm run format",
+    "test": "npm run api_guardian:update && jest --config jestconfig.json",
+    "build": "npm run compile && npm run format",
     "compile": "tsc -b ./src/tsconfig.cjs.json ./src/tsconfig.esm.json ./src/tsconfig.esm5.json ./src/tsconfig.types.json",
     "format": "prettier --write \"./src/**/*.ts\" \"./dist/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
@@ -75,15 +75,10 @@
   },
   "homepage": "https://github.com/igordrangel/koala-utils#readme",
   "devDependencies": {
-    "@angular-devkit/build-optimizer": "^0.4.6",
-    "@angular-devkit/schematics": "^11.0.7",
     "@types/jest": "^26.0.0",
     "@types/lodash": "^4.14.155",
     "@types/node-fetch": "^2.5.7",
-    "fs-extra": "^8.1.0",
     "jest": "^26.0.1",
-    "klaw-sync": "^3.0.2",
-    "minimist": "^1.2.5",
     "prettier": "^2.0.5",
     "ts-jest": "^26.1.0",
     "tslint": "^6.1.2",
@@ -103,12 +98,8 @@
     "dist/esm/**/!(*.tsbuildinfo)",
     "dist/esm5/**/!(*.tsbuildinfo)",
     "dist/types/**/!(*.tsbuildinfo)",
-    "src/!(__tests__)",
-    "operators",
-    "enums",
     "LICENSE",
     "package.json",
-    "README.md",
-    "tsconfig.json"
+    "README.md"
   ]
 }
