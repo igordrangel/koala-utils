@@ -16,7 +16,7 @@
     "preversion": "npm run lint",
     "version": "git add -A src",
     "postversion": "git push && git push --tags",
-    "deploy": "npm version patch && npm publish dist"
+    "deploy": "npm version patch && npm publish dist --access public"
   },
   "repository": {
     "type": "git",
