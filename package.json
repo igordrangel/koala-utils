@@ -1,6 +1,6 @@
 {
   "name": "@koalarx/utils",
-  "version": "1.0.68",
+  "version": "1.0.69",
   "description": "Biblioteca com validadores, conversores e abstrações de algumas problemáticas",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm5/index.js",
@@ -9,7 +9,7 @@
   "sideEffects": false,
   "scripts": {
     "test": "jest --config jestconfig.json",
-    "build": "copy \"./LICENSE\" \"./dist\" && copy \"./README.md\" \"./dist\" && copy \"./package.json\" \"./dist\" && npm run compile && npm run format",
+    "build": "npm run compile && npm run format",
     "compile": "tsc -b ../src/tsconfig.cjs.json ../src/tsconfig.esm.json ../src/tsconfig.esm5.json ../src/tsconfig.types.json",
     "format": "prettier --write \"../src/**/*.ts\" \"../dist/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
@@ -18,7 +18,8 @@
     "preversion": "npm run lint",
     "version": "git add -A src",
     "postversion": "git push && git push --tags",
-    "deploy": "npm version patch && npm publish dist --access public"
+    "copy-default-files": "copy \"./LICENSE\" \"./dist\" && copy \"./README.md\" \"./dist\" && copy \"./package.json\" \"./dist\"",
+    "deploy": "npm version patch && npm run copy-default-files && npm publish dist --access public"
   },
   "repository": {
     "type": "git",
