@@ -5,12 +5,7 @@
     "baseUrl": ".",
     "paths": {
       "@koalarx/utils": ["./"],
-      "@koalarx/utils/*": ["./*"],
-      "@koalarx/utils/operators/date/*": ["./operators/date/*"],
-      "@koalarx/utils/operators/delay/*": ["./operators/delay/*"],
-      "@koalarx/utils/operators/number/*": ["./operators/number/*"],
-      "@koalarx/utils/operators/string/*": ["./operators/string/*"],
-      "@koalarx/utils/enum/*": ["./enum/*"],
+      "@koalarx/utils/*": ["./*"]
     }
   },
   "include": ["./**/*.ts"],

@@ -98,8 +98,11 @@
     "dist/esm/**/!(*.tsbuildinfo)",
     "dist/esm5/**/!(*.tsbuildinfo)",
     "dist/types/**/!(*.tsbuildinfo)",
+    "operators",
+    "enums",
     "LICENSE",
     "package.json",
-    "README.md"
+    "README.md",
+    "tsconfig.json"
   ]
 }
