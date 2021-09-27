@@ -1,6 +1,6 @@
 {
   "name": "@koalarx/utils",
-  "version": "1.0.60",
+  "version": "1.0.58",
   "description": "Biblioteca com validadores, conversores e abstrações de algumas problemáticas",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm5/index.js",
@@ -14,7 +14,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"dist/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
+    "prepublishOnly": "npm test && npm run lint && cd dist",
     "preversion": "npm run lint",
     "version": "git add -A src",
     "postversion": "git push && git push --tags",
@@ -60,6 +60,12 @@
     "node-fetch": "^2.6.1"
   },
   "files": [
-    "dist/**/*"
+    "cjs/**/!(*.tsbuildinfo)",
+    "esm/**/!(*.tsbuildinfo)",
+    "esm5/**/!(*.tsbuildinfo)",
+    "types/**/!(*.tsbuildinfo)",
+    "LICENSE",
+    "package.json",
+    "README.md"
   ]
 }
