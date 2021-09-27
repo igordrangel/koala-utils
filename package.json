@@ -60,10 +60,10 @@
     "node-fetch": "^2.6.1"
   },
   "files": [
-    "cjs/**/**/!(*.tsbuildinfo)",
-    "esm/**/**/!(*.tsbuildinfo)",
-    "esm5/**/**/!(*.tsbuildinfo)",
-    "types/**/**/!(*.tsbuildinfo)",
+    "cjs/**/*",
+    "esm/**/*",
+    "esm5/**/*",
+    "types/**/*",
     "LICENSE",
     "package.json",
     "README.md"
