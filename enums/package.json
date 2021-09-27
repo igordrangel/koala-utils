@@ -1,0 +1,8 @@
+{
+  "name": "@koalarx/utils/enums",
+  "types": "../dist/types/enums/index.d.ts",
+  "main": "../dist/cjs/enums/index.js",
+  "module": "../dist/esm5/enums/index.js",
+  "es2015": "../dist/esm/enums/index.js",
+  "sideEffects": false
+}
