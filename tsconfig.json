@@ -1,31 +1,20 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "incremental": true,
-    "removeComments": true,
-    "preserveConstEnums": true,
-    "sourceMap": true,
+    "target": "es6",
+    "module": "commonJs",
+    "declaration": true,
+    "outDir": "./dist",
     "strict": true,
-    "noImplicitReturns": true,
+    "downlevelIteration": true,
+    "sourceMap": true,
     "moduleResolution": "node",
-    "stripInternal": true,
-    "noEmit": true,
-    "lib": [
-      "esnext",
-      "dom"
-    ],
-    "target": "esnext",
-    "baseUrl": ".",
-    "paths": {
-      "@koalarx/utils": ["./src/index"],
-      "@koalarx/utils/operators/date": ["./src/operators/date/index"],
-      "@koalarx/utils/operators/delay": ["./src/operators/delay/index"],
-      "@koalarx/utils/operators/number": ["./src/operators/number/index"],
-      "@koalarx/utils/operators/string": ["./src/operators/string/index"],
-      "@koalarx/utils/enums": ["./src/enums/index"]
-    }
+    "esModuleInterop": true
   },
-  "bazelOptions": {
-    "suppressTsconfigOverrideWarnings": true
-  }
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/__tests__/*"
+  ]
 }
