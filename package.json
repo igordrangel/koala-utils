@@ -18,7 +18,7 @@
     "preversion": "npm run lint",
     "version": "git add -A src",
     "postversion": "git push && git push --tags",
-    "deploy": "npm version patch && npm publish dist --access public"
+    "deploy": "npm version patch && npm publish --access public"
   },
   "repository": {
     "type": "git",
@@ -60,12 +60,6 @@
     "node-fetch": "^2.6.1"
   },
   "files": [
-    "cjs/**/!(*.tsbuildinfo)",
-    "esm/**/!(*.tsbuildinfo)",
-    "esm5/**/!(*.tsbuildinfo)",
-    "types/**/!(*.tsbuildinfo)",
-    "LICENSE",
-    "package.json",
-    "README.md"
+    "dist/**/!(*.tsbuildinfo)"
   ]
 }
