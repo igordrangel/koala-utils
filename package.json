@@ -7,7 +7,7 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "test": "jest --config ../jestconfig.json",
-    "build": "tsc && npm run copy-default-files && npm run format",
+    "build": "tsc && npm run format",
     "copy-default-files": "copy \"./LICENSE\" \"./dist\" && copy \"./README.md\" \"./dist\" && copy \"./package.json\" \"./dist\"",
     "format": "prettier --write \"../src/**/*.ts\" \"../dist/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
@@ -16,7 +16,7 @@
     "preversion": "npm run lint",
     "version": "git add -A src",
     "postversion": "git push && git push --tags",
-    "deploy": "npm version patch && npm publish dist --access public"
+    "deploy": "npm version patch && npm run copy-default-files && npm publish dist --access public"
   },
   "repository": {
     "type": "git",
