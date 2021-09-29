@@ -22,8 +22,8 @@ export function clear(value: string, delimiter?: string) {
   return koala(value).string().clear(delimiter).getValue();
 }
 
-export function unmaskCoin(value: string) {
-  return koala(value).string().unmaskCoin().getValue();
+export function unmaskCoin(value: string, decimalCount?: number) {
+  return koala(value).string().unmaskCoin(decimalCount).getValue();
 }
 
 export function toCamelCase(value: string) {

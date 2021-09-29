@@ -42,7 +42,7 @@ export class KlString extends KlAbstract<string> {
     return this;
   }
 
-  public unmaskCoin() {
+  public unmaskCoin(decimalCount: number = 2) {
     return new KlNumber(
       parseFloat(
         Number(
@@ -53,7 +53,7 @@ export class KlString extends KlAbstract<string> {
             .replace(/[^0-9a-zA-Z\(,\@\-\!\#\\$\%\&\*\(\)\_\+\=\{\[\}\]\/\?\;\:\.\|)\.]+/g, '')
             .replace(/\./g, '')
             .replace(/,/g, '.'),
-        ).toFixed(2),
+        ).toFixed(decimalCount),
       ),
     );
   }
