@@ -452,3 +452,13 @@ import { delay } from '@koalarx/utils/operators/delay';
 delay(2000).then();
 ```
 </details><br>
+
+<details>
+ <summary><strong>General Operators</strong></summary>
+ 
+```bash
+import { clone } from '@koalarx/utils/operators';
+
+clone({test: 1}) // {test: 1};
+```
+</details><br>

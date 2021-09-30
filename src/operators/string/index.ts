@@ -10,12 +10,17 @@ export function maskCnpj(value: string) {
 
 export function randomString(
   length: number,
-  numbers: boolean,
-  uppercase: boolean = false,
-  lowercase: boolean = false,
-  specialCharacters: boolean = false,
+  options: {
+    numbers?: boolean;
+    uppercase?: boolean;
+    lowercase?: boolean;
+    specialCharacters?: boolean;
+  },
 ) {
-  return koala('').string().random(length, numbers, uppercase, lowercase, specialCharacters).getValue();
+  return koala('')
+    .string()
+    .random(length, options.numbers ?? true, options.uppercase, options.lowercase, options.specialCharacters)
+    .getValue();
 }
 
 export function clear(value: string, delimiter?: string) {

@@ -2,7 +2,7 @@ import { koala } from '../../index';
 import { KlDateDateType } from '../../utils/KlDate';
 import { KlDateDay } from '../../enums/KlDateDay';
 
-export function format(value: string | Date, mask: string) {
+export function format(value: string | Date, mask?: string) {
   return koala(value).date().format(mask).getValue();
 }
 

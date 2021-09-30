@@ -1,6 +1,9 @@
 import { KlString } from './KlString';
 import { KlAbstract } from './KlAbstract';
 import { json2csv } from 'json-2-csv';
+import { clone } from 'lodash';
+
+export type KlArrayFilterComparatorType = 'like' | '=' | '!=' | '>=' | '<=' | '>' | '<';
 
 export class KlArray<T> extends KlAbstract<T[]> {
   constructor(value: T[]) {
@@ -90,21 +93,50 @@ export class KlArray<T> extends KlAbstract<T[]> {
     return this;
   }
 
-  public filter(value: string, index?: string) {
-    this.value = this.value.filter((item: any) => {
+  public filter(
+    value: string,
+    index?: string,
+    options?: {
+      comparator?: KlArrayFilterComparatorType;
+    },
+  ) {
+    this.value = clone(this.value).filter((item: any) => {
       const filter = index ? item[index] : item;
       if (filter) {
         let find = false;
-        `${value}`
-          .toLowerCase()
-          .split(' ')
-          .forEach((part) => {
-            if (`${filter}`.toLowerCase().indexOf(part) >= 0) {
-              find = true;
-              return false;
-            }
-            return false;
-          });
+
+        switch (options?.comparator) {
+          case '=':
+            find = filter === value;
+            break;
+          case '!=':
+            find = filter !== value;
+            break;
+          case '>':
+            find = value > filter;
+            break;
+          case '<':
+            find = value < filter;
+            break;
+          case '>=':
+            find = value > filter || filter === value;
+            break;
+          case '<=':
+            find = value < filter || filter === value;
+            break;
+          case 'like':
+          default:
+            `${value}`
+              .toLowerCase()
+              .split(' ')
+              .forEach((part) => {
+                if (`${filter}`.toLowerCase().indexOf(part) >= 0) {
+                  find = true;
+                  return false;
+                }
+                return false;
+              });
+        }
 
         return find;
       }
