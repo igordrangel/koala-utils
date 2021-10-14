@@ -10,7 +10,7 @@ export function maskCnpj(value: string) {
 
 export function randomString(
   length: number,
-  options: {
+  options?: {
     numbers?: boolean;
     uppercase?: boolean;
     lowercase?: boolean;
@@ -19,7 +19,7 @@ export function randomString(
 ) {
   return koala('')
     .string()
-    .random(length, options.numbers ?? true, options.uppercase, options.lowercase, options.specialCharacters)
+    .random(length, options?.numbers ?? true, options?.uppercase, options?.lowercase, options?.specialCharacters)
     .getValue();
 }
 
