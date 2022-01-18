@@ -4,7 +4,7 @@
   "description": "Biblioteca com validadores, conversores e abstrações de algumas problemáticas",
   "main": "index.js",
   "types": "index.d.ts",
-  "typings": "dist/index.d.ts",
+  "typings": "index.d.ts",
   "scripts": {
     "test": "jest --config ../jestconfig.json",
     "build": "tsc && npm run format",
@@ -16,7 +16,7 @@
     "preversion": "npm run lint",
     "version": "git add -A src",
     "postversion": "git push && git push --tags",
-    "deploy": "npm version patch && npm run copy-default-files && npm publish dist --access public"
+    "deploy": "npm version patch && npm run copy-default-files && npm publish ./dist --access public"
   },
   "repository": {
     "type": "git",
