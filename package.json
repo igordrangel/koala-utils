@@ -2,7 +2,7 @@
   "name": "@koalarx/utils",
   "version": "1.0.88",
   "description": "Biblioteca com validadores, conversores e abstrações de algumas problemáticas",
-  "main": "dist/index.js",
+  "main": "index.js",
   "types": "index.d.ts",
   "typings": "dist/index.d.ts",
   "scripts": {
