@@ -72,7 +72,7 @@ export class KlRequest extends KlAbstract<string> {
         body,
       })
         .then(async (response) => {
-          const responseData = await response.json().catch(() => null);
+          const responseData = (await response.json().catch(() => null)) as any;
           if (response.status.toString().substr(0, 2) === '20') {
             resolve({
               statusCode: response.status,
@@ -94,7 +94,13 @@ export class KlRequest extends KlAbstract<string> {
   private getParams(data: any) {
     const params = new URLSearchParams();
     Object.keys(data).forEach((indexName) => {
-      params.append(indexName, data[indexName]);
+      if (Array.isArray(data[indexName])) {
+        data[indexName].forEach((item: string) => {
+          params.append(indexName, item);
+        });
+      } else {
+        params.append(indexName, data[indexName]);
+      }
     });
 
     return params;
