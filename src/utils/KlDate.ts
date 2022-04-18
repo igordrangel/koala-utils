@@ -48,8 +48,8 @@ export class KlDate extends KlAbstract<Date> {
     return this;
   }
 
-  public diff(diffDate: string | Date) {
-    return new KlNumber(moment(diffDate).diff(this.value, 'days'));
+  public diff(diffDate: string | Date, type: KlDateDateType = 'days') {
+    return new KlNumber(moment(diffDate).diff(this.value, type));
   }
 
   public isHoliday(country: string = 'BR') {

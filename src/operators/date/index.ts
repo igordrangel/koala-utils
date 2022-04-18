@@ -18,6 +18,6 @@ export function sub(value: string | Date, qtd: number, type: KlDateDateType = 'd
   return koala(value).date().sub({ type, qtd, ignoreDays }).getValue();
 }
 
-export function diff(startDate: string | Date, endDate: string | Date) {
-  return koala(startDate).date().diff(endDate).getValue();
+export function diff(startDate: string | Date, endDate: string | Date, type: KlDateDateType = 'days') {
+  return koala(startDate).date().diff(endDate, type).getValue();
 }
