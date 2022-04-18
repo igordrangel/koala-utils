@@ -7,7 +7,7 @@ import { KlDateDay } from '../enums/KlDateDay';
 import { koala } from '../index';
 import { KlNumber } from './KlNumber';
 
-export type KlDateDateType = 'days' | 'months' | 'years';
+export type KlDateDateType = 'minutes' | 'hours' | 'days' | 'months' | 'years';
 
 export class KlDate extends KlAbstract<Date> {
   constructor(value: Date) {
