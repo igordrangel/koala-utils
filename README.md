@@ -137,6 +137,18 @@ let result = (await koala([
 
 console.log(result);// [123,456,789]
 ```
+### shuffle
+```bash
+let result = (koala([
+    {id: 1},
+    {id: 2},
+    {id: 3}
+]).array<{id: number}>()
+  .shuffle()
+  .getValue();
+
+console.log(result);// [{id: 3},{id: 1},{id: 2}]
+```
 </details><br>
 
 <details>
@@ -457,8 +469,9 @@ delay(2000).then();
  <summary><strong>General Operators</strong></summary>
  
 ```bash
-import { clone } from '@koalarx/utils/operators';
+import { clone, shuffleArray } from '@koalarx/utils/operators';
 
 clone({test: 1}) // {test: 1};
+shuffleArray([ {id: 1}, {id: 2}, {id: 3} ]);// [ {id: 3}, {id: 1}, {id: 2} ]
 ```
 </details><br>

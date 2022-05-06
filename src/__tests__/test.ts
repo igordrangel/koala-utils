@@ -1,7 +1,7 @@
 import { koala } from '../index';
 import { KlDateDay } from '../enums/KlDateDay';
 import { KlDelay } from '../utils/KlDelay';
-import { clone } from '../operators/index';
+import { clone, shuffleArray } from '../operators/index';
 
 jest.setTimeout(10000000);
 test('Array Utils', async () => {
@@ -106,6 +106,7 @@ test('Array Utils', async () => {
         })
     ).getValue(),
   ).toStrictEqual([123, 456, 789]);
+  expect(shuffleArray([{ id: 1 }, { id: 2 }, , { id: 3 }])[0].id !== 1).toBe(true);
 });
 
 test('String Utils', async () => {
@@ -170,4 +171,5 @@ test('Object Util', () => {
       .toString(['param1', 'param2'])
       .getValue(),
   ).toBe('Hello World');
+  expect(clone({ teste: 1 })).toStrictEqual({ teste: 1 });
 });

@@ -193,4 +193,13 @@ export class KlArray<T> extends KlAbstract<T[]> {
   public async pipeAsync<TypeResult>(callbackFn: (value: this) => Promise<TypeResult[]>) {
     return new KlArray<TypeResult>(await callbackFn(this));
   }
+
+  public shuffle() {
+    for (let i = this.value.length - 1; i > 0; i--) {
+      const rand = Math.floor(Math.random() * (i + 1));
+      [this.value[i], this.value[rand]] = [this.value[rand], this.value[i]];
+    }
+
+    return this;
+  }
 }
