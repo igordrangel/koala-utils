@@ -106,7 +106,7 @@ test('Array Utils', async () => {
         })
     ).getValue(),
   ).toStrictEqual([123, 456, 789]);
-  expect(shuffleArray([{ id: 1 }, { id: 2 }, , { id: 3 }])[0].id !== 1).toBe(true);
+  expect(shuffleArray([{ id: 1 }, { id: 2 }, { id: 3 }])[0].id !== 1).toBe(true);
 });
 
 test('String Utils', async () => {
