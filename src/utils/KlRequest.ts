@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import https from 'https';
 import { koala } from '..';
 import { KlAbstract } from './KlAbstract';
 
@@ -7,8 +8,14 @@ export interface KlRequestResponse<TypeResponse> {
   data: TypeResponse;
 }
 
+export interface KlRequestCert {
+  cert: string;
+  key: string;
+}
+
 export class KlRequest extends KlAbstract<string> {
   private headers?: any = undefined;
+  private cert?: https.Agent = undefined;
 
   constructor(urlBase: string) {
     super(urlBase);
@@ -16,6 +23,11 @@ export class KlRequest extends KlAbstract<string> {
 
   public defineHeaders(headers: any) {
     this.headers = headers;
+    return this;
+  }
+
+  public defineCert(cert: KlRequestCert) {
+    this.cert = new https.Agent(cert);
     return this;
   }
 
@@ -69,6 +81,7 @@ export class KlRequest extends KlAbstract<string> {
       fetch(this.value + url + (params ? '?' + params : ''), {
         method: type,
         headers: this.headers,
+        agent: this.cert,
         body,
       })
         .then(async (response) => {
