@@ -1,5 +1,4 @@
 import fetch from 'node-fetch';
-import https from 'https';
 import { koala } from '..';
 import { KlAbstract } from './KlAbstract';
 
@@ -15,7 +14,7 @@ export interface KlRequestCert {
 
 export class KlRequest extends KlAbstract<string> {
   private headers?: any = undefined;
-  private cert?: https.Agent = undefined;
+  private cert?: any = undefined;
 
   constructor(urlBase: string) {
     super(urlBase);
@@ -26,7 +25,7 @@ export class KlRequest extends KlAbstract<string> {
     return this;
   }
 
-  public defineCert(cert: KlRequestCert) {
+  public defineCert(https: any, cert: KlRequestCert) {
     this.cert = new https.Agent(cert);
     return this;
   }
