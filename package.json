@@ -16,7 +16,10 @@
     "preversion": "npm run lint",
     "version": "git add -A src",
     "postversion": "git push && git push --tags",
-    "deploy": "npm version patch && npm run copy-default-files && npm publish ./dist --access public"
+    "deploy": "npm run copy-default-files && npm publish ./dist --access public",
+    "deploy:hotfix": "npm version patch && npm run deploy",
+    "deploy:feature": "npm version minor && npm run deploy",
+    "deploy:release": "npm version major && npm run deploy"
   },
   "repository": {
     "type": "git",

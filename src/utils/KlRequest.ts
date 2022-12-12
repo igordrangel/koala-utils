@@ -12,6 +12,8 @@ export interface KlRequestCert {
   key: string;
 }
 
+export type KlRequestContentType = 'application/x-www-form-urlencoded' | 'application/json' | 'text/plain';
+
 export class KlRequest extends KlAbstract<string> {
   private headers?: any = undefined;
   private cert?: any = undefined;
@@ -58,10 +60,24 @@ export class KlRequest extends KlAbstract<string> {
   ) {
     return new Promise<KlRequestResponse<TypeResponse>>((resolve, reject) => {
       let params = '';
+      let contentType: KlRequestContentType;
       let body;
+
+      if (formUrlEncoded) {
+        contentType = 'application/x-www-form-urlencoded';
+      } else if (typeof data === 'object') {
+        contentType = 'application/json';
+      } else {
+        contentType = 'text/plain';
+      }
+
       switch (type) {
         case 'GET':
-          params = this.getParams(data).toString();
+          if (contentType !== 'text/plain') {
+            params = this.getParams(data).toString();
+          } else {
+            params = data;
+          }
           break;
         case 'POST':
         case 'PUT':
@@ -69,11 +85,14 @@ export class KlRequest extends KlAbstract<string> {
         case 'DELETE':
           this.headers = koala(this.headers ?? {})
             .object()
-            .merge({
-              'Content-Type': formUrlEncoded ? 'application/x-www-form-urlencoded' : 'application/json',
-            })
+            .merge({ 'Content-Type': contentType })
             .getValue();
-          body = formUrlEncoded ? this.getFormUrlEncoded(data) : JSON.stringify(data ?? {});
+
+          if (contentType !== 'text/plain') {
+            body = formUrlEncoded ? this.getFormUrlEncoded(data) : JSON.stringify(data ?? {});
+          } else {
+            body = data;
+          }
           break;
       }
 
