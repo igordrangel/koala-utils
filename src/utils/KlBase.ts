@@ -3,7 +3,6 @@ import { KlString } from './KlString';
 import { KlArray } from './KlArray';
 import { KlDate } from './KlDate';
 import { KlNumber } from './KlNumber';
-import { KlRequest } from './KlRequest';
 
 export abstract class KlBase {
   protected constructor(protected value: any) {}
@@ -38,9 +37,5 @@ export abstract class KlBase {
 
   public number() {
     return new KlNumber(this.value);
-  }
-
-  public request() {
-    return new KlRequest(this.value);
   }
 }
