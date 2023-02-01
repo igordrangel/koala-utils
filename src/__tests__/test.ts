@@ -24,10 +24,7 @@ test('Array Utils', async () => {
       .filter('123', 'teste')
       .getValue(),
   ).toStrictEqual([{ teste: 123 }]);
-  expect(
-    klArray([{ teste: 123 }, { teste: 123 }])
-      .getIndex('teste', 123),
-  ).toBe(0);
+  expect(klArray([{ teste: 123 }, { teste: 123 }]).getIndex('teste', 123)).toBe(0);
   expect(klArray([1, 2, 3, 4]).split(2).getValue()).toStrictEqual([
     [1, 2],
     [3, 4],
@@ -63,11 +60,9 @@ test('Array Utils', async () => {
     { date: new Date('2020-06-17') },
     { date: new Date('2020-06-15') },
   ]);
-  expect(
-    (
-      await klArray([{ nome: 'Teste 1' }, { nome: 'Teste 2' }]).toBase64()
-    ).getValue(),
-  ).toBe('bm9tZQpUZXN0ZSAxClRlc3RlIDI=');
+  expect((await klArray([{ nome: 'Teste 1' }, { nome: 'Teste 2' }]).toBase64()).getValue()).toBe(
+    'bm9tZQpUZXN0ZSAxClRlc3RlIDI=',
+  );
   expect(
     klArray([{ proposal: '123' }, { proposal: '456' }, { proposal: '789' }])
       .pipe((klArray) => {
@@ -77,11 +72,10 @@ test('Array Utils', async () => {
   ).toStrictEqual([123, 456, 789]);
   expect(
     (
-      await klArray([{ proposal: '123' }, { proposal: '456' }, { proposal: '789' }])
-        .pipeAsync(async (klArray) => {
-          await KlDelay.waitFor(300);
-          return klArray.getValue().map((item) => parseInt(item.proposal, 10));
-        })
+      await klArray([{ proposal: '123' }, { proposal: '456' }, { proposal: '789' }]).pipeAsync(async (klArray) => {
+        await KlDelay.waitFor(300);
+        return klArray.getValue().map((item) => parseInt(item.proposal, 10));
+      })
     ).getValue(),
   ).toStrictEqual([123, 456, 789]);
   expect(
@@ -91,11 +85,10 @@ test('Array Utils', async () => {
   ).toStrictEqual(['123', '456', '789']);
   expect(
     (
-      await klArray([{ proposal: '123' }, { proposal: '456' }, { proposal: '789' }])
-        .mapAsync<number>(async (item) => {
-          await KlDelay.waitFor(300);
-          return parseInt(item.proposal, 10);
-        })
+      await klArray([{ proposal: '123' }, { proposal: '456' }, { proposal: '789' }]).mapAsync<number>(async (item) => {
+        await KlDelay.waitFor(300);
+        return parseInt(item.proposal, 10);
+      })
     ).getValue(),
   ).toStrictEqual([123, 456, 789]);
   expect(shuffleArray([{ id: 1 }, { id: 2 }, { id: 3 }])[0].id !== 1).toBe(true);
