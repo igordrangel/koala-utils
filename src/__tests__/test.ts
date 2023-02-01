@@ -1,7 +1,8 @@
 import { koala } from '../index';
 import { KlDateDay } from '../enums/KlDateDay';
 import { KlDelay } from '../utils/KlDelay';
-import { clone, shuffleArray } from '../operators/index';
+import { clone } from '../operators/object';
+import { shuffleArray } from '../operators/array';
 
 jest.setTimeout(10000000);
 test('Array Utils', async () => {
