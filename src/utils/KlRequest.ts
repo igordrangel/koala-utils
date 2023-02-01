@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { koala } from '..';
+import { object } from '../operators/object';
 import { KlAbstract } from './KlAbstract';
 
 export interface KlRequestResponse<TypeResponse> {
@@ -83,8 +83,7 @@ export class KlRequest extends KlAbstract<string> {
         case 'PUT':
         case 'PATCH':
         case 'DELETE':
-          this.headers = koala(this.headers ?? {})
-            .object()
+          this.headers = object(this.headers ?? {})
             .merge({ 'Content-Type': contentType })
             .getValue();
 

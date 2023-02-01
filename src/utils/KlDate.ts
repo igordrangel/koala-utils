@@ -4,8 +4,8 @@ import Holidays from 'date-holidays';
 import { KlAbstract } from './KlAbstract';
 import { KlString } from './KlString';
 import { KlDateDay } from '../enums/KlDateDay';
-import { koala } from '../index';
 import { KlNumber } from './KlNumber';
+import { date } from '../operators/date';
 
 export type KlDateDateType = 'minutes' | 'hours' | 'days' | 'months' | 'years';
 
@@ -24,7 +24,7 @@ export class KlDate extends KlAbstract<Date> {
     if (!config.ignoreDays) config.ignoreDays = [];
     while (
       config.ignoreDays.indexOf(momentDate.toDate().getDay()) >= 0 ||
-      (config.ignoreDays.indexOf(KlDateDay.holidays) >= 0 && koala(momentDate.toDate()).date().isHoliday())
+      (config.ignoreDays.indexOf(KlDateDay.holidays) >= 0 && date(momentDate.toDate()).isHoliday())
     ) {
       momentDate = moment(momentDate.toDate()).add(config.qtd, config.type);
     }
@@ -39,7 +39,7 @@ export class KlDate extends KlAbstract<Date> {
     if (!config.ignoreDays) config.ignoreDays = [];
     while (
       config.ignoreDays.indexOf(momentDate.toDate().getDay()) >= 0 ||
-      (config.ignoreDays.indexOf(KlDateDay.holidays) >= 0 && koala(momentDate.toDate()).date().isHoliday())
+      (config.ignoreDays.indexOf(KlDateDay.holidays) >= 0 && date(momentDate.toDate()).isHoliday())
     ) {
       momentDate = moment(momentDate.toDate()).subtract(config.qtd, config.type);
     }

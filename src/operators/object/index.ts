@@ -1,4 +1,4 @@
-import { KlObject } from "../../utils/KlObject";
+import { KlObject } from '../../utils/KlObject';
 
 export function object<T>(value: T) {
   return new KlObject<T>(value);
