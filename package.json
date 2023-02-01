@@ -43,7 +43,7 @@
   "homepage": "https://github.com/igordrangel/koala-utils#readme",
   "devDependencies": {
     "@types/jest": "^26.0.0",
-    "@types/lodash-es": "^4.17.6",
+    "@types/lodash": "^4.14.191",
     "@types/node-fetch": "^2.5.7",
     "jest": "^26.0.1",
     "prettier": "^2.0.5",
@@ -56,7 +56,7 @@
     "b64-to-blob": "^1.2.19",
     "date-holidays": "^1.8.1",
     "json-2-csv": "^3.7.8",
-    "lodash-es": "^4.17.21",
+    "lodash": "^4.17.21",
     "moment": "^2.29.3",
     "node-fetch": "^2.6.1"
   }

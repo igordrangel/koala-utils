@@ -1,4 +1,4 @@
-import { camelCase } from 'lodash-es';
+import { camelCase } from 'lodash';
 import { KlArray } from './KlArray';
 import { KlAbstract } from './KlAbstract';
 import { KlNumber } from './KlNumber';

@@ -1,7 +1,7 @@
 import { KlString } from './KlString';
 import { KlAbstract } from './KlAbstract';
 import { json2csv } from 'json-2-csv';
-import { clone } from 'lodash-es';
+import { clone } from 'lodash';
 
 export type KlArrayFilterComparatorType = 'like' | '=' | '!=' | '>=' | '<=' | '>' | '<';
 
