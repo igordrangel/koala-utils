@@ -1,4 +1,8 @@
-import { koala } from '../../index';
+import { KlNumber } from '../../utils/KlNumber';
+
+export function number(value: number) {
+  return new KlNumber(value);
+}
 
 export function maskCoin(
   value: number,
@@ -9,8 +13,7 @@ export function maskCoin(
     decimalCount?: number;
   },
 ) {
-  return koala(value)
-    .number()
+  return number(value)
     .maskCoin(options?.prefix, options?.thousands, options?.decimal, options?.decimalCount)
     .getValue();
 }
