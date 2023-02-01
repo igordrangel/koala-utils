@@ -1,9 +1,9 @@
 import { KlArray } from '../../utils/KlArray';
 
-export function array<T>(value: T[]) {
+export function klArray<T>(value: T[]) {
   return new KlArray<T>(value);
 }
 
 export function shuffleArray<T>(value: T[]) {
-  return array(value).shuffle().getValue();
+  return klArray(value).shuffle().getValue();
 }

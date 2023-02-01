@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { object } from '../operators/object';
+import { klObject } from '../operators/object';
 import { KlAbstract } from './KlAbstract';
 
 export interface KlRequestResponse<TypeResponse> {
@@ -83,7 +83,7 @@ export class KlRequest extends KlAbstract<string> {
         case 'PUT':
         case 'PATCH':
         case 'DELETE':
-          this.headers = object(this.headers ?? {})
+          this.headers = klObject(this.headers ?? {})
             .merge({ 'Content-Type': contentType })
             .getValue();
 

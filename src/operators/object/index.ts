@@ -1,9 +1,9 @@
 import { KlObject } from '../../utils/KlObject';
 
-export function object<T>(value: T) {
+export function klObject<T>(value: T) {
   return new KlObject<T>(value);
 }
 
 export function clone<T>(value: T) {
-  return object(value).clone();
+  return klObject(value).clone();
 }

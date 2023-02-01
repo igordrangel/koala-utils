@@ -1,5 +1,5 @@
 import { KlDelay } from '../../utils/KlDelay';
 
-export function delay(ms: number) {
+export function klDelay(ms: number) {
   return KlDelay.waitFor(ms);
 }
