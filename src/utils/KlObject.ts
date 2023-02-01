@@ -12,7 +12,7 @@ export class KlObject<T> extends KlAbstract<T> {
 
   public merge<ObjectType>(object: ObjectType) {
     const result: any = this.value;
-    for (const [index, value] of Object.entries(object)) {
+    for (const [index, value] of Object.entries(object as any)) {
       result[index] = value;
     }
 

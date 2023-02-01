@@ -1,4 +1,4 @@
-import * as lodash from 'lodash';
+import { camelCase } from 'lodash-es';
 import { KlArray } from './KlArray';
 import { KlAbstract } from './KlAbstract';
 import { KlNumber } from './KlNumber';
@@ -38,7 +38,7 @@ export class KlString extends KlAbstract<string> {
   }
 
   public toCamelCase() {
-    this.value = lodash.camelCase(this.clear().getValue());
+    this.value = camelCase(this.clear().getValue());
     return this;
   }
 
