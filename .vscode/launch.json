@@ -10,9 +10,7 @@
       "name": "Debug",
       "program": "${workspaceRoot}\\node_modules\\jest\\bin\\jest.js",
       "internalConsoleOptions": "openOnSessionStart",
-      "outFiles": [
-        "${workspaceRoot}/src/**/*"
-      ],
+      "outFiles": ["${workspaceRoot}/src/**/*"]
     }
   ]
 }
