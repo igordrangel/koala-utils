@@ -3,15 +3,14 @@
   "version": "2.0.8",
   "description": "Biblioteca com validadores, conversores e abstrações de algumas problemáticas",
   "main": "index.js",
+  "type": "module",
   "types": "index.d.ts",
   "typings": "index.d.ts",
   "scripts": {
-    "test": "jest --config ../jestconfig.json",
-    "local-test": "jest --config jestconfig.json",
-    "build": "tsc && npm run format",
+    "test": "jest",
+    "build": "tsc",
     "copy-default-files": "copy \"./LICENSE\" \"./dist\" && copy \"./README.md\" \"./dist\" && copy \"./package.json\" \"./dist\"",
-    "format": "prettier --write \"../src/**/*.ts\" \"../dist/**/*.js\"",
-    "lint": "tslint -p tsconfig.json",
+    "lint": "prettier --end-of-line lf --write . && npx eslint --fix src/**/*",
     "prepare": "npm run build",
     "prepublishOnly": "npm test",
     "preversion": "npm run lint",
@@ -43,15 +42,18 @@
   },
   "homepage": "https://github.com/igordrangel/koala-utils#readme",
   "devDependencies": {
-    "@types/jest": "^26.0.0",
+    "@rocketseat/eslint-config": "^1.2.0",
+    "@types/jest": "^29.5.2",
     "@types/lodash": "^4.14.191",
-    "@types/node-fetch": "^2.5.7",
-    "jest": "^26.0.1",
-    "prettier": "^2.0.5",
-    "ts-jest": "^26.1.0",
-    "tslint": "^6.1.2",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.9.5"
+    "@types/node": "^18.14.0",
+    "@types/node-fetch": "^2.6.4",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "jest": "^29.6.1",
+    "prettier": "^3.0.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.1.6"
   },
   "dependencies": {
     "b64-to-blob": "^1.2.19",
@@ -60,5 +62,22 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.3",
     "node-fetch": "^2.6.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
   }
 }

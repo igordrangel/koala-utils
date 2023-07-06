@@ -1,61 +1,78 @@
-import moment from 'moment';
-import Holidays from 'date-holidays';
+import Holidays from 'date-holidays'
+import moment from 'moment'
+import { klDate } from '../operators/date'
+import { KlAbstract } from './KlAbstract'
+import { KlNumber } from './KlNumber'
+import { KlString } from './KlString'
 
-import { KlAbstract } from './KlAbstract';
-import { KlString } from './KlString';
-import { KlDateDay } from '../enums/KlDateDay';
-import { KlNumber } from './KlNumber';
-import { klDate } from '../operators/date';
+export type KlDateDateType =
+  | 'seconds'
+  | 'minutes'
+  | 'hours'
+  | 'days'
+  | 'months'
+  | 'years'
 
-export type KlDateDateType = 'minutes' | 'hours' | 'days' | 'months' | 'years';
+export enum KlDateDay {
+  sunday,
+  monday,
+  tuesday,
+  wednesday,
+  thursday,
+  friday,
+  saturday,
+  holidays,
+}
 
 export class KlDate extends KlAbstract<Date> {
   constructor(value: Date) {
-    super(value);
+    super(value)
   }
 
-  public format(format = 'DD/MM/YYYY HH:mm:ss') {
-    return new KlString(moment(this.value).format(format));
+  format(format = 'DD/MM/YYYY HH:mm:ss') {
+    return new KlString(moment(this.value).format(format))
   }
 
-  public add(config: { qtd: number; type: KlDateDateType; ignoreDays?: KlDateDay[] }) {
-    let momentDate = moment(this.value).add(config.qtd, config.type);
+  add(config: { qtd: number; type: KlDateDateType; ignoreDays?: KlDateDay[] }) {
+    let momentDate = moment(this.value).add(config.qtd, config.type)
 
-    if (!config.ignoreDays) config.ignoreDays = [];
+    if (!config.ignoreDays) config.ignoreDays = []
     while (
       config.ignoreDays.indexOf(momentDate.toDate().getDay()) >= 0 ||
-      (config.ignoreDays.indexOf(KlDateDay.holidays) >= 0 && klDate(momentDate.toDate()).isHoliday())
+      (config.ignoreDays.indexOf(KlDateDay.holidays) >= 0 &&
+        klDate(momentDate.toDate()).isHoliday())
     ) {
-      momentDate = moment(momentDate.toDate()).add(config.qtd, config.type);
+      momentDate = moment(momentDate.toDate()).add(config.qtd, config.type)
     }
 
-    this.value = momentDate.toDate();
-    return this;
+    this.value = momentDate.toDate()
+    return this
   }
 
-  public sub(config: { qtd: number; type: KlDateDateType; ignoreDays?: KlDateDay[] }) {
-    let momentDate = moment(this.value).subtract(config.qtd, config.type);
+  sub(config: { qtd: number; type: KlDateDateType; ignoreDays?: KlDateDay[] }) {
+    let momentDate = moment(this.value).subtract(config.qtd, config.type)
 
-    if (!config.ignoreDays) config.ignoreDays = [];
+    if (!config.ignoreDays) config.ignoreDays = []
     while (
       config.ignoreDays.indexOf(momentDate.toDate().getDay()) >= 0 ||
-      (config.ignoreDays.indexOf(KlDateDay.holidays) >= 0 && klDate(momentDate.toDate()).isHoliday())
+      (config.ignoreDays.indexOf(KlDateDay.holidays) >= 0 &&
+        klDate(momentDate.toDate()).isHoliday())
     ) {
-      momentDate = moment(momentDate.toDate()).subtract(config.qtd, config.type);
+      momentDate = moment(momentDate.toDate()).subtract(config.qtd, config.type)
     }
 
-    this.value = momentDate.toDate();
-    return this;
+    this.value = momentDate.toDate()
+    return this
   }
 
-  public diff(diffDate: string | Date, type: KlDateDateType = 'days') {
-    return new KlNumber(moment(diffDate).diff(this.value, type));
+  diff(diffDate: string | Date, type: KlDateDateType = 'days') {
+    return new KlNumber(moment(diffDate).diff(this.value, type))
   }
 
-  public isHoliday(country: string = 'BR') {
-    const hd = new Holidays(country);
-    const date = new Date(this.value.toDateString());
-    date.setHours(1);
-    return !!hd.isHoliday(date);
+  isHoliday(country: string = 'BR') {
+    const hd = new Holidays(country)
+    const date = new Date(this.value.toDateString())
+    date.setHours(1)
+    return !!hd.isHoliday(date)
   }
 }

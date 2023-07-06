@@ -1,19 +1,24 @@
-import { KlNumber } from '../../utils/KlNumber';
+import { KlNumber } from '../../utils/KlNumber'
 
 export function klNumber(value: number) {
-  return new KlNumber(value);
+  return new KlNumber(value)
 }
 
 export function maskCoin(
   value: number,
   options?: {
-    prefix?: string;
-    thousands?: string;
-    decimal?: string;
-    decimalCount?: number;
+    prefix?: string
+    thousands?: string
+    decimal?: string
+    decimalCount?: number
   },
 ) {
   return klNumber(value)
-    .maskCoin(options?.prefix, options?.thousands, options?.decimal, options?.decimalCount)
-    .getValue();
+    .maskCoin(
+      options?.prefix,
+      options?.thousands,
+      options?.decimal,
+      options?.decimalCount,
+    )
+    .getValue()
 }

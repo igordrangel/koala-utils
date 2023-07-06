@@ -1,151 +1,205 @@
-import fetch from 'node-fetch';
-import { klObject } from '../operators/object';
-import { KlAbstract } from './KlAbstract';
+import fetch, { Response } from 'node-fetch'
+import { KlAbstract } from './KlAbstract'
 
 export interface KlRequestResponse<TypeResponse> {
-  statusCode: number;
-  data: TypeResponse;
+  statusCode: number
+  data: TypeResponse
 }
 
 export interface KlRequestCert {
-  cert: string;
-  key: string;
+  cert: string
+  key: string
 }
 
-export type KlRequestContentType = 'application/x-www-form-urlencoded' | 'application/json' | 'text/plain';
+export type KlRequestContentType =
+  | 'application/x-www-form-urlencoded'
+  | 'application/json'
+  | 'text/plain'
+  | 'application/octet-stream'
+  | 'multipart/form-data'
+
+export type KlRequestMethodType = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
+
+export interface FileEncodedToBase64Type {
+  filename: string
+  type: string
+  base64: string
+}
 
 export class KlRequest extends KlAbstract<string> {
-  private headers?: any = undefined;
-  private cert?: any = undefined;
+  private headers?: any = undefined
+  private cert?: any = undefined
 
   constructor(urlBase: string) {
-    super(urlBase);
+    super(urlBase)
   }
 
-  public defineHeaders(headers: any) {
-    this.headers = headers;
-    return this;
+  defineHeaders(headers: any) {
+    this.headers = headers
+    return this
   }
 
-  public defineCert(https: any, cert: KlRequestCert) {
-    this.cert = new https.Agent(cert);
-    return this;
+  defineCert(https: any, cert: KlRequestCert) {
+    this.cert = new https.Agent(cert)
+    return this
   }
 
-  public get<TypeResponse>(url: string, params: any) {
-    return this.request<TypeResponse>('GET', url, params);
+  get<TypeResponse>(
+    url: string,
+    params: any = {},
+    contentType: KlRequestContentType = 'application/json',
+  ) {
+    return this.request<TypeResponse>('GET', url, params, contentType)
   }
 
-  public post<TypeResponse>(url: string, data: any, formUrlEncoded = false) {
-    return this.request<TypeResponse>('POST', url, data, formUrlEncoded);
-  }
-
-  public put<TypeResponse>(url: string, data: any) {
-    return this.request<TypeResponse>('PUT', url, data);
-  }
-
-  public patch<TypeResponse>(url: string, data: any) {
-    return this.request<TypeResponse>('PATCH', url, data);
-  }
-
-  public delete<TypeResponse>(url: string, data?: any) {
-    return this.request<TypeResponse>('DELETE', url, data);
-  }
-
-  private request<TypeResponse>(
-    type: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE',
+  post<TypeResponse>(
     url: string,
     data: any,
-    formUrlEncoded = false,
+    contentType: KlRequestContentType = 'application/json',
   ) {
-    return new Promise<KlRequestResponse<TypeResponse>>((resolve, reject) => {
-      let params = '';
-      let contentType: KlRequestContentType;
-      let body;
+    return this.request<TypeResponse>('POST', url, data, contentType)
+  }
 
-      if (formUrlEncoded) {
-        contentType = 'application/x-www-form-urlencoded';
-      } else if (typeof data === 'object') {
-        contentType = 'application/json';
-      } else {
-        contentType = 'text/plain';
-      }
+  put<TypeResponse>(
+    url: string,
+    data: any,
+    contentType: KlRequestContentType = 'application/json',
+  ) {
+    return this.request<TypeResponse>('PUT', url, data, contentType)
+  }
 
-      switch (type) {
-        case 'GET':
-          if (contentType !== 'text/plain') {
-            params = this.getParams(data).toString();
-          } else {
-            params = data;
-          }
-          break;
-        case 'POST':
-        case 'PUT':
-        case 'PATCH':
-        case 'DELETE':
-          this.headers = klObject(this.headers ?? {})
-            .merge({ 'Content-Type': contentType })
-            .getValue();
+  patch<TypeResponse>(
+    url: string,
+    data: any,
+    contentType: KlRequestContentType = 'application/json',
+  ) {
+    return this.request<TypeResponse>('PATCH', url, data, contentType)
+  }
 
-          if (contentType !== 'text/plain') {
-            body = formUrlEncoded ? this.getFormUrlEncoded(data) : JSON.stringify(data ?? {});
-          } else {
-            body = data;
-          }
-          break;
-      }
+  delete<TypeResponse>(
+    url: string,
+    data?: any,
+    contentType: KlRequestContentType = 'application/json',
+  ) {
+    return this.request<TypeResponse>('DELETE', url, data, contentType)
+  }
 
-      fetch(this.value + url + (params ? '?' + params : ''), {
-        method: type,
-        headers: this.headers,
-        agent: this.cert,
-        body,
-      })
-        .then(async (response) => {
-          const responseData = (await response.json().catch(() => null)) as any;
-          if (response.status.toString().substr(0, 2) === '20') {
-            resolve({
-              statusCode: response.status,
-              data: responseData,
-            });
-          } else {
-            reject({
-              statusCode: response.status,
-              data: responseData,
-            });
-          }
-        })
-        .catch(async (e) => {
-          reject(e);
-        });
-    });
+  async base64ToBlob(file: FileEncodedToBase64Type) {
+    return fetch(`data:${file.type};base64,${file.base64}`).then((response) =>
+      response.blob(),
+    )
+  }
+
+  private async request<TypeResponse>(
+    method: KlRequestMethodType,
+    url: string,
+    data: any,
+    contentType: KlRequestContentType = 'application/json',
+  ) {
+    let params = ''
+    let body
+
+    if (method === 'GET') {
+      params = this.convertDataToPayload(data, contentType, method)
+      params = params ? '?' + params : ''
+    } else {
+      body = this.convertDataToPayload(data, contentType, method)
+    }
+
+    return fetch(this.value + url + params, {
+      method,
+      headers: this.headers,
+      agent: this.cert,
+      body,
+    })
+      .then((response) =>
+        this.convertResponseByType<TypeResponse>(response, contentType),
+      )
+      .catch((e: Response) =>
+        this.convertResponseByType<TypeResponse>(e, contentType),
+      )
   }
 
   private getParams(data: any) {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams()
     Object.keys(data).forEach((indexName) => {
       if (Array.isArray(data[indexName])) {
         data[indexName].forEach((item: string) => {
-          params.append(indexName, item);
-        });
+          params.append(indexName, item)
+        })
       } else {
-        params.append(indexName, data[indexName]);
+        params.append(indexName, data[indexName])
       }
-    });
+    })
 
-    return params;
+    return params
   }
 
   private getFormUrlEncoded(data: any) {
-    let result = '';
+    let result = ''
     Object.keys(data).forEach((indexName) => {
       if (!result) {
-        result = `${indexName}=${data[indexName]}`;
+        result = `${indexName}=${data[indexName]}`
       } else {
-        result += `&${indexName}=${data[indexName]}`;
+        result += `&${indexName}=${data[indexName]}`
       }
-    });
+    })
 
-    return result;
+    return result
+  }
+
+  private convertDataToPayload(
+    data: any,
+    contentType: KlRequestContentType,
+    method: KlRequestMethodType,
+  ) {
+    switch (method) {
+      case 'GET':
+        switch (contentType) {
+          case 'application/x-www-form-urlencoded':
+          case 'application/json':
+            return this.getParams(data).toString()
+          case 'text/plain':
+          default:
+            return data
+        }
+      case 'POST':
+      case 'PUT':
+      case 'PATCH':
+      case 'DELETE':
+        switch (contentType) {
+          case 'application/x-www-form-urlencoded':
+            return this.getFormUrlEncoded(data)
+          case 'application/octet-stream':
+          case 'multipart/form-data':
+          case 'text/plain':
+          case 'application/json':
+          default:
+            return data
+        }
+    }
+  }
+
+  private async convertResponseByType<TypeResponse>(
+    response: Response,
+    contentType: KlRequestContentType,
+  ) {
+    const statusCode = response.status
+    return (async () => {
+      switch (contentType) {
+        case 'application/x-www-form-urlencoded':
+        case 'application/json':
+        case 'application/octet-stream':
+        case 'multipart/form-data':
+          return response.json().catch(() => null)
+        case 'text/plain':
+          return response.text()
+      }
+    })().then((data) => {
+      return {
+        statusCode,
+        data,
+      } as KlRequestResponse<TypeResponse>
+    })
   }
 }
