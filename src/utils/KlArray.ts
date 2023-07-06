@@ -206,10 +206,14 @@ export class KlArray<T> extends KlAbstract<T[]> {
   }
 
   shuffle() {
-    for (let i = this.value.length - 1; i > 0; i--) {
-      const rand = Math.floor(Math.random() * (i + 1))
-      ;[this.value[i], this.value[rand]] = [this.value[rand], this.value[i]]
-    }
+    const originalValue = JSON.parse(JSON.stringify(this.value))
+
+    do {
+      for (let i = this.value.length - 1; i > 0; i--) {
+        const rand = Math.floor(Math.random() * (i + 1))
+        ;[this.value[i], this.value[rand]] = [this.value[rand], this.value[i]]
+      }
+    } while (JSON.stringify(originalValue) === JSON.stringify(this.value))
 
     return this
   }
