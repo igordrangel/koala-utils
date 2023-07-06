@@ -6,7 +6,7 @@
   "types": "index.d.ts",
   "typings": "index.d.ts",
   "scripts": {
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "build": "tsc",
     "copy-default-files": "copy \"./LICENSE\" \"./dist\" && copy \"./README.md\" \"./dist\" && copy \"./package.json\" \"./dist\"",
     "lint": "prettier --end-of-line lf --write . && npx eslint --fix src/**/*",
@@ -15,7 +15,7 @@
     "preversion": "npm run lint",
     "version": "git add -A src",
     "postversion": "git push && git push --tags",
-    "deploy": "npm run copy-default-files && npm publish ./dist --access public",
+    "deploy": "npm run copy-default-files && npm test && npm publish ./dist --access public",
     "deploy:hotfix": "npm version patch && npm run deploy",
     "deploy:feature": "npm version minor && npm run deploy",
     "deploy:release": "npm version major && npm run deploy"
