@@ -1,5 +1,4 @@
-import { KlDate, KlDateDay } from './../../utils/KlDate'
-import { KlDateDateType } from '../../utils/KlDate'
+import { KlDate, KlDateDay, KlDateDateType } from '../../utils/KlDate'
 
 export function klDate(value: any, GMT?: string) {
   if (typeof value === 'string') {
