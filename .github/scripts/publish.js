@@ -4,9 +4,9 @@ const packageJson = require("../../package.json");
 
 execSync(`tsc`, { stdio: "inherit" });
 
-delete packageJson.scripts
-delete packageJson.devDependencies
-delete packageJson.jest
+delete packageJson.scripts;
+delete packageJson.devDependencies;
+delete packageJson.jest;
 
 fs.writeFileSync(
   "dist/package.json",
