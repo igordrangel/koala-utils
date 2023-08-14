@@ -2,23 +2,18 @@
   "name": "@koalarx/utils",
   "version": "3.0.8",
   "description": "Biblioteca com validadores, conversores e abstrações de algumas problemáticas",
-  "main": "index.js",
-  "types": "index.d.ts",
-  "typings": "index.d.ts",
   "scripts": {
     "test": "jest --passWithNoTests",
-    "build": "tsc",
-    "copy-default-files": "copy \"./LICENSE\" \"./dist\" && copy \"./README.md\" \"./dist\" && copy \"./package.json\" \"./dist\"",
+    "build": "node .github/scripts/publish.js",
     "lint": "prettier --end-of-line lf --write . && npx eslint --fix src/**/*",
     "prepare": "npm run build",
     "prepublishOnly": "npm test",
     "preversion": "npm run lint",
     "version": "git add -A src",
     "postversion": "git push && git push --tags",
-    "deploy": "npm run copy-default-files && npm test && npm publish ./dist --access public",
-    "deploy:hotfix": "npm version patch && npm run deploy",
-    "deploy:feature": "npm version minor && npm run deploy",
-    "deploy:release": "npm version major && npm run deploy"
+    "deploy:hotfix": "npm test && npm version patch",
+    "deploy:feature": "npm test && npm version minor",
+    "deploy:release": "npm test && npm version major"
   },
   "repository": {
     "type": "git",
@@ -55,12 +50,12 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "b64-to-blob": "1.2.19",
-    "date-holidays": "1.8.1",
-    "json-2-csv": "3.7.8",
-    "lodash": "4.17.21",
-    "moment": "^2.29.4",
-    "node-fetch": "2.6.7"
+    "b64-to-blob": "^1.2.19",
+    "date-holidays": "^1.8.1",
+    "json-2-csv": "^3.7.8",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.3",
+    "node-fetch": "^2.6.1"
   },
   "jest": {
     "moduleFileExtensions": [
