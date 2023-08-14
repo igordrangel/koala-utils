@@ -108,18 +108,20 @@ export class KlRequest extends KlAbstract<string> {
 
     return fetch(this.value + url + params, {
       method,
-      headers: {
-        'Content-Type': contentType,
-        ...(this.headers ?? {}),
-      },
+      headers: this.headers,
       agent: this.cert,
       body,
     })
       .then((response) =>
         this.convertResponseByType<TypeResponse>(response, contentType),
       )
-      .catch((e: Response) => {
-        throw this.convertResponseByType<TypeResponse>(e, contentType)
+      .then((response) => {
+        if (response.statusCode.toString().charAt(0) !== '2') {
+          throw response
+        }
+      })
+      .catch(async (e: Response) => {
+        throw await this.convertResponseByType<TypeResponse>(e, contentType)
       })
   }
 
