@@ -1,11 +1,16 @@
 const fs = require("fs");
 const { execSync } = require("child_process");
+const packageJson = require("../../package.json");
 
 execSync(`tsc`, { stdio: "inherit" });
 
+delete packageJson.scripts
+delete packageJson.devDependencies
+delete packageJson.jest
+
 fs.writeFileSync(
   "dist/package.json",
-  fs.readFileSync("package.json", { encoding: "utf8" }).toString(),
+  JSON.stringify(packageJson, null, 2),
   "utf8"
 );
 fs.writeFileSync(
