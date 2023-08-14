@@ -106,6 +106,11 @@ export class KlRequest extends KlAbstract<string> {
       body = this.convertDataToPayload(data, contentType, method)
     }
 
+    this.headers = {
+      'Content-Type': contentType,
+      ...(this.headers ?? {}),
+    }
+
     return fetch(this.value + url + params, {
       method,
       headers: this.headers,
@@ -120,9 +125,6 @@ export class KlRequest extends KlAbstract<string> {
           throw response
         }
         return response
-      })
-      .catch(async (e: Response) => {
-        throw await this.convertResponseByType<TypeResponse>(e, contentType)
       })
   }
 
@@ -176,10 +178,11 @@ export class KlRequest extends KlAbstract<string> {
         switch (contentType) {
           case 'application/x-www-form-urlencoded':
             return this.getFormUrlEncoded(data)
+          case 'application/json':
+            return JSON.stringify(data)
           case 'application/octet-stream':
           case 'multipart/form-data':
           case 'text/plain':
-          case 'application/json':
           default:
             return data
         }
