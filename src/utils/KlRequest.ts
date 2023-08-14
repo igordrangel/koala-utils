@@ -47,7 +47,7 @@ export class KlRequest extends KlAbstract<string> {
   get<TypeResponse>(
     url: string,
     params: any = {},
-    contentType: KlRequestContentType = 'application/json',
+    contentType?: KlRequestContentType,
   ) {
     return this.request<TypeResponse>('GET', url, params, contentType)
   }
@@ -55,7 +55,7 @@ export class KlRequest extends KlAbstract<string> {
   post<TypeResponse>(
     url: string,
     data: any,
-    contentType: KlRequestContentType = 'application/json',
+    contentType?: KlRequestContentType,
   ) {
     return this.request<TypeResponse>('POST', url, data, contentType)
   }
@@ -63,7 +63,7 @@ export class KlRequest extends KlAbstract<string> {
   put<TypeResponse>(
     url: string,
     data: any,
-    contentType: KlRequestContentType = 'application/json',
+    contentType?: KlRequestContentType,
   ) {
     return this.request<TypeResponse>('PUT', url, data, contentType)
   }
@@ -71,7 +71,7 @@ export class KlRequest extends KlAbstract<string> {
   patch<TypeResponse>(
     url: string,
     data: any,
-    contentType: KlRequestContentType = 'application/json',
+    contentType?: KlRequestContentType,
   ) {
     return this.request<TypeResponse>('PATCH', url, data, contentType)
   }
@@ -79,7 +79,7 @@ export class KlRequest extends KlAbstract<string> {
   delete<TypeResponse>(
     url: string,
     data?: any,
-    contentType: KlRequestContentType = 'application/json',
+    contentType?: KlRequestContentType,
   ) {
     return this.request<TypeResponse>('DELETE', url, data, contentType)
   }
@@ -108,16 +108,19 @@ export class KlRequest extends KlAbstract<string> {
 
     return fetch(this.value + url + params, {
       method,
-      headers: this.headers,
+      headers: {
+        'Content-Type': contentType,
+        ...(this.headers ?? {}),
+      },
       agent: this.cert,
       body,
     })
       .then((response) =>
         this.convertResponseByType<TypeResponse>(response, contentType),
       )
-      .catch((e: Response) =>
-        this.convertResponseByType<TypeResponse>(e, contentType),
-      )
+      .catch((e: Response) => {
+        throw this.convertResponseByType<TypeResponse>(e, contentType)
+      })
   }
 
   private getParams(data: any) {
