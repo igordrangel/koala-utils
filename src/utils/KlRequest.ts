@@ -119,6 +119,7 @@ export class KlRequest extends KlAbstract<string> {
         if (response.statusCode.toString().charAt(0) !== '2') {
           throw response
         }
+        return response
       })
       .catch(async (e: Response) => {
         throw await this.convertResponseByType<TypeResponse>(e, contentType)
