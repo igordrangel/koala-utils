@@ -118,6 +118,16 @@ nbl2br("Line1\nLine2");
 // Result: Line1<br/>Line2
 ```
 
+### toRegex
+
+```typescript
+import { toRegex } from "@koalarx/utils/operators/string";
+
+toRegex("000.000.000-00");
+
+// Result: /\d{3}.\d{3}.\d{3}-\d{2}/
+```
+
 # Number
 
 ### maskCoin

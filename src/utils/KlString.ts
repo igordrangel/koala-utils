@@ -258,6 +258,49 @@ export class KlString extends KlAbstract<string> {
     return Array(length).join(paddingChar || '0') + value
   }
 
+  toRegex() {
+    function isDelimiter(value: string) {
+      return /(\.|\/|-)/.test(value)
+    }
+
+    function getRegexScopeByValue(value: string) {
+      if (isNaN(value as any)) {
+        return 'S'
+      } else {
+        return 'd'
+      }
+    }
+
+    const mask = this.value
+
+    let regex = ''
+    let qtyCharactersBeforeDelimiter = 0
+
+    for (let pos = 0; pos < mask.length; pos++) {
+      ++qtyCharactersBeforeDelimiter
+
+      const value = mask.substring(pos, pos + 1)
+      const beforeValue = mask.substring(pos - 1, pos - 1 + 1)
+
+      if (isDelimiter(value) || pos === mask.length - 1) {
+        let delimiter = value
+
+        if (isDelimiter(value)) {
+          qtyCharactersBeforeDelimiter -= 1
+        } else {
+          delimiter = ''
+        }
+
+        regex += `\\${getRegexScopeByValue(
+          beforeValue,
+        )}{${qtyCharactersBeforeDelimiter}}${delimiter}`
+        qtyCharactersBeforeDelimiter = 0
+      }
+    }
+
+    return new RegExp(regex)
+  }
+
   private removeMaskCpfOrCnpj() {
     return this.value.replace(/\D/g, '')
   }

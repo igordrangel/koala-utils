@@ -62,4 +62,9 @@ describe('KlString', () => {
     expect(klString('Hellow World').replace('Hellow', 'Hello').getValue()).toBe(
       'Hello World',
     ))
+
+  it('toRegex', () =>
+    expect(klString('000.000.000-00').toRegex().test('123.456.789-10')).toBe(
+      true,
+    ))
 })

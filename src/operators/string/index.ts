@@ -49,3 +49,7 @@ export function validateCpf(value: string) {
 export function validateCnpj(value: string) {
   return klString(value).validateCnpj()
 }
+
+export function toRegex(mask: string) {
+  return klString(mask).toRegex()
+}
