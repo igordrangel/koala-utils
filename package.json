@@ -1,6 +1,6 @@
 {
   "name": "@koalarx/utils",
-  "version": "3.0.14",
+  "version": "3.1.0",
   "description": "Biblioteca com validadores, conversores e abstrações de algumas problemáticas",
   "scripts": {
     "test": "jest --passWithNoTests",
