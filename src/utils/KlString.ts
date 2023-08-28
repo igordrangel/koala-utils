@@ -281,12 +281,19 @@ export class KlString extends KlAbstract<string> {
 
       const value = mask.substring(pos, pos + 1)
       const beforeValue = mask.substring(pos - 1, pos - 1 + 1)
+      const hasDiffRegex =
+        beforeValue &&
+        !isDelimiter(beforeValue) &&
+        getRegexScopeByValue(value) !== getRegexScopeByValue(beforeValue)
 
-      if (isDelimiter(value) || pos === mask.length - 1) {
+      if (isDelimiter(value) || pos === mask.length - 1 || hasDiffRegex) {
         let delimiter = value
 
-        if (isDelimiter(value)) {
+        if (isDelimiter(value) || hasDiffRegex) {
           qtyCharactersBeforeDelimiter -= 1
+          if (hasDiffRegex && !isDelimiter(value)) {
+            delimiter = ''
+          }
         } else {
           delimiter = ''
         }
