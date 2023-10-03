@@ -66,7 +66,9 @@ export class KlDate extends KlAbstract<Date> {
   }
 
   diff(diffDate: string | Date, type: KlDateDateType = 'days') {
-    return new KlNumber(moment(diffDate).diff(this.value, type))
+    return new KlNumber(
+      Math.round(moment(diffDate).diff(this.value, type, true)),
+    )
   }
 
   isHoliday(country: string = 'BR') {
