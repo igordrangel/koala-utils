@@ -58,7 +58,7 @@
   "gitlens.codeLens.enabled": false,
   "workbench.iconTheme": "material-icon-theme",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "terminal.integrated.defaultProfile.windows": "Command Prompt",
   "git.confirmSync": false,

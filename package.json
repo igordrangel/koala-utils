@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "b64-to-blob": "^1.2.19",
-    "date-holidays": "^1.8.1",
+    "date-holidays": "^3.23.7",
     "json-2-csv": "^3.7.8",
     "lodash": "^4.17.21",
     "moment": "^2.29.3",
