@@ -33,7 +33,7 @@ Classe para manipulação avançada de strings.
 #### Exemplos de Uso
 
 ```typescript
-import { KlString, maskCpf, toCamelCase } from "@koalarx/utils";
+import { KlString, maskCpf, toCamelCase } from "@koalarx/utils/KlString";
 
 const str = new KlString("Olá Mundo!");
 console.log(str.normalizeAndRemoveSpecialChars().toString()); // "Ola Mundo"
@@ -55,7 +55,7 @@ Classe para manipulação avançada de números.
 #### Exemplos de Uso
 
 ```typescript
-import { KlNumber, maskCoin, randomNumber } from "@koalarx/utils";
+import { maskCoin, randomNumber } from "@koalarx/utils/KlNumber";
 
 console.log(maskCoin(1000)); // "R$ 1.000,00"
 console.log(randomNumber(1, 100)); // Exemplo: 42
@@ -80,7 +80,7 @@ Classe para manipulação avançada de datas.
 #### Exemplos de Uso
 
 ```typescript
-import { KlDate, isHoliday } from "@koalarx/utils";
+import { KlDate, isHoliday } from "@koalarx/utils/KlDate";
 
 const date = new KlDate("2023-10-01");
 console.log(date.format("dd/MM/yyyy")); // "01/10/2023"
@@ -103,7 +103,7 @@ Classe para manipulação avançada de arrays.
 #### Exemplos de Uso
 
 ```typescript
-import { KlArray } from "@koalarx/utils";
+import { KlArray } from "@koalarx/utils/KlArray";
 
 const array = new KlArray([1, 2, 3, 4]);
 console.log(array.split(2)); // [[1, 2], [3, 4]]
@@ -123,7 +123,7 @@ Classe para criar atrasos no código.
 #### Exemplos de Uso
 
 ```typescript
-import { delay } from "@koalarx/utils";
+import { delay } from "@koalarx/utils/KlDelay";
 
 await delay(1000);
 console.log("Aguardou 1 segundo");
@@ -144,7 +144,7 @@ Classe para medir a duração de execuções.
 #### Exemplos de Uso
 
 ```typescript
-import { KlCron } from "@koalarx/utils";
+import { KlCron } from "@koalarx/utils/KlCron";
 
 const cron = new KlCron();
 cron.start();

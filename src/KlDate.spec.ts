@@ -1,4 +1,4 @@
-import { KlDateDayEnum } from '../enums/KlDateDayEnum'
+import { KlDateDayEnum } from './enums/KlDateDayEnum'
 import { KlDate } from './KlDate'
 
 describe('KlDate', () => {

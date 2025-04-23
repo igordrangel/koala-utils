@@ -1,8 +1,8 @@
 import { format } from 'date-fns'
 import Holidays from 'date-holidays'
-import { KlDateDayEnum } from '../enums/KlDateDayEnum'
-import { KlDateCountry } from '../types/KlDateCountry'
-import { KlDateDateType } from '../types/KlDateDateType'
+import { KlDateDayEnum } from './enums/KlDateDayEnum'
+import { KlDateCountry } from './types/KlDateCountry'
+import { KlDateDateType } from './types/KlDateDateType'
 
 interface KlDateOptions {
   skipHolidays?: {
