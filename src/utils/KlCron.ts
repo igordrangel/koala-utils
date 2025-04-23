@@ -1,4 +1,4 @@
-import { KlDate } from './klDate'
+import { KlDate } from './KlDate'
 
 export class KlCron {
   private startDate?: KlDate

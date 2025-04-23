@@ -1,5 +1,5 @@
 import { KlDateDayEnum } from '../enums/KlDateDayEnum'
-import { KlDate } from './klDate'
+import { KlDate } from './KlDate'
 
 describe('KlDate', () => {
   it('format date', () => {
