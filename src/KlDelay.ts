@@ -4,7 +4,7 @@ class KlDelay {
    * @param delay Tempo de espera em milissegundos (padrão: 300ms).
    * @returns Uma Promise que será resolvida após o tempo especificado.
    */
-  static waitFor(delay: number = 300) {
+  static waitFor(delay = 300) {
     return new Promise((resolve) => {
       setTimeout(() => resolve(true), delay)
     })
