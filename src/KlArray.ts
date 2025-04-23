@@ -1,6 +1,9 @@
 export class KlArray extends Array {
   constructor(initialValue: any[] = []) {
-    super(...initialValue)
+    super()
+    if (typeof initialValue[Symbol.iterator] === 'function') {
+      this.push(...initialValue)
+    }
   }
 
   /**
@@ -45,24 +48,21 @@ export class KlArray extends Array {
   orderBy(by: string, direction: 'asc' | 'desc' = 'asc') {
     const inverse = direction === 'desc'
 
-    return new KlArray(
-      this.sort((a: any, b: any) => {
-        if (typeof a !== 'string' && typeof b !== 'string') {
-          if ((!inverse && a[by] > b[by]) || (inverse && a[by] < b[by])) {
-            return 1
-          } else if (
-            (!inverse && a[by] < b[by]) ||
-            (inverse && a[by] > b[by])
-          ) {
-            return -1
-          } else {
-            return 0
-          }
+    this.sort((a: any, b: any) => {
+      if (typeof a !== 'string' && typeof b !== 'string') {
+        if ((!inverse && a[by] > b[by]) || (inverse && a[by] < b[by])) {
+          return 1
+        } else if ((!inverse && a[by] < b[by]) || (inverse && a[by] > b[by])) {
+          return -1
         } else {
           return 0
         }
-      }),
-    )
+      } else {
+        return 0
+      }
+    })
+
+    return this
   }
 
   /**
