@@ -1,4 +1,4 @@
-import camelCase from 'lodash/camelCase'
+import * as camelCase from 'lodash/camelCase'
 import { isCNPJ, isCPF } from 'validation-br'
 import { KlNumber } from './KlNumber'
 
