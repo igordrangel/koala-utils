@@ -1,60 +1,64 @@
 import camelCase from 'lodash/camelCase'
-import { KlArray } from './KlArray'
-import { KlAbstract } from './KlAbstract'
+import { isCNPJ, isCPF } from 'validation-br'
 import { KlNumber } from './KlNumber'
 
-export interface KlStringRandomOptions {
+interface KlStringRandomOptions {
   numbers?: boolean
   uppercase?: boolean
   lowercase?: boolean
   specialCharacters?: boolean
 }
 
-export class KlString extends KlAbstract<string> {
-  constructor(value: string) {
-    super(value)
+export class KlString extends String {
+  /**
+   * Normaliza a string atual e remove caracteres especiais, como acentos.
+   * @returns Uma nova instância de `KlString` contendo a string normalizada e sem caracteres especiais.
+   */
+  normalizeAndRemoveSpecialChars() {
+    return new KlString(this.normalize('NFD').replace(/[\u0300-\u036f]/g, ''))
   }
 
+  /**
+   * Remove espaços da string atual, substituindo-os por um delimitador.
+   * @param delimiter O delimitador que substituirá os espaços (padrão: '').
+   * @returns Uma nova instância de `KlString` sem espaços.
+   */
   removeSpaces(delimiter: string = '') {
-    this.value = this.value.normalize('NFD').replace(/\s/g, delimiter)
-    return this
+    return this.normalize('NFD').replace(/\s/g, delimiter)
   }
 
-  replace(searchValue: string | RegExp, replaceValue: string) {
-    this.value = this.value.replace(searchValue, replaceValue)
-    return this
-  }
-
-  split(delimiter: string = ',') {
-    if (this.value.indexOf(delimiter) >= 0) {
-      return new KlArray<string>(this.value.split(delimiter))
-    } else {
-      return new KlArray<string>(this.value.split(/\r\n|\r|\n/gi))
-    }
-  }
-
+  /**
+   * Remove espaços e caracteres especiais de uma string.
+   * @param delimiter O delimitador que substituirá os espaços e caracteres especiais (padrão: ' ').
+   * @returns Uma nova instância de `KlString` contendo a string limpa.
+   */
   clear(delimiter: string = ' ') {
-    this.value = this.value
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '') // Remove acentos
-      .replace(/([^\w]+|\s+)/g, delimiter) // Substitui espaço e outros caracteres por hífen
-      .replace(/\-\-+/g, '-') // Substitui multiplos hífens por um único hífen
-      .replace(/(^-+|-+$)/, '')
-
-    return this
+    return new KlString(
+      this.normalizeAndRemoveSpecialChars()
+        .replace(/([^\w]+|\s+)/g, delimiter) // Substitui espaço e outros caracteres por hífen
+        .replace(/\-\-+/g, '-') // Substitui multiplos hífens por um único hífen
+        .replace(/(^-+|-+$)/, ''),
+    )
   }
 
+  /**
+   * Converte a string atual para o formato camelCase.
+   * @returns Uma nova instância de `KlString` no formato camelCase.
+   */
   toCamelCase() {
-    this.value = camelCase(this.clear().getValue())
-    return this
+    return new KlString(camelCase(this.clear().toString()))
   }
 
+  /**
+   * Remove a máscara de moeda da string atual e converte para um número.
+   * @param decimalCount Número de casas decimais (padrão: 2).
+   * @returns Uma instância de `KlNumber` contendo o valor numérico sem a máscara.
+   */
   unmaskCoin(decimalCount: number = 2) {
     return new KlNumber(
       parseFloat(
         Number(
-          this.value
-            .replace('R$', '')
+          this.replace('R$', '')
             .replace(/\s(?=\s)/g, '')
             .replace(/[\n\r\t]/g, '')
             .replace(
@@ -68,16 +72,30 @@ export class KlString extends KlAbstract<string> {
     )
   }
 
-  concat(value: string, toStart: boolean = false) {
-    if (toStart) {
-      this.value = `${value}${this.value}`
-    } else {
-      this.value = `${this.value}${value}`
-    }
-
-    return this
+  /**
+   * Concatena a string atual com outras strings fornecidas.
+   * @param stringValue As strings a serem concatenadas.
+   * @returns Uma nova instância de `KlString` com as strings concatenadas.
+   */
+  contatenate(...stringValue: string[]) {
+    return new KlString(super.concat(...stringValue))
   }
 
+  /**
+   * Concatena a string atual com outra string no início.
+   * @param value A string a ser adicionada no início.
+   * @returns Uma nova instância de `KlString` com a string concatenada.
+   */
+  concatenateToStart(value: string) {
+    return new KlString(`${value}${this}`)
+  }
+
+  /**
+   * Gera uma string aleatória com o comprimento e opções especificados.
+   * @param length O comprimento da string gerada.
+   * @param options Opções para incluir letras maiúsculas, minúsculas, números e caracteres especiais.
+   * @returns Uma nova instância de `KlString` contendo a string aleatória gerada.
+   */
   random(
     length: number,
     { lowercase, uppercase, numbers, specialCharacters }: KlStringRandomOptions,
@@ -100,215 +118,189 @@ export class KlString extends KlAbstract<string> {
       result += characters[rand - 1]
     }
 
-    this.value = result
-    return this
+    return new KlString(result)
   }
 
+  /**
+   * Aplica a máscara de CPF à string atual.
+   * @returns Uma nova instância de `KlString` formatada como CPF (ex.: '123.456.789-00').
+   */
   maskCpf() {
-    this.value = this.leftPad(this.value.replace(/\D/g, ''), 11)
-      .replace(/\D/g, '')
-      .replace(/(\d{3})(\d)/, '$1.$2')
-      .replace(/(\d{3})(\d)/, '$1.$2')
-      .replace(/(\d{3})(\d{1,2})$/, '$1-$2')
-
-    return this
-  }
-
-  maskCnpj() {
-    this.value = this.leftPad(this.value.replace(/\D/g, ''), 14).replace(
-      /^(\d{2})(\d{3})?(\d{3})?(\d{4})?(\d{2})?/,
-      '$1.$2.$3/$4-$5',
+    return new KlString(
+      this.leftPad(this.onlyNumbers(), 11)
+        .replace(/\D/g, '')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d{1,2})$/, '$1-$2'),
     )
-
-    return this
   }
 
-  unmaskCpf() {
-    this.value = this.removeMaskCpfOrCnpj()
-    return this
+  /**
+   * Aplica a máscara de CNPJ à string atual.
+   * @returns Uma nova instância de `KlString` formatada como CNPJ (ex.: '12.345.678/0001-00').
+   */
+  maskCnpj() {
+    return new KlString(
+      this.leftPad(this.onlyNumbers(), 14).replace(
+        /^(\d{2})(\d{3})?(\d{3})?(\d{4})?(\d{2})?/,
+        '$1.$2.$3/$4-$5',
+      ),
+    )
   }
 
-  unmaskCnpj() {
-    this.value = this.removeMaskCpfOrCnpj()
-    return this
-  }
-
+  /**
+   * Valida se a string atual é um CPF válido.
+   * @returns `true` se o CPF for válido, caso contrário `false`.
+   */
   validateCpf() {
-    function calcChecker1(digits: any) {
-      let sum = 0
-
-      for (let j = 0; j < 9; ++j) {
-        sum += digits.toString().charAt(j) * (10 - j)
-      }
-
-      const lastSumChecker1 = sum % 11
-
-      return lastSumChecker1 < 2 ? 0 : 11 - lastSumChecker1
-    }
-
-    function calcChecker2(cpfWithChecker1: any) {
-      let sum = 0
-
-      for (let k = 0; k < 10; ++k) {
-        sum += cpfWithChecker1.toString().charAt(k) * (11 - k)
-      }
-
-      const lastSumChecker2 = sum % 11
-
-      return lastSumChecker2 < 2 ? 0 : 11 - lastSumChecker2
-    }
-
-    const cleanCPF = this.removeMaskCpfOrCnpj()
-    const firstNineDigits = cleanCPF.substring(0, 9)
-    const checker = cleanCPF.substring(9, 11)
-
-    if (cleanCPF.length !== 11) {
-      return false
-    }
-
-    // Checking if all digits are equal
-    for (let i = 0; i < 10; i++) {
-      if ('' + firstNineDigits + checker === Array(12).join(`${i}`)) {
-        return false
-      }
-    }
-
-    const checker1 = calcChecker1(firstNineDigits)
-    const checker2 = calcChecker2(firstNineDigits + '' + checker1)
-
-    return checker.toString() === checker1.toString() + checker2.toString()
+    return isCPF(this.onlyNumbers().toString())
   }
 
+  /**
+   * Valida se a string atual é um CNPJ válido.
+   * @returns `true` se o CNPJ for válido, caso contrário `false`.
+   */
   validateCnpj() {
-    const value = this.removeMaskCpfOrCnpj()
-
-    if (value === '') {
-      return false
-    }
-
-    if (value.length !== 14) {
-      return false
-    }
-
-    // Elimina CNPJs invalidos conhecidos
-    if (
-      value === '00000000000000' ||
-      value === '11111111111111' ||
-      value === '22222222222222' ||
-      value === '33333333333333' ||
-      value === '44444444444444' ||
-      value === '55555555555555' ||
-      value === '66666666666666' ||
-      value === '77777777777777' ||
-      value === '88888888888888' ||
-      value === '99999999999999'
-    ) {
-      return false
-    }
-
-    // Valida DVs
-    let tamanho = value.length - 2
-    let numeros = value.substring(0, tamanho)
-    const digitos = value.substring(tamanho)
-    let soma = 0
-    let pos = tamanho - 7
-    for (let i = tamanho; i >= 1; i--) {
-      soma += parseInt(numeros.charAt(tamanho - i), 10) * pos--
-      if (pos < 2) {
-        pos = 9
-      }
-    }
-    let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11)
-    if (resultado !== parseInt(digitos.charAt(0), 10)) {
-      return false
-    }
-
-    tamanho = tamanho + 1
-    numeros = value.substring(0, tamanho)
-    soma = 0
-    pos = tamanho - 7
-    for (let i = tamanho; i >= 1; i--) {
-      soma += parseInt(numeros.charAt(tamanho - i), 10) * pos--
-      if (pos < 2) {
-        pos = 9
-      }
-    }
-    resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11)
-
-    return !(resultado !== parseInt(digitos.charAt(1), 10))
+    return isCNPJ(this.toString())
   }
 
+  /**
+   * Remove todos os caracteres não numéricos da string.
+   * @returns Uma nova instância de `KlString` contendo apenas os números.
+   */
+  onlyNumbers() {
+    return new KlString(this.replace(/\D/g, ''))
+  }
+
+  /**
+   * Substitui quebras de linha (`\n`, `\r\n`, `\r`) por tags HTML `<br/>`.
+   * @returns Uma nova instância de `KlString` com as quebras de linha substituídas.
+   */
   nbl2br() {
-    this.value = this.value.replace(/\r\n|\r|\n/gi, '<br/>')
-    return this
+    return new KlString(this.replace(/\r\n|\r|\n/gi, '<br/>'))
   }
 
-  normalize() {
-    this.value = this.value.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    return this
-  }
-
+  /**
+   * Converte a string atual para Base64.
+   * @returns Uma nova instância de `KlString` contendo a string codificada em Base64.
+   */
   toBase64() {
-    this.value = Buffer.from(this.value).toString('base64')
-    return this
+    return new KlString(Buffer.from(this).toString('base64'))
   }
 
-  leftPad(value: string, totalWidth: number, paddingChar?: string) {
-    const length = totalWidth - value.toString().length + 1
+  /**
+   * Adiciona caracteres de preenchimento à esquerda de uma string até atingir o comprimento total especificado.
+   * @param value A string que será preenchida.
+   * @param totalWidth O comprimento total desejado.
+   * @param paddingChar O caractere de preenchimento (padrão: '0').
+   * @returns Uma string preenchida com o caractere especificado.
+   */
+  private leftPad(value: KlString, totalWidth: number, paddingChar?: string) {
+    const length = totalWidth - value.length + 1
     return Array(length).join(paddingChar || '0') + value
   }
+}
 
-  toRegex() {
-    function isDelimiter(value: string) {
-      return /(\.|\/|-)/.test(value)
-    }
+/**
+ * Aplica a máscara de CPF a uma string.
+ * @param value A string contendo o CPF (apenas números ou com formatação).
+ * @returns Uma string formatada como CPF (ex.: '123.456.789-00').
+ */
+export function maskCpf(value: string) {
+  return new KlString(value).maskCpf().toString()
+}
 
-    function getRegexScopeByValue(value: string) {
-      if (isNaN(value as any)) {
-        return 'S'
-      } else {
-        return 'd'
-      }
-    }
+/**
+ * Aplica a máscara de CNPJ a uma string.
+ * @param value A string contendo o CNPJ (apenas números ou com formatação).
+ * @returns Uma string formatada como CNPJ (ex.: '12.345.678/0001-00').
+ */
+export function maskCnpj(value: string) {
+  return new KlString(value).maskCnpj().toString()
+}
 
-    const mask = this.value
+/**
+ * Gera uma string aleatória com o comprimento e opções especificados.
+ * @param length O comprimento da string gerada.
+ * @param options Opções para incluir letras maiúsculas, minúsculas, números e caracteres especiais.
+ * @returns Uma string aleatória gerada com base nas opções fornecidas.
+ */
+export function randomString(length: number, options?: KlStringRandomOptions) {
+  return new KlString('')
+    .random(length, options ?? { lowercase: true, uppercase: true })
+    .toString()
+}
 
-    let regex = ''
-    let qtyCharactersBeforeDelimiter = 0
+/**
+ * Remove espaços e caracteres especiais de uma string.
+ * @param value A string a ser limpa.
+ * @param delimiter O delimitador que substituirá os espaços e caracteres especiais (padrão: '').
+ * @returns Uma string limpa.
+ */
+export function clear(value: string, delimiter?: string) {
+  return new KlString(value).clear(delimiter).toString()
+}
 
-    for (let pos = 0; pos < mask.length; pos++) {
-      ++qtyCharactersBeforeDelimiter
+/**
+ * Remove a máscara de moeda de uma string e converte para número.
+ * @param value A string contendo o valor monetário.
+ * @param decimalCount Número de casas decimais (padrão: 2).
+ * @returns O valor numérico sem a máscara.
+ */
+export function unmaskCoin(value: string, decimalCount?: number) {
+  return new KlString(value).unmaskCoin(decimalCount).toNumber()
+}
 
-      const value = mask.substring(pos, pos + 1)
-      const beforeValue = mask.substring(pos - 1, pos - 1 + 1)
-      const hasDiffRegex =
-        beforeValue &&
-        !isDelimiter(beforeValue) &&
-        getRegexScopeByValue(value) !== getRegexScopeByValue(beforeValue)
+/**
+ * Remove a máscara de CPF de uma string, retornando apenas os números.
+ * @param value A string contendo o CPF.
+ * @returns Uma string contendo apenas os números do CPF.
+ */
+export function unmaskCpf(value: string) {
+  return new KlString(value).onlyNumbers()
+}
 
-      if (isDelimiter(value) || pos === mask.length - 1 || hasDiffRegex) {
-        let delimiter = value
+/**
+ * Remove a máscara de CNPJ de uma string, retornando apenas os números.
+ * @param value A string contendo o CNPJ.
+ * @returns Uma string contendo apenas os números do CNPJ.
+ */
+export function unmaskCnpj(value: string) {
+  return new KlString(value).onlyNumbers()
+}
 
-        if (isDelimiter(value) || hasDiffRegex) {
-          qtyCharactersBeforeDelimiter -= 1
-          if (hasDiffRegex && !isDelimiter(value)) {
-            delimiter = ''
-          }
-        } else {
-          delimiter = ''
-        }
+/**
+ * Converte uma string para o formato camelCase.
+ * @param value A string a ser convertida.
+ * @returns Uma string no formato camelCase.
+ */
+export function toCamelCase(value: string) {
+  return new KlString(value).toCamelCase().toString()
+}
 
-        regex += `\\${getRegexScopeByValue(
-          beforeValue,
-        )}{${qtyCharactersBeforeDelimiter}}${delimiter}`
-        qtyCharactersBeforeDelimiter = 0
-      }
-    }
+/**
+ * Substitui quebras de linha (`\n`, `\r\n`, `\r`) por tags HTML `<br/>`.
+ * @param value A string contendo quebras de linha.
+ * @returns Uma string com as quebras de linha substituídas por `<br/>`.
+ */
+export function nbl2br(value: string) {
+  return new KlString(value).nbl2br().toString()
+}
 
-    return new RegExp(regex)
-  }
+/**
+ * Valida se uma string é um CPF válido.
+ * @param value A string contendo o CPF.
+ * @returns `true` se o CPF for válido, caso contrário `false`.
+ */
+export function validateCpf(value: string) {
+  return new KlString(value).validateCpf()
+}
 
-  private removeMaskCpfOrCnpj() {
-    return this.value.replace(/\D/g, '')
-  }
+/**
+ * Valida se uma string é um CNPJ válido.
+ * @param value A string contendo o CNPJ.
+ * @returns `true` se o CNPJ for válido, caso contrário `false`.
+ */
+export function validateCnpj(value: string) {
+  return new KlString(value).validateCnpj()
 }

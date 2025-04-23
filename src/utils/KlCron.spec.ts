@@ -1,14 +1,14 @@
-import { klCron } from '../operators/cron'
-import { klDelay } from '../operators/delay'
+import { delay } from './KlDelay'
+import { KlCron } from './KlCron'
 
 describe('KlCron', () => {
   it('timer execution cron', async () => {
-    const cron = klCron()
+    const cron = new KlCron()
 
     cron.start()
-    await klDelay(2000)
+    await delay(1000)
     cron.end()
 
-    expect(cron.duration().getValue()).toBe(2)
+    expect(cron.duration()).toBe(1)
   })
 })

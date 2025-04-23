@@ -1,8 +1,8 @@
-import { klDelay } from '../operators/delay'
+import { delay } from './KlDelay'
 
 describe('KlDelay', () => {
   it('delay', async () => {
-    await klDelay(1000)
+    await delay(10)
     expect(true).toBe(true)
   })
 })
