@@ -1,4 +1,4 @@
-import camelCase from 'lodash/camelCase'
+import { camelCase } from 'lodash'
 import { isCNPJ, isCPF } from 'validation-br'
 import { KlNumber } from './KlNumber'
 
@@ -23,7 +23,7 @@ export class KlString extends String {
    * @param delimiter O delimitador que substituirá os espaços (padrão: '').
    * @returns Uma nova instância de `KlString` sem espaços.
    */
-  removeSpaces(delimiter: string = '') {
+  removeSpaces(delimiter = '') {
     return this.normalize('NFD').replace(/\s/g, delimiter)
   }
 
@@ -32,7 +32,7 @@ export class KlString extends String {
    * @param delimiter O delimitador que substituirá os espaços e caracteres especiais (padrão: ' ').
    * @returns Uma nova instância de `KlString` contendo a string limpa.
    */
-  clear(delimiter: string = ' ') {
+  clear(delimiter = ' ') {
     return new KlString(
       this.normalizeAndRemoveSpecialChars()
         .replace(/([^\w]+|\s+)/g, delimiter) // Substitui espaço e outros caracteres por hífen
@@ -54,7 +54,7 @@ export class KlString extends String {
    * @param decimalCount Número de casas decimais (padrão: 2).
    * @returns Uma instância de `KlNumber` contendo o valor numérico sem a máscara.
    */
-  unmaskCoin(decimalCount: number = 2) {
+  unmaskCoin(decimalCount = 2) {
     return new KlNumber(
       parseFloat(
         Number(
