@@ -1,5 +1,5 @@
-export class KlArray extends Array {
-  constructor(initialValue: any[] = []) {
+export class KlArray<T = any> extends Array<T> {
+  constructor(initialValue: T[] = []) {
     super()
     if (typeof initialValue[Symbol.iterator] === 'function') {
       this.push(...initialValue)
@@ -11,7 +11,9 @@ export class KlArray extends Array {
    * @returns Um novo `KlArray` contendo apenas os valores "truthy".
    */
   clearEmptyValues() {
-    return this.filter((item) => !!item)
+    return new KlArray<NonNullable<T>>(
+      this.filter((item): item is NonNullable<T> => !!item),
+    )
   }
 
   /**
@@ -20,13 +22,13 @@ export class KlArray extends Array {
    * @returns Um novo KlArray contendo subarrays do tipo KlArray.
    */
   split(maxRowsSplit: number) {
-    const result = new KlArray()
+    const result = new KlArray<KlArray<T>>()
 
     let group = 0
 
     this.forEach((value, index) => {
       if (result[group] === undefined) {
-        result[group] = new KlArray()
+        result[group] = new KlArray<T>()
       }
 
       result[group].push(value)

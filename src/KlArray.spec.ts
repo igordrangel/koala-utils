@@ -48,4 +48,8 @@ describe('KlArray', () => {
       JSON.stringify(originalArray) !== JSON.stringify(shuffledArray),
     ).toBe(true)
   })
+
+  it('clearEmptyValues', () => {
+    expect(new KlArray([1, 2, null, 3]).clearEmptyValues()).toEqual([1, 2, 3])
+  })
 })
