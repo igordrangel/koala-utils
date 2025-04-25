@@ -1,6 +1,6 @@
 {
   "name": "@koalarx/utils",
-  "version": "4.0.8",
+  "version": "4.0.9",
   "engines": {
     "node": "^20.18.0"
   },
