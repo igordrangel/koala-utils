@@ -70,7 +70,7 @@ Classe para manipulação avançada de datas.
 #### Métodos Disponíveis
 
 - **format**: Formata a data com base em uma máscara.
-- **changeGMT**: Altera o fuso horário da data.
+- **changeTimeZone**: Altera o fuso horário da data.
 - **toUTC**: Converte a data para UTC.
 - **add**: Adiciona tempo à data.
 - **sub**: Subtrai tempo da data.
@@ -85,6 +85,28 @@ import { KlDate, isHoliday } from "@koalarx/utils/KlDate";
 const date = new KlDate("2023-10-01");
 console.log(date.format("dd/MM/yyyy")); // "01/10/2023"
 console.log(isHoliday(date, "BR")); // true ou false
+```
+
+### KlTime
+
+Classe para manipulação avançada de horários.
+
+#### Métodos Disponíveis
+
+- **format**: Formata um horário com base em uma máscara.
+- **changeTimeZone**: Altera o fuso horário da data.
+- **toUTC**: Converte a data para UTC.
+- **add**: Adiciona tempo à data.
+- **sub**: Subtrai tempo da data.
+- **diff**: Calcula a diferença entre duas datas.
+
+#### Exemplos de Uso
+
+```typescript
+import { KlTime } from "@koalarx/utils/KlTime";
+
+const date = new KlTime(13);
+console.log(date.format()); // "13:00:00"
 ```
 
 ---
