@@ -22,8 +22,11 @@ describe('KlDate', () => {
 
   it('format with GMT', () => {
     expect(
-      new KlDate('2020-06-20T13:51:00').toUTC().changeGMT('-0300').format(),
-    ).toBe('20/06/2020 13:51:00')
+      new KlDate('2020-06-20T13:00:00')
+        .toUTC()
+        .changeTimeZone('America/Sao_Paulo')
+        .format(),
+    ).toBe('20/06/2020 16:00:00')
   })
 
   it('add', () => {

@@ -3,6 +3,7 @@ import Holidays from 'date-holidays'
 import { KlDateDayEnum } from './enums/KlDateDayEnum'
 import { KlDateCountry } from './types/KlDateCountry'
 import { KlDateDateType } from './types/KlDateDateType'
+import { KlDateTimeZone } from './types/KlDateTimeZone'
 
 interface KlDateOptions {
   skipHolidays?: {
@@ -23,13 +24,11 @@ export class KlDate extends Date {
 
   /**
    * Altera o fuso horário (GMT) da data atual.
-   * @param GMT String representando o GMT (ex.: '+3', '-2').
+   * @param timeZone String representando o GMT (ex.: '+3', '-2').
    * @returns Uma nova instância de `KlDate` com o GMT ajustado.
    */
-  changeGMT(GMT: string) {
-    return new KlDate(
-      this.toISOString().replace('.000Z', `.${Math.abs(parseInt(GMT))}Z`),
-    )
+  changeTimeZone(timeZone: KlDateTimeZone) {
+    return new KlDate(this.toLocaleString('en-US', { timeZone }))
   }
 
   /**
@@ -37,7 +36,11 @@ export class KlDate extends Date {
    * @returns Uma nova instância de `KlDate` no formato UTC.
    */
   toUTC() {
-    return new KlDate(this.toISOString())
+    return new KlDate(
+      this.toLocaleString('en-US', {
+        timeZone: 'UTC',
+      }),
+    )
   }
 
   /**

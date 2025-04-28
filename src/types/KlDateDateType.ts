@@ -1,7 +1,3 @@
-export type KlDateDateType =
-  | 'seconds'
-  | 'minutes'
-  | 'hours'
-  | 'days'
-  | 'months'
-  | 'years'
+import { KlTimeTimeType } from './KlTimeTimeType'
+
+export type KlDateDateType = KlTimeTimeType | 'days' | 'months' | 'years'
