@@ -63,7 +63,7 @@
   "terminal.integrated.defaultProfile.windows": "Command Prompt",
   "git.confirmSync": false,
   "files.eol": "\n",
-  "workbench.productIconTheme": "fluent-icons",
+  "workbench.productIconTheme": "Default",
   "npm.scriptExplorerAction": "run",
   "npm.packageManager": "npm",
   "editor.wordWrap": "on",
