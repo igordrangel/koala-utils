@@ -1,4 +1,3 @@
-import { camelCase } from 'lodash'
 import { isCNPJ, isCPF } from 'validation-br'
 import { KlNumber } from './KlNumber'
 
@@ -46,7 +45,11 @@ export class KlString extends String {
    * @returns Uma nova instância de `KlString` no formato camelCase.
    */
   toCamelCase() {
-    return new KlString(camelCase(this.clear().toString()))
+    const str = this.clear().toString().toLowerCase()
+    const camel = str.replace(/[-_\s]+(.)?/g, (_, c) =>
+      c ? c.toUpperCase() : '',
+    )
+    return new KlString(camel)
   }
 
   /**
