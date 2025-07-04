@@ -45,10 +45,28 @@ export class KlString extends String {
    * @returns Uma nova instância de `KlString` no formato camelCase.
    */
   toCamelCase() {
-    const str = this.clear().toString().toLowerCase()
-    const camel = str.replace(/[-_\s]+(.)?/g, (_, c) =>
-      c ? c.toUpperCase() : '',
-    )
+    // Primeiro, normaliza e remove caracteres especiais
+    const cleaned = this.normalizeAndRemoveSpecialChars().toString()
+
+    // Converte para camelCase preservando PascalCase
+    const camel = cleaned
+      // Adiciona espaço antes de letras maiúsculas (para dividir PascalCase)
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      // Remove caracteres especiais e substitui por espaços
+      .replace(/[^a-zA-Z0-9]/g, ' ')
+      // Remove espaços múltiplos
+      .replace(/\s+/g, ' ')
+      .trim()
+      // Converte para camelCase
+      .split(' ')
+      .map((word, index) => {
+        if (index === 0) {
+          return word.toLowerCase()
+        }
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      })
+      .join('')
+
     return new KlString(camel)
   }
 

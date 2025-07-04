@@ -41,6 +41,7 @@ describe('KlString', () => {
 
   it('toCamelCase', () => {
     expect(new KlString('Olá Mundo').toCamelCase().toString()).toBe('olaMundo')
+    expect(new KlString('OláMundo').toCamelCase().toString()).toBe('olaMundo')
   })
 
   it('split', () => {
