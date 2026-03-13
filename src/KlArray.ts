@@ -1,8 +1,8 @@
 export class KlArray<T = any> extends Array<T> {
   constructor(initialValue: T[] = []) {
-    super()
-    if (typeof initialValue[Symbol.iterator] === 'function') {
-      this.push(...initialValue)
+    super();
+    if (typeof initialValue[Symbol.iterator] === "function") {
+      this.push(...initialValue);
     }
   }
 
@@ -12,8 +12,8 @@ export class KlArray<T = any> extends Array<T> {
    */
   clearEmptyValues() {
     return new KlArray<NonNullable<T>>(
-      this.filter((item): item is NonNullable<T> => !!item),
-    )
+      this.filter((item): item is NonNullable<T> => !!item)
+    );
   }
 
   /**
@@ -22,23 +22,23 @@ export class KlArray<T = any> extends Array<T> {
    * @returns Um novo KlArray contendo subarrays do tipo KlArray.
    */
   split(maxRowsSplit: number) {
-    const result = new KlArray<KlArray<T>>()
+    const result = new KlArray<KlArray<T>>();
 
-    let group = 0
+    let group = 0;
 
     this.forEach((value, index) => {
       if (result[group] === undefined) {
-        result[group] = new KlArray<T>()
+        result[group] = new KlArray<T>();
       }
 
-      result[group].push(value)
+      result[group].push(value);
 
       if ((index + 1) % maxRowsSplit === 0) {
-        group = group + 1
+        group = group + 1;
       }
-    })
+    });
 
-    return result
+    return result;
   }
 
   /**
@@ -47,24 +47,24 @@ export class KlArray<T = any> extends Array<T> {
    * @param direction Direção da ordenação: 'asc' para ascendente (padrão) ou 'desc' para descendente.
    * @returns Um novo KlArray com os elementos ordenados.
    */
-  orderBy(by: string, direction: 'asc' | 'desc' = 'asc') {
-    const inverse = direction === 'desc'
+  orderBy(by: string, direction: "asc" | "desc" = "asc") {
+    const inverse = direction === "desc";
 
     this.sort((a: any, b: any) => {
-      if (typeof a !== 'string' && typeof b !== 'string') {
+      if (typeof a !== "string" && typeof b !== "string") {
         if ((!inverse && a[by] > b[by]) || (inverse && a[by] < b[by])) {
-          return 1
+          return 1;
         } else if ((!inverse && a[by] < b[by]) || (inverse && a[by] > b[by])) {
-          return -1
+          return -1;
         } else {
-          return 0
+          return 0;
         }
       } else {
-        return 0
+        return 0;
       }
-    })
+    });
 
-    return this
+    return this;
   }
 
   /**
@@ -72,15 +72,15 @@ export class KlArray<T = any> extends Array<T> {
    * @returns O próprio KlArray com os elementos embaralhados.
    */
   shuffle() {
-    const originalValue = JSON.parse(JSON.stringify(this))
+    const originalValue = JSON.parse(JSON.stringify(this));
 
     do {
       for (let i = this.length - 1; i > 0; i--) {
-        const rand = Math.floor(Math.random() * (i + 1))
-        ;[this[i], this[rand]] = [this[rand], this[i]]
+        const rand = Math.floor(Math.random() * (i + 1));
+        [this[i], this[rand]] = [this[rand], this[i]];
       }
-    } while (JSON.stringify(originalValue) === JSON.stringify(this))
+    } while (JSON.stringify(originalValue) === JSON.stringify(this));
 
-    return this
+    return this;
   }
 }

@@ -1,17 +1,17 @@
-import { format } from 'date-fns'
-import { KlDateDayEnum } from './enums/KlDateDayEnum'
-import { KlDateCountry } from './types/KlDateCountry'
-import { KlDateDateType } from './types/KlDateDateType'
-import { KlDateTimeZone } from './types/KlDateTimeZone'
+import { format } from "date-fns";
+import { KlDateDayEnum } from "./enums/KlDateDayEnum";
+import { KlDateCountry } from "./types/KlDateCountry";
+import { KlDateDateType } from "./types/KlDateDateType";
+import { KlDateTimeZone } from "./types/KlDateTimeZone";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const Holidays = require('date-holidays')
+const Holidays = require("date-holidays");
 
 interface KlDateOptions {
   skipHolidays?: {
-    country: KlDateCountry
-  }
-  skipDays?: KlDateDayEnum[]
+    country: KlDateCountry;
+  };
+  skipDays?: KlDateDayEnum[];
 }
 
 export class KlDate extends Date {
@@ -21,7 +21,7 @@ export class KlDate extends Date {
    * @returns Uma string representando a data formatada.
    */
   format(mask?: string) {
-    return format(this, mask || 'dd/MM/yyyy HH:mm:ss')
+    return format(this, mask || "dd/MM/yyyy HH:mm:ss");
   }
 
   /**
@@ -30,7 +30,7 @@ export class KlDate extends Date {
    * @returns Uma nova instância de `KlDate` com o GMT ajustado.
    */
   changeTimeZone(timeZone: KlDateTimeZone) {
-    return new KlDate(this.toLocaleString('en-US', { timeZone }))
+    return new KlDate(this.toLocaleString("en-US", { timeZone }));
   }
 
   /**
@@ -39,10 +39,10 @@ export class KlDate extends Date {
    */
   toUTC() {
     return new KlDate(
-      this.toLocaleString('en-US', {
-        timeZone: 'UTC',
-      }),
-    )
+      this.toLocaleString("en-US", {
+        timeZone: "UTC",
+      })
+    );
   }
 
   /**
@@ -54,24 +54,24 @@ export class KlDate extends Date {
    */
   add(qty: number, type: KlDateDateType, options?: KlDateOptions) {
     switch (type) {
-      case 'seconds':
-        this.setSeconds(this.getSeconds() + qty)
-        break
-      case 'minutes':
-        this.setMinutes(this.getMinutes() + qty)
-        break
-      case 'hours':
-        this.setHours(this.getHours() + qty)
-        break
-      case 'days':
-        this.setDate(this.getDate() + qty)
-        break
-      case 'months':
-        this.setMonth(this.getMonth() + qty)
-        break
-      case 'years':
-        this.setFullYear(this.getFullYear() + qty)
-        break
+      case "seconds":
+        this.setSeconds(this.getSeconds() + qty);
+        break;
+      case "minutes":
+        this.setMinutes(this.getMinutes() + qty);
+        break;
+      case "hours":
+        this.setHours(this.getHours() + qty);
+        break;
+      case "days":
+        this.setDate(this.getDate() + qty);
+        break;
+      case "months":
+        this.setMonth(this.getMonth() + qty);
+        break;
+      case "years":
+        this.setFullYear(this.getFullYear() + qty);
+        break;
     }
 
     // Ignora feriados ou dias específicos, se configurado.
@@ -79,10 +79,10 @@ export class KlDate extends Date {
       (options?.skipHolidays && this.isHoliday(options.skipHolidays.country)) ||
       (options?.skipDays && options.skipDays.includes(this.getDay()))
     ) {
-      this.add(1, 'days', options)
+      this.add(1, "days", options);
     }
 
-    return this
+    return this;
   }
 
   /**
@@ -94,24 +94,24 @@ export class KlDate extends Date {
    */
   sub(qty: number, type: KlDateDateType, options?: KlDateOptions) {
     switch (type) {
-      case 'seconds':
-        this.setSeconds(this.getSeconds() - qty)
-        break
-      case 'minutes':
-        this.setMinutes(this.getMinutes() - qty)
-        break
-      case 'hours':
-        this.setHours(this.getHours() - qty)
-        break
-      case 'days':
-        this.setDate(this.getDate() - qty)
-        break
-      case 'months':
-        this.setMonth(this.getMonth() - qty)
-        break
-      case 'years':
-        this.setFullYear(this.getFullYear() - qty)
-        break
+      case "seconds":
+        this.setSeconds(this.getSeconds() - qty);
+        break;
+      case "minutes":
+        this.setMinutes(this.getMinutes() - qty);
+        break;
+      case "hours":
+        this.setHours(this.getHours() - qty);
+        break;
+      case "days":
+        this.setDate(this.getDate() - qty);
+        break;
+      case "months":
+        this.setMonth(this.getMonth() - qty);
+        break;
+      case "years":
+        this.setFullYear(this.getFullYear() - qty);
+        break;
     }
 
     // Ignora feriados ou dias específicos, se configurado.
@@ -119,10 +119,10 @@ export class KlDate extends Date {
       (options?.skipHolidays && this.isHoliday(options.skipHolidays.country)) ||
       (options?.skipDays && options.skipDays.includes(this.getDay()))
     ) {
-      return this.sub(1, 'days', options)
+      return this.sub(1, "days", options);
     }
 
-    return this
+    return this;
   }
 
   /**
@@ -132,21 +132,21 @@ export class KlDate extends Date {
    * @returns A diferença entre as datas na unidade especificada.
    */
   diff(date: Date, type: KlDateDateType) {
-    const diffInMs = Math.abs(this.getTime() - date.getTime())
+    const diffInMs = Math.abs(this.getTime() - date.getTime());
 
     switch (type) {
-      case 'seconds':
-        return Math.floor(diffInMs / 1000)
-      case 'minutes':
-        return Math.floor(diffInMs / (1000 * 60))
-      case 'hours':
-        return Math.floor(diffInMs / (1000 * 60 * 60))
-      case 'days':
-        return Math.floor(diffInMs / (1000 * 60 * 60 * 24))
-      case 'months':
-        return Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 30))
-      case 'years':
-        return Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 365))
+      case "seconds":
+        return Math.floor(diffInMs / 1000);
+      case "minutes":
+        return Math.floor(diffInMs / (1000 * 60));
+      case "hours":
+        return Math.floor(diffInMs / (1000 * 60 * 60));
+      case "days":
+        return Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+      case "months":
+        return Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 30));
+      case "years":
+        return Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 365));
     }
   }
 
@@ -159,11 +159,11 @@ export class KlDate extends Date {
    * corresponde a um feriado oficial no país informado. A data é ajustada para garantir
    * que a verificação seja precisa, mesmo em diferentes fusos horários.
    */
-  isHoliday(country: KlDateCountry = 'BR') {
-    const hd = new Holidays(country)
-    const date = new Date(this.toDateString())
-    date.setHours(1)
-    return !!hd.isHoliday(date)
+  isHoliday(country: KlDateCountry = "BR") {
+    const hd = new Holidays(country);
+    const date = new Date(this.toDateString());
+    date.setHours(1);
+    return !!hd.isHoliday(date);
   }
 }
 
@@ -173,6 +173,6 @@ export class KlDate extends Date {
  * @param country Código do país (ex.: 'BR' para Brasil).
  * @returns `true` se a data for um feriado no país especificado, caso contrário `false`.
  */
-export function isHoliday(date: KlDate | Date, country: KlDateCountry = 'BR') {
-  return new KlDate(date).isHoliday(country)
+export function isHoliday(date: KlDate | Date, country: KlDateCountry = "BR") {
+  return new KlDate(date).isHoliday(country);
 }

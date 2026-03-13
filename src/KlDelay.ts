@@ -6,8 +6,8 @@ class KlDelay {
    */
   static waitFor(delay = 300) {
     return new Promise((resolve) => {
-      setTimeout(() => resolve(true), delay)
-    })
+      setTimeout(() => resolve(true), delay);
+    });
   }
 }
 
@@ -17,5 +17,5 @@ class KlDelay {
  * @returns Uma Promise que será resolvida após o tempo especificado.
  */
 export function delay(ms: number) {
-  return KlDelay.waitFor(ms)
+  return KlDelay.waitFor(ms);
 }

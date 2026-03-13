@@ -8,10 +8,10 @@ export class KlNumber extends Number {
    */
   random(min: number, max: number) {
     if (min > max) {
-      throw new Error('The min value cannot be greater than the max')
+      throw new Error("The min value cannot be greater than the max");
     }
 
-    return new KlNumber(Math.floor(Math.random() * (max - min + 1)) + min)
+    return new KlNumber(Math.floor(Math.random() * (max - min + 1)) + min);
   }
 
   /**
@@ -22,14 +22,14 @@ export class KlNumber extends Number {
    * @param decimalCount Número de casas decimais (padrão: 2).
    * @returns Uma string representando o número formatado como moeda.
    */
-  maskCoin(prefix = 'R$', thousands = '.', decimal = ',', decimalCount = 2) {
+  maskCoin(prefix = "R$", thousands = ".", decimal = ",", decimalCount = 2) {
     const coin = this.formatMoney(
       this.toNumber(),
       decimalCount,
       decimal,
-      thousands,
-    )
-    return `${prefix} ${coin}`
+      thousands
+    );
+    return `${prefix} ${coin}`;
   }
 
   /**
@@ -37,7 +37,7 @@ export class KlNumber extends Number {
    * @returns O valor numérico da instância.
    */
   toNumber() {
-    return this.valueOf()
+    return this.valueOf();
   }
 
   /**
@@ -51,30 +51,30 @@ export class KlNumber extends Number {
   private formatMoney(
     amount: number,
     decimalCount = 2,
-    decimal = '.',
-    thousands = ',',
+    decimal = ".",
+    thousands = ","
   ) {
-    decimalCount = Math.abs(decimalCount)
-    decimalCount = isNaN(decimalCount) ? 2 : decimalCount
+    decimalCount = Math.abs(decimalCount);
+    decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
 
-    const negativeSign = Number(amount) < 0 ? '-' : ''
+    const negativeSign = Number(amount) < 0 ? "-" : "";
 
-    const result = Math.abs(Number(amount) || 0).toFixed(decimalCount)
+    const result = Math.abs(Number(amount) || 0).toFixed(decimalCount);
 
-    const i = parseInt(result, 10).toString()
-    const j = i.length > 3 ? i.length % 3 : 0
+    const i = parseInt(result, 10).toString();
+    const j = i.length > 3 ? i.length % 3 : 0;
 
     return (
       negativeSign +
-      (j ? i.substring(0, j) + thousands : '') +
-      i.substring(j).replace(/(\d{3})(?=\d)/g, '$1' + thousands) +
+      (j ? i.substring(0, j) + thousands : "") +
+      i.substring(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) +
       (decimalCount
         ? decimal +
           Math.abs(Number(amount) - Number(i))
             .toFixed(decimalCount)
             .slice(2)
-        : '')
-    )
+        : "")
+    );
   }
 }
 
@@ -85,9 +85,9 @@ export class KlNumber extends Number {
  */
 export function maskCoin(
   value: number,
-  { prefix = 'R$', thousands = '.', decimal = ',', decimalCount = 2 } = {},
+  { prefix = "R$", thousands = ".", decimal = ",", decimalCount = 2 } = {}
 ) {
-  return new KlNumber(value).maskCoin(prefix, thousands, decimal, decimalCount)
+  return new KlNumber(value).maskCoin(prefix, thousands, decimal, decimalCount);
 }
 
 /**
@@ -97,5 +97,5 @@ export function maskCoin(
  * @returns Um número aleatório dentro do intervalo especificado.
  */
 export function randomNumber(min?: number, max?: number) {
-  return new KlNumber().random(min ?? 0, max ?? 99999999999).toNumber()
+  return new KlNumber().random(min ?? 0, max ?? 99999999999).toNumber();
 }

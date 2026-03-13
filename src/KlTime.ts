@@ -1,25 +1,25 @@
-import { format } from 'date-fns'
-import { KlDate } from './KlDate'
-import { KlTimeTimeType } from './types/KlTimeTimeType'
-import { KlDateTimeZone } from './types/KlDateTimeZone'
+import { format } from "date-fns";
+import { KlDate } from "./KlDate";
+import { KlTimeTimeType } from "./types/KlTimeTimeType";
+import { KlDateTimeZone } from "./types/KlDateTimeZone";
 
 export class KlTime extends Date {
-  constructor()
-  constructor(value: Date)
-  constructor(hours?: number, minutes?: number, seconds?: number, ms?: number)
+  constructor();
+  constructor(value: Date);
+  constructor(hours?: number, minutes?: number, seconds?: number, ms?: number);
 
   constructor(
     value?: number | Date,
     minutes?: number,
     seconds?: number,
-    miliseconds?: number,
+    miliseconds?: number
   ) {
     if (value instanceof Date) {
-      super(value)
-      return
+      super(value);
+      return;
     }
 
-    const date = new Date()
+    const date = new Date();
     super(
       date.getFullYear(),
       date.getMonth(),
@@ -27,8 +27,8 @@ export class KlTime extends Date {
       value ?? 0,
       minutes ?? 0,
       seconds ?? 0,
-      miliseconds ?? 0,
-    )
+      miliseconds ?? 0
+    );
   }
 
   /**
@@ -37,7 +37,7 @@ export class KlTime extends Date {
    * @returns Uma string representando a data formatada.
    */
   format(mask?: string): string {
-    return format(this, mask || 'HH:mm:ss')
+    return format(this, mask || "HH:mm:ss");
   }
 
   /**
@@ -46,12 +46,12 @@ export class KlTime extends Date {
    * @returns Uma nova instância de `KlDate` com o GMT ajustado.
    */
   changeTimeZone(timeZone: KlDateTimeZone) {
-    const date = new KlDate(this.toLocaleString('en-US', { timeZone }))
-    const hours = +date.format('HH')
-    const minutes = +date.format('mm')
-    const seconds = +date.format('ss')
+    const date = new KlDate(this.toLocaleString("en-US", { timeZone }));
+    const hours = +date.format("HH");
+    const minutes = +date.format("mm");
+    const seconds = +date.format("ss");
 
-    return new KlTime(hours, minutes, seconds)
+    return new KlTime(hours, minutes, seconds);
   }
 
   /**
@@ -60,14 +60,14 @@ export class KlTime extends Date {
    */
   toUTC() {
     const date = new KlDate(
-      this.toLocaleString('en-US', {
-        timeZone: 'UTC',
-      }),
-    )
-    const hours = +date.format('HH')
-    const minutes = +date.format('mm')
-    const seconds = +date.format('ss')
-    return new KlTime(hours, minutes, seconds)
+      this.toLocaleString("en-US", {
+        timeZone: "UTC",
+      })
+    );
+    const hours = +date.format("HH");
+    const minutes = +date.format("mm");
+    const seconds = +date.format("ss");
+    return new KlTime(hours, minutes, seconds);
   }
 
   /**
@@ -78,18 +78,18 @@ export class KlTime extends Date {
    */
   add(qty: number, type: KlTimeTimeType) {
     switch (type) {
-      case 'seconds':
-        this.setSeconds(this.getSeconds() + qty)
-        break
-      case 'minutes':
-        this.setMinutes(this.getMinutes() + qty)
-        break
-      case 'hours':
-        this.setHours(this.getHours() + qty)
-        break
+      case "seconds":
+        this.setSeconds(this.getSeconds() + qty);
+        break;
+      case "minutes":
+        this.setMinutes(this.getMinutes() + qty);
+        break;
+      case "hours":
+        this.setHours(this.getHours() + qty);
+        break;
     }
 
-    return this
+    return this;
   }
 
   /**
@@ -100,18 +100,18 @@ export class KlTime extends Date {
    */
   sub(qty: number, type: KlTimeTimeType) {
     switch (type) {
-      case 'seconds':
-        this.setSeconds(this.getSeconds() - qty)
-        break
-      case 'minutes':
-        this.setMinutes(this.getMinutes() - qty)
-        break
-      case 'hours':
-        this.setHours(this.getHours() - qty)
-        break
+      case "seconds":
+        this.setSeconds(this.getSeconds() - qty);
+        break;
+      case "minutes":
+        this.setMinutes(this.getMinutes() - qty);
+        break;
+      case "hours":
+        this.setHours(this.getHours() - qty);
+        break;
     }
 
-    return this
+    return this;
   }
 
   /**
@@ -121,15 +121,15 @@ export class KlTime extends Date {
    * @returns A diferença entre as datas na unidade especificada.
    */
   diff(date: Date, type: KlTimeTimeType) {
-    const diffInMs = Math.abs(this.getTime() - date.getTime())
+    const diffInMs = Math.abs(this.getTime() - date.getTime());
 
     switch (type) {
-      case 'seconds':
-        return Math.floor(diffInMs / 1000)
-      case 'minutes':
-        return Math.floor(diffInMs / (1000 * 60))
-      case 'hours':
-        return Math.floor(diffInMs / (1000 * 60 * 60))
+      case "seconds":
+        return Math.floor(diffInMs / 1000);
+      case "minutes":
+        return Math.floor(diffInMs / (1000 * 60));
+      case "hours":
+        return Math.floor(diffInMs / (1000 * 60 * 60));
     }
   }
 }
