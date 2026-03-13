@@ -83,8 +83,11 @@ export class KlNumber extends Number {
  * @param value Valor numérico a ser formatado.
  * @returns Uma string representando o número formatado como moeda.
  */
-export function maskCoin(value: number) {
-  return new KlNumber(value).maskCoin()
+export function maskCoin(
+  value: number,
+  { prefix = 'R$', thousands = '.', decimal = ',', decimalCount = 2 } = {},
+) {
+  return new KlNumber(value).maskCoin(prefix, thousands, decimal, decimalCount)
 }
 
 /**

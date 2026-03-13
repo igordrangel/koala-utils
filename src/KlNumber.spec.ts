@@ -1,4 +1,4 @@
-import { KlNumber } from './KlNumber'
+import { KlNumber, maskCoin } from './KlNumber'
 
 describe('KlNumber', () => {
   it('random', () => {
@@ -10,5 +10,6 @@ describe('KlNumber', () => {
 
   it('maskCoin', () => {
     expect(new KlNumber(1000).maskCoin()).toBe('R$ 1.000,00')
+    expect(maskCoin(1000)).toBe('R$ 1.000,00')
   })
 })

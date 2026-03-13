@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "koala-nest-docs": {
+      "command": "bunx",
+      "args": [
+        "@koalarx/mcp-server"
+      ]
+    }
+  }
+}
