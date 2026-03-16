@@ -1,11 +1,11 @@
-import { isCNPJ, isCPF } from 'validation-br'
-import { KlNumber } from './KlNumber'
+import { isCNPJ, isCPF } from "validation-br";
+import { KlNumber } from "./KlNumber";
 
 interface KlStringRandomOptions {
-  numbers?: boolean
-  uppercase?: boolean
-  lowercase?: boolean
-  specialCharacters?: boolean
+  numbers?: boolean;
+  uppercase?: boolean;
+  lowercase?: boolean;
+  specialCharacters?: boolean;
 }
 
 export class KlString extends String {
@@ -14,7 +14,7 @@ export class KlString extends String {
    * @returns Uma nova instância de `KlString` contendo a string normalizada e sem caracteres especiais.
    */
   normalizeAndRemoveSpecialChars() {
-    return new KlString(this.normalize('NFD').replace(/[\u0300-\u036f]/g, ''))
+    return new KlString(this.normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
   }
 
   /**
@@ -22,8 +22,8 @@ export class KlString extends String {
    * @param delimiter O delimitador que substituirá os espaços (padrão: '').
    * @returns Uma nova instância de `KlString` sem espaços.
    */
-  removeSpaces(delimiter = '') {
-    return this.normalize('NFD').replace(/\s/g, delimiter)
+  removeSpaces(delimiter = "") {
+    return this.normalize("NFD").replace(/\s/g, delimiter);
   }
 
   /**
@@ -31,13 +31,13 @@ export class KlString extends String {
    * @param delimiter O delimitador que substituirá os espaços e caracteres especiais (padrão: ' ').
    * @returns Uma nova instância de `KlString` contendo a string limpa.
    */
-  clear(delimiter = ' ') {
+  clear(delimiter = " ") {
     return new KlString(
       this.normalizeAndRemoveSpecialChars()
         .replace(/([^\w]+|\s+)/g, delimiter) // Substitui espaço e outros caracteres por hífen
-        .replace(/\-\-+/g, '-') // Substitui multiplos hífens por um único hífen
-        .replace(/(^-+|-+$)/, ''),
-    )
+        .replace(/\-\-+/g, "-") // Substitui multiplos hífens por um único hífen
+        .replace(/(^-+|-+$)/, "")
+    );
   }
 
   /**
@@ -46,28 +46,28 @@ export class KlString extends String {
    */
   toCamelCase() {
     // Primeiro, normaliza e remove caracteres especiais
-    const cleaned = this.normalizeAndRemoveSpecialChars().toString()
+    const cleaned = this.normalizeAndRemoveSpecialChars().toString();
 
     // Converte para camelCase preservando PascalCase
     const camel = cleaned
       // Adiciona espaço antes de letras maiúsculas (para dividir PascalCase)
-      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      .replace(/([a-z])([A-Z])/g, "$1 $2")
       // Remove caracteres especiais e substitui por espaços
-      .replace(/[^a-zA-Z0-9]/g, ' ')
+      .replace(/[^a-zA-Z0-9]/g, " ")
       // Remove espaços múltiplos
-      .replace(/\s+/g, ' ')
+      .replace(/\s+/g, " ")
       .trim()
       // Converte para camelCase
-      .split(' ')
+      .split(" ")
       .map((word, index) => {
         if (index === 0) {
-          return word.toLowerCase()
+          return word.toLowerCase();
         }
-        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
       })
-      .join('')
+      .join("");
 
-    return new KlString(camel)
+    return new KlString(camel);
   }
 
   /**
@@ -79,18 +79,18 @@ export class KlString extends String {
     return new KlNumber(
       parseFloat(
         Number(
-          this.replace('R$', '')
-            .replace(/\s(?=\s)/g, '')
-            .replace(/[\n\r\t]/g, '')
+          this.replace("R$", "")
+            .replace(/\s(?=\s)/g, "")
+            .replace(/[\n\r\t]/g, "")
             .replace(
               /[^0-9a-zA-Z\(,\@\-\!\#\\$\%\&\*\(\)\_\+\=\{\[\}\]\/\?\;\:\.\|)\.]+/g,
-              '',
+              ""
             )
-            .replace(/\./g, '')
-            .replace(/,/g, '.'),
-        ).toFixed(decimalCount),
-      ),
-    )
+            .replace(/\./g, "")
+            .replace(/,/g, ".")
+        ).toFixed(decimalCount)
+      )
+    );
   }
 
   /**
@@ -99,7 +99,7 @@ export class KlString extends String {
    * @returns Uma nova instância de `KlString` com as strings concatenadas.
    */
   contatenate(...stringValue: string[]) {
-    return new KlString(super.concat(...stringValue))
+    return new KlString(super.concat(...stringValue));
   }
 
   /**
@@ -108,7 +108,7 @@ export class KlString extends String {
    * @returns Uma nova instância de `KlString` com a string concatenada.
    */
   concatenateToStart(value: string) {
-    return new KlString(`${value}${this}`)
+    return new KlString(`${value}${this}`);
   }
 
   /**
@@ -119,27 +119,27 @@ export class KlString extends String {
    */
   random(
     length: number,
-    { lowercase, uppercase, numbers, specialCharacters }: KlStringRandomOptions,
+    { lowercase, uppercase, numbers, specialCharacters }: KlStringRandomOptions
   ) {
-    const lmin = 'abcdefghijklmnopqrstuvwxyz'
-    const lmai = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    const num = '1234567890'
-    const simb = '@%_-#$%&*!'
-    let result = ''
-    let characters = ''
+    const lmin = "abcdefghijklmnopqrstuvwxyz";
+    const lmai = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const num = "1234567890";
+    const simb = "@%_-#$%&*!";
+    let result = "";
+    let characters = "";
 
-    if (lowercase) characters += lmin
-    if (uppercase) characters += lmai
-    if (numbers) characters += num
-    if (specialCharacters) characters += simb
+    if (lowercase) characters += lmin;
+    if (uppercase) characters += lmai;
+    if (numbers) characters += num;
+    if (specialCharacters) characters += simb;
 
-    const len = characters.length
+    const len = characters.length;
     for (let n = 1; n <= length; n++) {
-      const rand = Math.floor(Math.random() * (len - 1 + 1)) + 1
-      result += characters[rand - 1]
+      const rand = Math.floor(Math.random() * (len - 1 + 1)) + 1;
+      result += characters[rand - 1];
     }
 
-    return new KlString(result)
+    return new KlString(result);
   }
 
   /**
@@ -149,11 +149,11 @@ export class KlString extends String {
   maskCpf() {
     return new KlString(
       this.leftPad(this.onlyNumbers(), 11)
-        .replace(/\D/g, '')
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d{1,2})$/, '$1-$2'),
-    )
+        .replace(/\D/g, "")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+    );
   }
 
   /**
@@ -164,9 +164,9 @@ export class KlString extends String {
     return new KlString(
       this.leftPad(this, 14).replace(
         /^([a-zA-Z\d]{2})([a-zA-Z\d]{3})?([a-zA-Z\d]{3})?([a-zA-Z\d]{4})?([a-zA-Z\d]{2})?/,
-        '$1.$2.$3/$4-$5',
-      ),
-    )
+        "$1.$2.$3/$4-$5"
+      )
+    );
   }
 
   /**
@@ -174,7 +174,7 @@ export class KlString extends String {
    * @returns `true` se o CPF for válido, caso contrário `false`.
    */
   validateCpf() {
-    return isCPF(this.onlyNumbers().toString())
+    return isCPF(this.onlyNumbers().toString());
   }
 
   /**
@@ -182,7 +182,7 @@ export class KlString extends String {
    * @returns `true` se o CNPJ for válido, caso contrário `false`.
    */
   validateCnpj() {
-    return isCNPJ(this.toString())
+    return isCNPJ(this.toString());
   }
 
   /**
@@ -190,7 +190,7 @@ export class KlString extends String {
    * @returns Uma nova instância de `KlString` contendo apenas os números.
    */
   onlyNumbers() {
-    return new KlString(this.replace(/\D/g, ''))
+    return new KlString(this.replace(/\D/g, ""));
   }
 
   /**
@@ -198,7 +198,7 @@ export class KlString extends String {
    * @returns Uma nova instância de `KlString` com as quebras de linha substituídas.
    */
   nbl2br() {
-    return new KlString(this.replace(/\r\n|\r|\n/gi, '<br/>'))
+    return new KlString(this.replace(/\r\n|\r|\n/gi, "<br/>"));
   }
 
   /**
@@ -206,7 +206,7 @@ export class KlString extends String {
    * @returns Uma nova instância de `KlString` contendo a string codificada em Base64.
    */
   toBase64() {
-    return new KlString(Buffer.from(this).toString('base64'))
+    return new KlString(Buffer.from(this).toString("base64"));
   }
 
   /**
@@ -217,8 +217,8 @@ export class KlString extends String {
    * @returns Uma string preenchida com o caractere especificado.
    */
   private leftPad(value: KlString, totalWidth: number, paddingChar?: string) {
-    const length = totalWidth - value.length + 1
-    return Array(length).join(paddingChar || '0') + value
+    const length = totalWidth - value.length + 1;
+    return Array(length).join(paddingChar || "0") + value;
   }
 }
 
@@ -228,7 +228,7 @@ export class KlString extends String {
  * @returns Uma string formatada como CPF (ex.: '123.456.789-00').
  */
 export function maskCpf(value: string) {
-  return new KlString(value).maskCpf().toString()
+  return new KlString(value).maskCpf().toString();
 }
 
 /**
@@ -237,7 +237,7 @@ export function maskCpf(value: string) {
  * @returns Uma string formatada como CNPJ (ex.: '12.345.678/0001-00').
  */
 export function maskCnpj(value: string) {
-  return new KlString(value).maskCnpj().toString()
+  return new KlString(value).maskCnpj().toString();
 }
 
 /**
@@ -247,9 +247,9 @@ export function maskCnpj(value: string) {
  * @returns Uma string aleatória gerada com base nas opções fornecidas.
  */
 export function randomString(length: number, options?: KlStringRandomOptions) {
-  return new KlString('')
+  return new KlString("")
     .random(length, options ?? { lowercase: true, uppercase: true })
-    .toString()
+    .toString();
 }
 
 /**
@@ -259,7 +259,7 @@ export function randomString(length: number, options?: KlStringRandomOptions) {
  * @returns Uma string limpa.
  */
 export function clear(value: string, delimiter?: string) {
-  return new KlString(value).clear(delimiter).toString()
+  return new KlString(value).clear(delimiter).toString();
 }
 
 /**
@@ -269,7 +269,7 @@ export function clear(value: string, delimiter?: string) {
  * @returns O valor numérico sem a máscara.
  */
 export function unmaskCoin(value: string, decimalCount?: number) {
-  return new KlString(value).unmaskCoin(decimalCount).toNumber()
+  return new KlString(value).unmaskCoin(decimalCount).toNumber();
 }
 
 /**
@@ -278,7 +278,7 @@ export function unmaskCoin(value: string, decimalCount?: number) {
  * @returns Uma string contendo apenas os números do CPF.
  */
 export function unmaskCpf(value: string) {
-  return new KlString(value).onlyNumbers()
+  return new KlString(value).onlyNumbers();
 }
 
 /**
@@ -287,7 +287,7 @@ export function unmaskCpf(value: string) {
  * @returns Uma string contendo apenas os números do CNPJ.
  */
 export function unmaskCnpj(value: string) {
-  return new KlString(value).onlyNumbers()
+  return new KlString(value).onlyNumbers();
 }
 
 /**
@@ -296,7 +296,7 @@ export function unmaskCnpj(value: string) {
  * @returns Uma string no formato camelCase.
  */
 export function toCamelCase(value: string) {
-  return new KlString(value).toCamelCase().toString()
+  return new KlString(value).toCamelCase().toString();
 }
 
 /**
@@ -305,7 +305,7 @@ export function toCamelCase(value: string) {
  * @returns Uma string com as quebras de linha substituídas por `<br/>`.
  */
 export function nbl2br(value: string) {
-  return new KlString(value).nbl2br().toString()
+  return new KlString(value).nbl2br().toString();
 }
 
 /**
@@ -314,7 +314,7 @@ export function nbl2br(value: string) {
  * @returns `true` se o CPF for válido, caso contrário `false`.
  */
 export function validateCpf(value: string) {
-  return new KlString(value).validateCpf()
+  return new KlString(value).validateCpf();
 }
 
 /**
@@ -323,5 +323,5 @@ export function validateCpf(value: string) {
  * @returns `true` se o CNPJ for válido, caso contrário `false`.
  */
 export function validateCnpj(value: string) {
-  return new KlString(value).validateCnpj()
+  return new KlString(value).validateCnpj();
 }
