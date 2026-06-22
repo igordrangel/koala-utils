@@ -1,3 +1,3 @@
-import { KlTimeTimeType } from './KlTimeTimeType'
+import { KlTimeTimeType } from "./KlTimeTimeType";
 
-export type KlDateDateType = KlTimeTimeType | 'days' | 'months' | 'years'
+export type KlDateDateType = KlTimeTimeType | "days" | "months" | "years";

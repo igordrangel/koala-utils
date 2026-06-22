@@ -36,7 +36,7 @@ export class KlString extends String {
       this.normalizeAndRemoveSpecialChars()
         .replace(/([^\w]+|\s+)/g, delimiter) // Substitui espaço e outros caracteres por hífen
         .replace(/\-\-+/g, "-") // Substitui multiplos hífens por um único hífen
-        .replace(/(^-+|-+$)/, "")
+        .replace(/(^-+|-+$)/, ""),
     );
   }
 
@@ -84,12 +84,12 @@ export class KlString extends String {
             .replace(/[\n\r\t]/g, "")
             .replace(
               /[^0-9a-zA-Z\(,\@\-\!\#\\$\%\&\*\(\)\_\+\=\{\[\}\]\/\?\;\:\.\|)\.]+/g,
-              ""
+              "",
             )
             .replace(/\./g, "")
-            .replace(/,/g, ".")
-        ).toFixed(decimalCount)
-      )
+            .replace(/,/g, "."),
+        ).toFixed(decimalCount),
+      ),
     );
   }
 
@@ -119,7 +119,7 @@ export class KlString extends String {
    */
   random(
     length: number,
-    { lowercase, uppercase, numbers, specialCharacters }: KlStringRandomOptions
+    { lowercase, uppercase, numbers, specialCharacters }: KlStringRandomOptions,
   ) {
     const lmin = "abcdefghijklmnopqrstuvwxyz";
     const lmai = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -152,7 +152,7 @@ export class KlString extends String {
         .replace(/\D/g, "")
         .replace(/(\d{3})(\d)/, "$1.$2")
         .replace(/(\d{3})(\d)/, "$1.$2")
-        .replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+        .replace(/(\d{3})(\d{1,2})$/, "$1-$2"),
     );
   }
 
@@ -164,8 +164,8 @@ export class KlString extends String {
     return new KlString(
       this.leftPad(this, 14).replace(
         /^([a-zA-Z\d]{2})([a-zA-Z\d]{3})?([a-zA-Z\d]{3})?([a-zA-Z\d]{4})?([a-zA-Z\d]{2})?/,
-        "$1.$2.$3/$4-$5"
-      )
+        "$1.$2.$3/$4-$5",
+      ),
     );
   }
 

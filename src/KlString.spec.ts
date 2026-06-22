@@ -8,28 +8,30 @@ describe("KlString", () => {
 
   it("nbl2br", () => {
     expect(new KlString("Olá\nMundo").nbl2br().toString()).toBe(
-      "Olá<br/>Mundo"
+      "Olá<br/>Mundo",
     );
   });
 
   it("maskCpf", () => {
     expect(new KlString("9964085842").maskCpf().toString()).toBe(
-      "099.640.858-42"
+      "099.640.858-42",
     );
   });
 
   it("maskCnpj", () => {
     expect(
-      new KlString(cnpj.fake({ alphanumeric: false })).maskCnpj().validateCnpj()
+      new KlString(cnpj.fake({ alphanumeric: false }))
+        .maskCnpj()
+        .validateCnpj(),
     ).toBe(true);
     expect(
-      new KlString(cnpj.fake({ alphanumeric: true })).maskCnpj().validateCnpj()
+      new KlString(cnpj.fake({ alphanumeric: true })).maskCnpj().validateCnpj(),
     ).toBe(true);
   });
 
   it("onlyNumbers", () => {
     expect(new KlString("05.581.451/0001-83").onlyNumbers().toString()).toBe(
-      "05581451000183"
+      "05581451000183",
     );
   });
 
@@ -40,7 +42,7 @@ describe("KlString", () => {
   it("validateCnpj", () => {
     expect(new KlString("05.581.451/0001-83").validateCnpj()).toBe(true);
     expect(new KlString(cnpj.fake({ alphanumeric: true })).validateCnpj()).toBe(
-      true
+      true,
     );
   });
 
@@ -66,7 +68,7 @@ describe("KlString", () => {
           specialCharacters: true,
           uppercase: true,
         })
-        .toString()
+        .toString(),
     ).toBe("string");
   });
 

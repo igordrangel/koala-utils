@@ -14,7 +14,7 @@ describe("KlTime", () => {
 
   it("format with GMT", () => {
     expect(
-      new KlTime(13).toUTC().changeTimeZone("America/Sao_Paulo").format()
+      new KlTime(13).toUTC().changeTimeZone("America/Sao_Paulo").format(),
     ).toBe("16:00:00");
   });
 

@@ -12,7 +12,7 @@ export class KlArray<T = any> extends Array<T> {
    */
   clearEmptyValues() {
     return new KlArray<NonNullable<T>>(
-      this.filter((item): item is NonNullable<T> => !!item)
+      this.filter((item): item is NonNullable<T> => !!item),
     );
   }
 

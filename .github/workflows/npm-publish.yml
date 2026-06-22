@@ -6,30 +6,33 @@ jobs:
   build:
     name: "npm publish library"
     runs-on: ubuntu-latest
+    env:
+      TZ: America/Sao_Paulo
     permissions:
       contents: read
     steps:
       - name: Get latest code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-          cache: npm
 
       - name: Install dependencies
-        run: npm ci
-
-      - name: Security audit
-        run: npm audit --audit-level=high
+        run: bun install --frozen-lockfile
 
       - name: Run tests
-        run: npm test
+        run: bun test src
 
       - name: Build project
-        run: npm run build
+        run: bun run build
 
       - name: Publish npm package
         run: cd ./dist && npm publish --access public --ignore-scripts

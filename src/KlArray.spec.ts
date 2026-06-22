@@ -15,7 +15,7 @@ describe("KlArray", () => {
         { date: new Date("2020-06-15") },
         { date: new Date("2020-06-17") },
         { date: new Date("2020-06-20") },
-      ]).orderBy("date")
+      ]).orderBy("date"),
     ).toEqual([
       { date: new Date("2020-06-15") },
       { date: new Date("2020-06-17") },
@@ -31,7 +31,7 @@ describe("KlArray", () => {
         { date: new Date("2020-06-15") },
         { date: new Date("2020-06-17") },
         { date: new Date("2020-06-20") },
-      ]).orderBy("date", "desc")
+      ]).orderBy("date", "desc"),
     ).toEqual([
       { date: new Date("2020-06-20") },
       { date: new Date("2020-06-18") },
@@ -45,7 +45,7 @@ describe("KlArray", () => {
     const shuffledArray = new KlArray(originalArray).shuffle();
 
     expect(
-      JSON.stringify(originalArray) !== JSON.stringify(shuffledArray)
+      JSON.stringify(originalArray) !== JSON.stringify(shuffledArray),
     ).toBe(true);
   });
 
