@@ -4,7 +4,7 @@ describe("KlNumber", () => {
   it("random", () => {
     expect(new KlNumber(0).random(1000, 2000)).toBeInstanceOf(KlNumber);
     expect(
-      new KlNumber(0).random(1000, 2000).toNumber()
+      new KlNumber(0).random(1000, 2000).toNumber(),
     ).toBeGreaterThanOrEqual(1000);
   });
 

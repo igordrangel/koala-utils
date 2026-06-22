@@ -1,1 +1,1 @@
-export type KlTimeTimeType = 'seconds' | 'minutes' | 'hours'
+export type KlTimeTimeType = "seconds" | "minutes" | "hours";

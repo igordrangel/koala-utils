@@ -19,13 +19,7 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "resolveJsonModule": true,
-    "types": ["vitest/globals"]
+    "types": ["bun-types"]
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "**/*.spec.ts",
-    ".eslintrc.js",
-    "vitest.config.mts"
-  ]
+  "exclude": ["node_modules", "dist", "**/*.spec.ts", "eslint.config.mts"]
 }

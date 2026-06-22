@@ -27,7 +27,7 @@ export class KlNumber extends Number {
       this.toNumber(),
       decimalCount,
       decimal,
-      thousands
+      thousands,
     );
     return `${prefix} ${coin}`;
   }
@@ -52,7 +52,7 @@ export class KlNumber extends Number {
     amount: number,
     decimalCount = 2,
     decimal = ".",
-    thousands = ","
+    thousands = ",",
   ) {
     decimalCount = Math.abs(decimalCount);
     decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
@@ -85,7 +85,7 @@ export class KlNumber extends Number {
  */
 export function maskCoin(
   value: number,
-  { prefix = "R$", thousands = ".", decimal = ",", decimalCount = 2 } = {}
+  { prefix = "R$", thousands = ".", decimal = ",", decimalCount = 2 } = {},
 ) {
   return new KlNumber(value).maskCoin(prefix, thousands, decimal, decimalCount);
 }

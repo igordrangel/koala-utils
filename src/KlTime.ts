@@ -12,7 +12,7 @@ export class KlTime extends Date {
     value?: number | Date,
     minutes?: number,
     seconds?: number,
-    miliseconds?: number
+    miliseconds?: number,
   ) {
     if (value instanceof Date) {
       super(value);
@@ -27,7 +27,7 @@ export class KlTime extends Date {
       value ?? 0,
       minutes ?? 0,
       seconds ?? 0,
-      miliseconds ?? 0
+      miliseconds ?? 0,
     );
   }
 
@@ -62,7 +62,7 @@ export class KlTime extends Date {
     const date = new KlDate(
       this.toLocaleString("en-US", {
         timeZone: "UTC",
-      })
+      }),
     );
     const hours = +date.format("HH");
     const minutes = +date.format("mm");
