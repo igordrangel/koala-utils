@@ -7,10 +7,12 @@
     "target": "es2022",
     "sourceMap": false,
     "outDir": "./dist",
+    "rootDir": "./src",
     "baseUrl": "./",
     "paths": {
       "@/*": ["./src/*"]
     },
+    "ignoreDeprecations": "6.0",
     "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": true,
