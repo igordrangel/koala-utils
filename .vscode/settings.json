@@ -33,6 +33,7 @@
     "editor.formatOnSave": true
   },
   "typescript.suggest.autoImports": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
   "terminal.integrated.env.osx": {
     "FIG_NEW_SESSION": "1"
   },
