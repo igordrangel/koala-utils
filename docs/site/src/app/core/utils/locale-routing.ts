@@ -3,6 +3,7 @@ import { isDocsUrl, isLandingUrl, parseLocaleFromUrl } from "./locale-url";
 
 export const DEFAULT_DOCS_ROUTE_BY_LOCALE: Record<Locale, string> = {
   pt: "/pt/docs/inicio/instalacao",
+  en: "/en/docs/getting-started/installation",
 };
 
 export function swapLocaleInPath(path: string, target: Locale): string {

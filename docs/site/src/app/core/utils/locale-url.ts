@@ -7,10 +7,10 @@ export function parseLocaleFromUrl(url: string): Locale {
 
 export function isLandingUrl(url: string) {
   const path = url.split("?")[0].split("#")[0];
-  return path === "/pt";
+  return path === "/pt" || path === "/en";
 }
 
 export function isDocsUrl(url: string) {
   const path = url.split("?")[0].split("#")[0];
-  return /^\/pt\/docs(\/|$)/.test(path);
+  return /^\/(pt|en)\/docs(\/|$)/.test(path);
 }

@@ -192,9 +192,19 @@ for (const locale of supportedLocales) {
       mdRel: d.mdRel,
       content: d.content,
       headings: d.headings,
-      alternateRoute: d.route,
+      alternateRoute: "",
     })),
   };
+}
+
+for (const locale of supportedLocales) {
+  const otherLocale = supportedLocales.find((item) => item !== locale);
+  if (!otherLocale) continue;
+
+  for (const doc of locales[locale].docs) {
+    doc.alternateRoute =
+      routesByDocKey[doc.docKey]?.[otherLocale] ?? doc.route;
+  }
 }
 
 const manifest = {

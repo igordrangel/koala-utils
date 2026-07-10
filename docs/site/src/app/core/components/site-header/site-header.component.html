@@ -35,43 +35,29 @@
   </a>
 </ng-template>
 
-<ng-template #externalLinks>
-  <a
-    href="https://www.npmjs.com/package/@koalarx/utils"
-    target="_blank"
-    appButton
-    class="justify-start lg:justify-center md:inline-flex"
-    btnSize="sm"
-    btnVariant="ghost"
-    (click)="closeMobileMenu()"
-  >
-    @koalarx/utils
-    <i class="fa-solid fa-arrow-up-long opacity-50 rotate-45 text-[0.6rem]"></i>
-  </a>
-  <a
-    href="https://www.npmjs.com/package/@koalarx/utils"
-    target="_blank"
-    appButton
-    class="justify-start lg:justify-center md:inline-flex"
-    btnSize="sm"
-    btnVariant="ghost"
-    (click)="closeMobileMenu()"
-  >
-    @koalarx/utils
-    <i class="fa-solid fa-arrow-up-long opacity-50 rotate-45 text-[0.6rem]"></i>
-  </a>
-  <a
-    href="https://koalarx.com"
-    target="_blank"
-    appButton
-    class="justify-start lg:justify-center md:inline-flex"
-    btnSize="sm"
-    btnVariant="ghost"
-    (click)="closeMobileMenu()"
-  >
-    @koalarx/ui-cli
-    <i class="fa-solid fa-arrow-up-long opacity-50 rotate-45 text-[0.6rem]"></i>
-  </a>
+<ng-template #localeSwitcher>
+  <div class="flex items-center gap-0.5 rounded-lg border border-base-300 p-0.5">
+    <button
+      type="button"
+      class="px-2 py-1 text-xs rounded-md transition-colors"
+      [class.bg-base-200]="locale() === 'pt'"
+      [class.opacity-100]="locale() === 'pt'"
+      [class.opacity-50]="locale() !== 'pt'"
+      (click)="switchLocale('pt')"
+    >
+      PT
+    </button>
+    <button
+      type="button"
+      class="px-2 py-1 text-xs rounded-md transition-colors"
+      [class.bg-base-200]="locale() === 'en'"
+      [class.opacity-100]="locale() === 'en'"
+      [class.opacity-50]="locale() !== 'en'"
+      (click)="switchLocale('en')"
+    >
+      EN
+    </button>
+  </div>
 </ng-template>
 
 @if (mobileMenuVisible()) {
@@ -100,12 +86,11 @@
   <div class="px-3 py-3 border-t border-base-300 shrink-0">
     <div class="grid grid-cols-1 gap-2">
       <ng-container *ngTemplateOutlet="navButtons" />
-      <ng-container *ngTemplateOutlet="externalLinks" />
     </div>
 
     <div class="flex items-center justify-between gap-2 mt-3 pt-3 border-t border-base-300">
       <span class="text-xs opacity-60">{{ copy().language }}</span>
-      <span class="px-2 py-1 text-xs rounded-md bg-base-200">PT</span>
+      <ng-container *ngTemplateOutlet="localeSwitcher" />
     </div>
   </div>
 </aside>
@@ -127,31 +112,10 @@
   </div>
 
   <div class="flex items-center min-w-0 gap-1 ml-auto shrink-0">
-    <button
-      class="flex md:hidden items-center justify-center rounded-lg border border-base-300 bg-base-200/60 size-8 opacity-70 hover:opacity-100 transition-opacity mr-1"
-      (click)="triggerSearch()"
-      [attr.aria-label]="copy().search"
-      type="button"
-    >
-      <i class="fa-solid fa-magnifying-glass text-xs"></i>
-    </button>
+    <app-doc-search class="mr-1" />
 
-    <button
-      class="hidden md:flex items-center gap-2 rounded-lg border border-base-300 bg-base-200/60 px-3 py-1.5 text-sm opacity-70 hover:opacity-100 transition-opacity mr-2"
-      (click)="triggerSearch()"
-      type="button"
-    >
-      <i class="fa-solid fa-magnifying-glass text-xs"></i>
-      <span>{{ copy().search }}</span>
-      <kbd class="text-xs opacity-60">Ctrl K</kbd>
-    </button>
-
-    <div class="hidden md:flex items-center gap-1">
-      <ng-container *ngTemplateOutlet="externalLinks" />
-    </div>
-
-    <div class="hidden md:flex items-center gap-0.5 ml-1 mr-1 rounded-lg border border-base-300 p-0.5">
-      <span class="px-2 py-1 text-xs rounded-md bg-base-200">PT</span>
+    <div class="hidden md:flex items-center ml-1 mr-1">
+      <ng-container *ngTemplateOutlet="localeSwitcher" />
     </div>
 
     <span class="ml-2 mr-1 opacity-20 hidden lg:inline">|</span>

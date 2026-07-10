@@ -2,7 +2,7 @@
   class="mt-25 mb-8 rounded-2xl border border-base-300 bg-base-100/80 backdrop-blur-sm"
   [class]="footerClass()"
 >
-  <div class="grid grid-cols-1 gap-6 p-6 md:grid-cols-4">
+  <div class="grid grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-4">
     <div>
       <h4 class="mb-2 text-sm font-semibold opacity-90">@koalarx/utils</h4>
       <p class="text-sm opacity-70">
@@ -25,6 +25,34 @@
     </div>
 
     <div>
+      <h4 class="mb-2 text-sm font-semibold opacity-90">{{ copy().footer.links }}</h4>
+      <ul class="space-y-1 text-sm opacity-80">
+        <li>
+          <a
+            href="https://www.npmjs.com/package/@koalarx/utils"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 transition-opacity hover:opacity-100"
+          >
+            {{ copy().footer.npm }}
+            <i class="fa-solid fa-arrow-up-long rotate-45 text-[0.6rem]"></i>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://koalarx.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 transition-opacity hover:opacity-100"
+          >
+            {{ copy().footer.koala }}
+            <i class="fa-solid fa-arrow-up-long rotate-45 text-[0.6rem]"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
       <h4 class="mb-2 text-sm font-semibold opacity-90">{{ copy().footer.docsAi }}</h4>
       <ul class="space-y-1 text-sm opacity-80">
         <li>
@@ -36,16 +64,6 @@
         <li>
           <a [routerLink]="installGuideLink()">{{ copy().footer.installGuide }}</a>
         </li>
-      </ul>
-    </div>
-
-    <div>
-      <h4 class="mb-2 text-sm font-semibold opacity-90">{{ copy().footer.quickCommands }}</h4>
-      <p class="text-xs opacity-60 mb-2">{{ copy().footer.quickCommandsHint }}</p>
-      <ul class="space-y-1 text-sm opacity-80 font-mono">
-        @for (command of copy().footer.quickCommandsList; track command) {
-          <li>{{ command }}</li>
-        }
       </ul>
     </div>
   </div>

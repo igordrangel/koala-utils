@@ -59,21 +59,28 @@ export class SeoService {
     link.href = href;
   }
 
-  private setAlternateLinks(currentPath: string, _alternatePath?: string) {
+  private setAlternateLinks(currentPath: string, alternatePath?: string) {
     this.document.head
       .querySelectorAll('link[rel="alternate"][hreflang]')
       .forEach((node) => node.remove());
 
-    const link = this.document.createElement("link");
-    link.rel = "alternate";
-    link.hreflang = "pt-BR";
-    link.href = absoluteSiteUrl(currentPath);
-    this.document.head.appendChild(link);
+    if (!alternatePath) {
+      return;
+    }
 
-    const xDefault = this.document.createElement("link");
-    xDefault.rel = "alternate";
-    xDefault.hreflang = "x-default";
-    xDefault.href = absoluteSiteUrl(currentPath);
-    this.document.head.appendChild(xDefault);
+    const ptPath = currentPath.startsWith("/en") ? alternatePath : currentPath;
+    const enPath = currentPath.startsWith("/en") ? currentPath : alternatePath;
+
+    for (const [hreflang, href] of [
+      ["pt-BR", absoluteSiteUrl(ptPath)],
+      ["en", absoluteSiteUrl(enPath)],
+      ["x-default", absoluteSiteUrl(ptPath)],
+    ] as const) {
+      const link = this.document.createElement("link");
+      link.rel = "alternate";
+      link.hreflang = hreflang;
+      link.href = href;
+      this.document.head.appendChild(link);
+    }
   }
 }

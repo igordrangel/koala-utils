@@ -1,4 +1,4 @@
-export const supportedLocales = ["pt"];
+export const supportedLocales = ["pt", "en"];
 
 export const defaultLocale = "pt";
 
@@ -13,6 +13,14 @@ export const categoryOrder = [
 
 export const categoryOrderByLocale = {
   pt: categoryOrder,
+  en: [
+    "intro",
+    "getting-started",
+    "core",
+    "operators",
+    "prototypes",
+    "guides",
+  ],
 };
 
 export const categoryLabelsByLocale = {
@@ -24,6 +32,14 @@ export const categoryLabelsByLocale = {
     prototypes: "Prototypes",
     guias: "Guias",
   },
+  en: {
+    intro: "Introduction",
+    "getting-started": "Getting Started",
+    core: "Core",
+    operators: "Operators",
+    prototypes: "Prototypes",
+    guides: "Guides",
+  },
 };
 
 export const llmsIndexHeaderByLocale = {
@@ -33,6 +49,16 @@ export const llmsIndexHeaderByLocale = {
     "> Biblioteca utilitária TypeScript/JavaScript para máscaras, datas, arrays e conversões do ecossistema Koala.",
     "",
     "Documentação otimizada para LLMs. Cada tópico aponta para o arquivo Markdown correspondente — sem duplicar conteúdo.",
+    "",
+    "Site: https://utils.koalarx.com",
+    "",
+  ].join("\n"),
+  en: [
+    "# @koalarx/utils",
+    "",
+    "> TypeScript/JavaScript utility library for masks, dates, arrays, and conversions in the Koala ecosystem.",
+    "",
+    "Documentation optimized for LLMs. Each topic links to the corresponding Markdown file — no duplicated content.",
     "",
     "Site: https://utils.koalarx.com",
     "",

@@ -8,28 +8,28 @@ import {
 
 describe('swapLocaleInPath', () => {
   it('troca o locale mantendo o restante da rota', () => {
-    expect(swapLocaleInPath('/pt/docs/inicio/guia-de-instalacao', 'en')).toBe(
-      '/en/docs/inicio/guia-de-instalacao',
+    expect(swapLocaleInPath('/pt/docs/inicio/instalacao', 'en')).toBe(
+      '/en/docs/inicio/instalacao',
     );
   });
 });
 
 describe('resolveLocaleSwitchPath', () => {
   const alternateRoutes = {
-    '/pt/docs/inicio/guia-de-instalacao': '/en/docs/getting-started/installation-guide',
-    '/en/docs/getting-started/installation-guide': '/pt/docs/inicio/guia-de-instalacao',
+    '/pt/docs/inicio/instalacao': '/en/docs/getting-started/installation',
+    '/en/docs/getting-started/installation': '/pt/docs/inicio/instalacao',
   };
 
   it('usa alternateRoute em páginas de documentação', () => {
     expect(
-      resolveLocaleSwitchPath('/pt/docs/inicio/guia-de-instalacao', 'en', alternateRoutes),
-    ).toBe('/en/docs/getting-started/installation-guide');
+      resolveLocaleSwitchPath('/pt/docs/inicio/instalacao', 'en', alternateRoutes),
+    ).toBe('/en/docs/getting-started/installation');
   });
 
   it('volta para a rota PT equivalente', () => {
     expect(
-      resolveLocaleSwitchPath('/en/docs/getting-started/installation-guide', 'pt', alternateRoutes),
-    ).toBe('/pt/docs/inicio/guia-de-instalacao');
+      resolveLocaleSwitchPath('/en/docs/getting-started/installation', 'pt', alternateRoutes),
+    ).toBe('/pt/docs/inicio/instalacao');
   });
 
   it('redireciona landing para a home do locale alvo', () => {
@@ -37,8 +37,8 @@ describe('resolveLocaleSwitchPath', () => {
   });
 
   it('faz fallback quando não há par traduzido', () => {
-    expect(resolveLocaleSwitchPath('/en/docs/host/routes', 'pt', alternateRoutes)).toBe(
-      '/pt/docs/host/routes',
+    expect(resolveLocaleSwitchPath('/en/docs/core/kl-string', 'pt', alternateRoutes)).toBe(
+      '/pt/docs/core/kl-string',
     );
   });
 });
@@ -47,22 +47,20 @@ describe('buildAlternateRouteIndex', () => {
   it('indexa rotas alternativas por rota atual', () => {
     const index = buildAlternateRouteIndex([
       {
-        route: '/pt/docs/inicio/guia-de-instalacao',
-        alternateRoute: '/en/docs/getting-started/installation-guide',
+        route: '/pt/docs/inicio/instalacao',
+        alternateRoute: '/en/docs/getting-started/installation',
       },
     ]);
 
-    expect(index['/pt/docs/inicio/guia-de-instalacao']).toBe(
-      '/en/docs/getting-started/installation-guide',
+    expect(index['/pt/docs/inicio/instalacao']).toBe(
+      '/en/docs/getting-started/installation',
     );
   });
 });
 
 describe('DEFAULT_DOCS_ROUTE_BY_LOCALE', () => {
   it('define rotas padrão por idioma', () => {
-    expect(DEFAULT_DOCS_ROUTE_BY_LOCALE.pt).toBe('/pt/docs/inicio/guia-de-instalacao');
-    expect(DEFAULT_DOCS_ROUTE_BY_LOCALE.en).toBe(
-      '/en/docs/getting-started/installation-guide',
-    );
+    expect(DEFAULT_DOCS_ROUTE_BY_LOCALE.pt).toBe('/pt/docs/inicio/instalacao');
+    expect(DEFAULT_DOCS_ROUTE_BY_LOCALE.en).toBe('/en/docs/getting-started/installation');
   });
 });

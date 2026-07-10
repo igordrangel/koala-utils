@@ -1,32 +1,7 @@
 // @vitest-environment jsdom
 
 import { describe, expect, it } from 'vitest';
-import {
-  collectTocItems,
-  extractCodeText,
-  findCopyCodeButton,
-  shouldCloseSearchDialog,
-  shouldOpenSearchDialog,
-} from './doc-ui';
-
-describe('shouldOpenSearchDialog', () => {
-  it('detecta Ctrl+K e Cmd+K', () => {
-    expect(
-      shouldOpenSearchDialog(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true })),
-    ).toBe(true);
-    expect(
-      shouldOpenSearchDialog(new KeyboardEvent('keydown', { key: 'K', metaKey: true })),
-    ).toBe(true);
-    expect(shouldOpenSearchDialog(new KeyboardEvent('keydown', { key: 'k' }))).toBe(false);
-  });
-});
-
-describe('shouldCloseSearchDialog', () => {
-  it('detecta Escape', () => {
-    expect(shouldCloseSearchDialog(new KeyboardEvent('keydown', { key: 'Escape' }))).toBe(true);
-    expect(shouldCloseSearchDialog(new KeyboardEvent('keydown', { key: 'k' }))).toBe(false);
-  });
-});
+import { collectTocItems, extractCodeText, findCopyCodeButton } from './doc-ui';
 
 describe('collectTocItems', () => {
   it('extrai headings h2/h3 com id', () => {

@@ -15,7 +15,24 @@ export class LandingPageComponent {
   readonly locale = this.localeService.locale;
   readonly copy = computed(() => UI_COPY[this.localeService.locale()]);
   readonly docsLink = computed(() => this.localeService.defaultDocsRoute());
-  readonly overviewLink = computed(() =>
-    this.localeService.docsRoute('intro', 'visao-geral'),
-  );
+  readonly overviewLink = computed(() => {
+    const locale = this.localeService.locale();
+    return locale === 'en'
+      ? this.localeService.docsRoute('intro', 'overview')
+      : this.localeService.docsRoute('intro', 'visao-geral');
+  });
+  readonly operatorsLink = computed(() => {
+    const locale = this.localeService.locale();
+    return locale === 'en'
+      ? this.localeService.docsRoute('operators', 'overview')
+      : this.localeService.docsRoute('operators', 'visao-geral');
+  });
+  readonly prototypesLink = computed(() => {
+    const locale = this.localeService.locale();
+    return locale === 'en'
+      ? this.localeService.docsRoute('prototypes', 'overview')
+      : this.localeService.docsRoute('prototypes', 'visao-geral');
+  });
+  readonly klStringLink = computed(() => this.localeService.docsRoute('core', 'kl-string'));
+  readonly installLink = computed(() => this.localeService.defaultDocsRoute());
 }

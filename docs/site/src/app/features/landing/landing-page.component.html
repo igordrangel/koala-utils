@@ -109,7 +109,7 @@
 
     <div class="flex flex-wrap gap-3 mt-5">
       <a
-        [routerLink]="localeService.docsRoute('operators', 'visao-geral')"
+        [routerLink]="operatorsLink()"
         appButton
         btnVariant="ghost"
         btnSize="sm"
@@ -118,7 +118,7 @@
         {{ copy().landing.exploreDdd }}
       </a>
       <a
-        [routerLink]="localeService.docsRoute('prototypes', 'visao-geral')"
+        [routerLink]="prototypesLink()"
         appButton
         btnVariant="ghost"
         btnSize="sm"
@@ -127,7 +127,7 @@
         {{ copy().landing.exploreCrud }}
       </a>
       <a
-        [routerLink]="localeService.docsRoute('core', 'kl-string')"
+        [routerLink]="klStringLink()"
         appButton
         btnVariant="ghost"
         btnSize="sm"
@@ -136,7 +136,7 @@
         {{ copy().landing.exploreOpenApi }}
       </a>
       <a
-        [routerLink]="localeService.docsRoute('inicio', 'instalacao')"
+        [routerLink]="installLink()"
         appButton
         btnVariant="ghost"
         btnSize="sm"

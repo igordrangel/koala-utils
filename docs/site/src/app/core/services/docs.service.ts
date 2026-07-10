@@ -27,23 +27,4 @@ export class DocsService {
   getRenderableContent(doc: DocPage): string {
     return transformMarkdownLinks(doc.content, doc.category, doc.locale);
   }
-
-  search(query: string) {
-    const term = query.trim().toLowerCase();
-    if (!term) return [];
-
-    return this.docs()
-      .filter((doc) => {
-        const haystack = [doc.title, doc.description, doc.content, doc.category]
-          .join(' ')
-          .toLowerCase();
-        return haystack.includes(term);
-      })
-      .slice(0, 12)
-      .map((doc) => ({
-        title: doc.title,
-        description: doc.description,
-        route: doc.route,
-      }));
-  }
 }

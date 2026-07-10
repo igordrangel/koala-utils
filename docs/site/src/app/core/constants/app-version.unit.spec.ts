@@ -6,7 +6,7 @@ import { APP_VERSION } from './app-version';
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
-  '../../../../../../../',
+  '../../../../../../',
 );
 
 describe('APP_VERSION', () => {

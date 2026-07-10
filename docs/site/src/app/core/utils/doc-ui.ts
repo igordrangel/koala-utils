@@ -1,11 +1,3 @@
-export function shouldOpenSearchDialog(event: KeyboardEvent): boolean {
-  return (event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k';
-}
-
-export function shouldCloseSearchDialog(event: KeyboardEvent): boolean {
-  return event.key === 'Escape';
-}
-
 export interface TocItem {
   label: string;
   fragment: string;
