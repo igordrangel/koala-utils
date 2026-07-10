@@ -1,0 +1,22 @@
+<nav class="docs-sidebar-nav w-full px-2 pb-15" aria-label="Documentação">
+  <ul class="flex flex-col flex-nowrap gap-1 w-full">
+    <li class="w-full">
+      @for (section of navigation(); track section.category) {
+        <h2 class="menu-title px-2">{{ section.label }}</h2>
+        <ul class="flex flex-col flex-nowrap w-full mb-2">
+          @for (item of section.items; track item.route) {
+            <li class="w-full">
+              <a
+                class="block w-full rounded-lg px-3 py-2 text-sm opacity-60 hover:opacity-100 leading-snug"
+                [routerLink]="item.route"
+                routerLinkActive="opacity-100 bg-base-200"
+              >
+                {{ item.title }}
+              </a>
+            </li>
+          }
+        </ul>
+      }
+    </li>
+  </ul>
+</nav>

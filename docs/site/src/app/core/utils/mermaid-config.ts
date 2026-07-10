@@ -1,0 +1,31 @@
+export const docsMermaidOptions = {
+  startOnLoad: false,
+  theme: 'dark' as const,
+  securityLevel: 'antiscript' as const,
+  fontFamily: 'Inter, system-ui, sans-serif',
+  themeVariables: {
+    fontSize: '15px',
+    fontFamily: 'Inter, system-ui, sans-serif',
+    background: 'transparent',
+    mainBkg: '#2e2e2e',
+    secondBkg: 'transparent',
+    tertiaryBkg: 'transparent',
+    clusterBkg: 'transparent',
+    nodeBorder: '#383838',
+    lineColor: '#a3a3a3',
+  },
+  flowchart: {
+    useMaxWidth: true,
+    htmlLabels: false,
+    padding: 24,
+    nodeSpacing: 64,
+    rankSpacing: 72,
+  },
+  sequence: {
+    useMaxWidth: true,
+    diagramMarginX: 24,
+    diagramMarginY: 12,
+    actorMargin: 60,
+    messageMargin: 36,
+  },
+};

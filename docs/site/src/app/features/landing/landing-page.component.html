@@ -1,0 +1,149 @@
+<section class="flex flex-col items-center gap-4 text-center my-25 px-6">
+  <span class="badge badge-neutral badge-sm">
+    <i class="fa-solid fa-circle text-[#E0234E] text-[0.5rem]"></i>
+    {{ copy().landing.heroBadge }}
+    <i class="fa-solid fa-arrow-right text-[0.7rem] opacity-70"></i>
+  </span>
+
+  <h1 class="text-4xl sm:text-5xl font-semibold">
+    {{ copy().landing.heroLead }}<span class="nest-brand-text">{{ copy().landing.heroGradient }}</span
+    >{{ copy().landing.heroTrail }}
+  </h1>
+
+  <h2 class="max-w-2xl text-lg opacity-80">
+    {{ copy().landing.heroSubtitle }}
+  </h2>
+
+  <nav class="flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
+    <a
+      [routerLink]="docsLink()"
+      appButton
+      btnVariant="neutral"
+      btnSize="sm"
+      class="bg-neutral-300 hover:bg-neutral-400 text-neutral-900"
+    >
+      {{ copy().landing.gettingStarted }}
+    </a>
+    <a [routerLink]="overviewLink()" appButton btnVariant="ghost" btnSize="sm">
+      {{ copy().landing.viewDocs }}
+    </a>
+  </nav>
+</section>
+
+<section class="px-6 pb-24 max-w-5xl mx-auto w-full">
+  <article class="py-2">
+    <div class="flex flex-col mb-2">
+      <h2 class="text-3xl font-bold">{{ copy().landing.whatIsTitle }}</h2>
+      <small class="text-base font-light opacity-75">
+        {{ copy().landing.whatIsSubtitle }}
+      </small>
+    </div>
+
+    <div class="flex flex-wrap gap-8 mt-5">
+      @for (card of copy().whatIsCards; track card.title) {
+        <div
+          class="border border-neutral-800 bg-neutral-900 rounded-2xl w-full lg:w-[calc(50%-2rem)] p-4"
+        >
+          <h4 class="font-bold text-lg">{{ card.title }}</h4>
+          <p class="font-light text-sm opacity-80">{{ card.description }}</p>
+        </div>
+      }
+    </div>
+  </article>
+
+  <article class="block mt-10 py-2">
+    <div class="flex flex-col mb-2">
+      <h2 class="text-3xl font-bold">{{ copy().landing.cliTitle }}</h2>
+      <small class="text-base font-light opacity-75">
+        {{ copy().landing.cliSubtitle }}
+      </small>
+    </div>
+
+    <div class="code-block relative rounded-xl bg-neutral-900 border border-base-300 overflow-hidden my-6">
+      <div class="flex items-center justify-between px-3 py-2 border-b border-base-300/80">
+        <span class="flex min-w-0 items-center gap-2 text-sm text-neutral-500">
+          <i class="bg-neutral-400 text-neutral-950 rounded-sm fa-solid fa-terminal p-1 text-[0.5rem]"></i>
+          <span class="truncate">bash</span>
+        </span>
+      </div>
+      <pre class="language-bash m-0! rounded-none! border-0! bg-transparent!"><code>npm i @koalarx/utils</code></pre>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-5">
+      @for (benefit of copy().cliBenefits; track benefit.title) {
+        <div class="border border-neutral-800 bg-neutral-900 rounded-2xl p-4">
+          <h4 class="font-bold text-lg">{{ benefit.title }}</h4>
+          <p class="font-light text-sm opacity-80">{{ benefit.description }}</p>
+        </div>
+      }
+    </div>
+  </article>
+
+  <article class="block mt-10 py-2">
+    <div class="flex flex-col mb-2">
+      <h2 class="text-3xl font-bold">{{ copy().landing.aiTitle }}</h2>
+      <small class="text-base font-light opacity-75">
+        {{ copy().landing.aiSubtitle }}
+      </small>
+    </div>
+
+    <div class="flex flex-wrap gap-8 mt-5">
+      @for (card of copy().aiCards; track card.title) {
+        <div
+          class="border border-neutral-800 bg-neutral-900 rounded-2xl w-full lg:w-[calc(50%-2rem)] p-4"
+        >
+          <h4 class="font-bold text-lg">{{ card.title }}</h4>
+          <p class="font-light text-sm opacity-80">{{ card.description }}</p>
+        </div>
+      }
+    </div>
+  </article>
+
+  <article class="block mt-10 py-2">
+    <div class="flex flex-col mb-2">
+      <h2 class="text-3xl font-bold">{{ copy().landing.exploreTitle }}</h2>
+      <small class="text-base font-light opacity-75">
+        {{ copy().landing.exploreSubtitle }}
+      </small>
+    </div>
+
+    <div class="flex flex-wrap gap-3 mt-5">
+      <a
+        [routerLink]="operatorsLink()"
+        appButton
+        btnVariant="ghost"
+        btnSize="sm"
+        btnOutline
+      >
+        {{ copy().landing.exploreDdd }}
+      </a>
+      <a
+        [routerLink]="prototypesLink()"
+        appButton
+        btnVariant="ghost"
+        btnSize="sm"
+        btnOutline
+      >
+        {{ copy().landing.exploreCrud }}
+      </a>
+      <a
+        [routerLink]="klStringLink()"
+        appButton
+        btnVariant="ghost"
+        btnSize="sm"
+        btnOutline
+      >
+        {{ copy().landing.exploreOpenApi }}
+      </a>
+      <a
+        [routerLink]="installLink()"
+        appButton
+        btnVariant="ghost"
+        btnSize="sm"
+        btnOutline
+      >
+        {{ copy().landing.exploreMapping }}
+      </a>
+    </div>
+  </article>
+</section>

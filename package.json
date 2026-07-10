@@ -1,14 +1,15 @@
 {
   "name": "@koalarx/utils",
-  "version": "4.2.6",
+  "version": "5.0.0",
   "engines": {
     "node": ">=20.18.0",
     "bun": ">=1.2.0"
   },
   "description": "Biblioteca com validadores, conversores e abstrações de algumas problemáticas",
   "scripts": {
-    "test": "TZ=America/Sao_Paulo bun test src",
-    "test:watch": "TZ=America/Sao_Paulo bun test --watch src",
+    "start": "cd docs/site && bun start",
+    "test": "TZ=America/Sao_Paulo bun test tests",
+    "test:watch": "TZ=America/Sao_Paulo bun test --watch tests",
     "build": "bun .github/scripts/publish.js",
     "lint": "prettier --end-of-line lf --write . && bunx eslint --fix \"src/**/*.ts\" eslint.config.mts",
     "prepare": "bun run build",
@@ -18,7 +19,11 @@
     "postversion": "git push && git push --tags",
     "deploy:hotfix": "bun run test && bun pm version patch",
     "deploy:feature": "bun run test && bun pm version minor",
-    "deploy:release": "bun run test && bun pm version major"
+    "deploy:release": "bun run test && bun pm version major",
+    "doc:manifest": "bun scripts/build-doc-manifest.mjs",
+    "dev:docs": "bun run doc:manifest && cd docs/site && bun start",
+    "build:docs": "bun run doc:manifest && cd docs/site && bun run build:prod",
+    "preview:docs": "bunx serve docs/site/dist/site/browser -p 4321"
   },
   "repository": {
     "type": "git",
@@ -40,10 +45,96 @@
     "url": "https://github.com/igordrangel/koala-utils/issues"
   },
   "homepage": "https://github.com/igordrangel/koala-utils#readme",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./holidays": {
+      "types": "./core/holidays.d.ts",
+      "default": "./core/holidays.js"
+    },
+    "./KlArray": {
+      "types": "./core/KlArray.d.ts",
+      "default": "./core/KlArray.js"
+    },
+    "./KlCron": {
+      "types": "./core/KlCron.d.ts",
+      "default": "./core/KlCron.js"
+    },
+    "./KlDate": {
+      "types": "./core/KlDate.d.ts",
+      "default": "./core/KlDate.js"
+    },
+    "./KlDelay": {
+      "types": "./core/KlDelay.d.ts",
+      "default": "./core/KlDelay.js"
+    },
+    "./KlNumber": {
+      "types": "./core/KlNumber.d.ts",
+      "default": "./core/KlNumber.js"
+    },
+    "./KlString": {
+      "types": "./core/KlString.d.ts",
+      "default": "./core/KlString.js"
+    },
+    "./KlTime": {
+      "types": "./core/KlTime.d.ts",
+      "default": "./core/KlTime.js"
+    },
+    "./operators": {
+      "types": "./operators/index.d.ts",
+      "default": "./operators/index.js"
+    },
+    "./prototypes": {
+      "types": "./prototypes/index.d.ts",
+      "default": "./prototypes/index.js"
+    },
+    "./prototypes/string": {
+      "types": "./prototypes/string.entry.d.ts",
+      "default": "./prototypes/string.entry.js"
+    },
+    "./prototypes/number": {
+      "types": "./prototypes/number.entry.d.ts",
+      "default": "./prototypes/number.entry.js"
+    },
+    "./prototypes/date": {
+      "types": "./prototypes/date.entry.d.ts",
+      "default": "./prototypes/date.entry.js"
+    },
+    "./prototypes/array": {
+      "types": "./prototypes/array.entry.d.ts",
+      "default": "./prototypes/array.entry.js"
+    },
+    "./*": "./*"
+  },
+  "sideEffects": [
+    "./core/holidays.js",
+    "./core/holidays.ts",
+    "./prototypes/index.js",
+    "./prototypes/index.ts",
+    "./prototypes/string.entry.js",
+    "./prototypes/string.entry.ts",
+    "./prototypes/number.entry.js",
+    "./prototypes/number.entry.ts",
+    "./prototypes/date.entry.js",
+    "./prototypes/date.entry.ts",
+    "./prototypes/array.entry.js",
+    "./prototypes/array.entry.ts",
+    "./prototypes/string.js",
+    "./prototypes/string.ts",
+    "./prototypes/number.js",
+    "./prototypes/number.ts",
+    "./prototypes/date.js",
+    "./prototypes/date.ts",
+    "./prototypes/array.js",
+    "./prototypes/array.ts"
+  ],
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/bun": "^1.3.14",
     "@types/node": "^20.19.43",
+    "date-holidays": "^3.32.0",
     "eslint": "^10.6.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
@@ -56,8 +147,15 @@
   },
   "dependencies": {
     "date-fns": "^4.4.0",
-    "date-holidays": "^3.32.0",
     "validation-br": "^1.6.4"
+  },
+  "peerDependencies": {
+    "date-holidays": "^3.32.0"
+  },
+  "peerDependenciesMeta": {
+    "date-holidays": {
+      "optional": true
+    }
   },
   "overrides": {
     "js-yaml": "^5.2.0",

@@ -1,6 +1,8 @@
 # @koalarx/utils
 
-Biblioteca utilitária para validações, conversões e abstrações de problemas comuns em JavaScript/TypeScript.
+Biblioteca utilitária TypeScript/JavaScript para máscaras (CPF/CNPJ/moeda), datas, arrays e conversões do ecossistema Koala.
+
+**Documentação:** [utils.koalarx.com](https://utils.koalarx.com/)
 
 ## Instalação
 
@@ -8,178 +10,31 @@ Biblioteca utilitária para validações, conversões e abstrações de problema
 npm install @koalarx/utils
 ```
 
-## Funcionalidades
+## Uso rápido
 
-### KlString
+```ts
+// Frontend — operators fluentes
+import { format, maskCpf } from "@koalarx/utils/operators";
+format(new Date(), "dd/MM/yyyy").split("/");
+maskCpf("12345678909").toString();
 
-Classe para manipulação avançada de strings.
-
-#### Métodos Disponíveis
-
-- **normalizeAndRemoveSpecialChars**: Remove caracteres especiais e normaliza a string.
-- **removeSpaces**: Remove espaços, substituindo-os por um delimitador.
-- **clear**: Remove espaços e caracteres especiais.
-- **toCamelCase**: Converte a string para camelCase.
-- **unmaskCoin**: Remove a máscara de moeda e converte para número.
-- **maskCpf**: Aplica a máscara de CPF.
-- **maskCnpj**: Aplica a máscara de CNPJ.
-- **validateCpf**: Valida se a string é um CPF válido.
-- **validateCnpj**: Valida se a string é um CNPJ válido.
-- **onlyNumbers**: Remove todos os caracteres não numéricos.
-- **nbl2br**: Substitui quebras de linha por `<br/>`.
-- **toBase64**: Converte a string para Base64.
-- **random**: Gera uma string aleatória.
-
-#### Exemplos de Uso
-
-```typescript
-import { KlString, maskCpf, toCamelCase } from "@koalarx/utils/KlString";
-
-const str = new KlString("Olá Mundo!");
-console.log(str.normalizeAndRemoveSpecialChars().toString()); // "Ola Mundo"
-console.log(maskCpf("12345678909")); // "123.456.789-09"
-console.log(toCamelCase("Olá Mundo")); // "olaMundo"
+// Backend — prototypes no main
+import "@koalarx/utils/prototypes";
+"12345678909".maskCpf();
 ```
 
----
+## Para LLMs
 
-### KlNumber
+No site da documentação:
 
-Classe para manipulação avançada de números.
+- **Copy AI** (header) → índice global [`llms.txt`](https://utils.koalarx.com/llms.txt)
+- **Copy for AI** (por página) → URL do Markdown daquele tópico
 
-#### Métodos Disponíveis
+## Links
 
-- **random**: Gera um número aleatório entre dois valores.
-- **maskCoin**: Formata o número como moeda.
-
-#### Exemplos de Uso
-
-```typescript
-import { maskCoin, randomNumber } from "@koalarx/utils/KlNumber";
-
-console.log(maskCoin(1000)); // "R$ 1.000,00"
-console.log(randomNumber(1, 100)); // Exemplo: 42
-```
-
----
-
-### KlDate
-
-Classe para manipulação avançada de datas.
-
-#### Métodos Disponíveis
-
-- **format**: Formata a data com base em uma máscara.
-- **changeTimeZone**: Altera o fuso horário da data.
-- **toUTC**: Converte a data para UTC.
-- **add**: Adiciona tempo à data.
-- **sub**: Subtrai tempo da data.
-- **diff**: Calcula a diferença entre duas datas.
-- **isHoliday**: Verifica se a data é um feriado.
-
-#### Exemplos de Uso
-
-```typescript
-import { KlDate, isHoliday } from "@koalarx/utils/KlDate";
-
-const date = new KlDate("2023-10-01");
-console.log(date.format("dd/MM/yyyy")); // "01/10/2023"
-console.log(isHoliday(date, "BR")); // true ou false
-```
-
-### KlTime
-
-Classe para manipulação avançada de horários.
-
-#### Métodos Disponíveis
-
-- **format**: Formata um horário com base em uma máscara.
-- **changeTimeZone**: Altera o fuso horário da data.
-- **toUTC**: Converte a data para UTC.
-- **add**: Adiciona tempo à data.
-- **sub**: Subtrai tempo da data.
-- **diff**: Calcula a diferença entre duas datas.
-
-#### Exemplos de Uso
-
-```typescript
-import { KlTime } from "@koalarx/utils/KlTime";
-
-const date = new KlTime(13);
-console.log(date.format()); // "13:00:00"
-```
-
----
-
-### KlArray
-
-Classe para manipulação avançada de arrays.
-
-#### Métodos Disponíveis
-
-- **clearEmptyValues**: Remove valores "falsy" do array.
-- **split**: Divide o array em subarrays.
-- **orderBy**: Ordena o array por uma propriedade.
-- **shuffle**: Embaralha os elementos do array.
-
-#### Exemplos de Uso
-
-```typescript
-import { KlArray } from "@koalarx/utils/KlArray";
-
-const array = new KlArray([1, 2, 3, 4]);
-console.log(array.split(2)); // [[1, 2], [3, 4]]
-console.log(array.shuffle()); // Exemplo: [3, 1, 4, 2]
-```
-
----
-
-### KlDelay
-
-Classe para criar atrasos no código.
-
-#### Métodos Disponíveis
-
-- **waitFor**: Aguarda um período de tempo especificado.
-
-#### Exemplos de Uso
-
-```typescript
-import { delay } from "@koalarx/utils/KlDelay";
-
-await delay(1000);
-console.log("Aguardou 1 segundo");
-```
-
----
-
-### KlCron
-
-Classe para medir a duração de execuções.
-
-#### Métodos Disponíveis
-
-- **start**: Inicia o cronômetro.
-- **end**: Finaliza o cronômetro.
-- **duration**: Calcula a duração entre o início e o fim.
-
-#### Exemplos de Uso
-
-```typescript
-import { KlCron } from "@koalarx/utils/KlCron";
-
-const cron = new KlCron();
-cron.start();
-// ... código a ser medido ...
-cron.end();
-console.log(cron.duration()); // Duração em segundos
-```
-
----
-
-## Contribuição
-
-Contribuições são bem-vindas! Por favor, abra uma issue ou envie um pull request no [repositório do GitHub](https://github.com/igordrangel/koala-utils).
+- Docs: https://utils.koalarx.com
+- npm: https://www.npmjs.com/package/@koalarx/utils
+- GitHub: https://github.com/igordrangel/koala-utils
 
 ## Licença
 

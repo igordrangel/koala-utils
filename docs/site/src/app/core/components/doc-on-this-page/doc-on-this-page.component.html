@@ -1,0 +1,22 @@
+@if (showNavigation()) {
+  <aside class="fixed w-64 right-4 top-20 text-xs pl-4">
+    <h4 class="opacity-70">{{ copy().onThisPage }}</h4>
+    <ul class="mt-4 space-y-1">
+      @for (item of items(); track item.fragment) {
+        @let isActive = activeSectionId() === item.fragment;
+
+        <a
+          class="opacity-70 hover:opacity-100 transition-opacity"
+          [class.opacity-100]="isActive"
+          [class.font-semibold]="isActive"
+          [routerLink]="[]"
+          [fragment]="item.fragment"
+        >
+          <li class="py-1">
+            {{ item.label }}
+          </li>
+        </a>
+      }
+    </ul>
+  </aside>
+}

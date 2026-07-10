@@ -5,14 +5,5 @@
   "trailingComma": "all",
   "arrowParens": "always",
   "semi": true,
-  "endOfLine": "lf",
-  "overrides": [
-    {
-      "files": "src/light/**/*.ts",
-      "options": {
-        "singleQuote": true,
-        "semi": false
-      }
-    }
-  ]
+  "endOfLine": "lf"
 }

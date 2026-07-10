@@ -21,7 +21,6 @@ export default [
   prettierConfig,
   {
     files: ["src/**/*.ts"],
-    ignores: ["src/light/**"],
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
@@ -41,43 +40,6 @@ export default [
           ...prettierBase,
           singleQuote: false,
           semi: true,
-        },
-      ],
-      "no-unused-vars": "off",
-      "no-useless-constructor": "off",
-      "no-useless-escape": "off",
-      "no-use-before-define": "off",
-      "@typescript-eslint/no-unused-vars": ["error"],
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-unsafe-function-type": "off",
-      "@typescript-eslint/no-unsafe-assignment": "off",
-      "@typescript-eslint/no-unsafe-member-access": "off",
-      "@typescript-eslint/no-unsafe-call": "off",
-      "@typescript-eslint/no-require-imports": "off",
-      "@typescript-eslint/no-inferrable-types": "off",
-    },
-  },
-  {
-    files: ["src/light/**/*.ts"],
-    languageOptions: {
-      parser: tseslint.parser,
-      parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module",
-      },
-      globals: globals.node,
-    },
-    plugins: {
-      "@typescript-eslint": tseslint.plugin,
-      prettier: prettierPlugin,
-    },
-    rules: {
-      "prettier/prettier": [
-        "warn",
-        {
-          ...prettierBase,
-          singleQuote: true,
-          semi: false,
         },
       ],
       "no-unused-vars": "off",

@@ -1,8 +1,9 @@
 const fs = require("fs");
+const path = require("path");
 const { execSync } = require("child_process");
 const packageJson = require("../../package.json");
 
-execSync(`tsc`, { stdio: "inherit" });
+execSync(`bunx tsc`, { stdio: "inherit" });
 
 delete packageJson.scripts;
 delete packageJson.devDependencies;

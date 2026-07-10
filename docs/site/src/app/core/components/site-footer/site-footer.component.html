@@ -1,0 +1,77 @@
+<footer
+  class="mt-25 mb-8 rounded-2xl border border-base-300 bg-base-100/80 backdrop-blur-sm"
+  [class]="footerClass()"
+>
+  <div class="grid grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <h4 class="mb-2 text-sm font-semibold opacity-90">@koalarx/utils</h4>
+      <p class="text-sm opacity-70">
+        {{ copy().footer.description }}
+      </p>
+    </div>
+
+    <div>
+      <h4 class="mb-2 text-sm font-semibold opacity-90">Creator</h4>
+      <a
+        href="https://igordrangel.com.br/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 text-sm opacity-80 transition-opacity hover:opacity-100"
+      >
+        igordrangel.com.br
+        <i class="fa-solid fa-arrow-up-long rotate-45 text-[0.6rem]"></i>
+      </a>
+      <p class="mt-2 text-xs opacity-60">{{ copy().footer.creatorRole }}</p>
+    </div>
+
+    <div>
+      <h4 class="mb-2 text-sm font-semibold opacity-90">{{ copy().footer.links }}</h4>
+      <ul class="space-y-1 text-sm opacity-80">
+        <li>
+          <a
+            href="https://www.npmjs.com/package/@koalarx/utils"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 transition-opacity hover:opacity-100"
+          >
+            {{ copy().footer.npm }}
+            <i class="fa-solid fa-arrow-up-long rotate-45 text-[0.6rem]"></i>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://koalarx.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 transition-opacity hover:opacity-100"
+          >
+            {{ copy().footer.koala }}
+            <i class="fa-solid fa-arrow-up-long rotate-45 text-[0.6rem]"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="mb-2 text-sm font-semibold opacity-90">{{ copy().footer.docsAi }}</h4>
+      <ul class="space-y-1 text-sm opacity-80">
+        <li>
+          <a [href]="llmsLink()" target="_blank" rel="noopener noreferrer">llms.txt (index)</a>
+        </li>
+        <li>
+          <a [href]="llmLink()" target="_blank" rel="noopener noreferrer">llm.txt</a>
+        </li>
+        <li>
+          <a [routerLink]="installGuideLink()">{{ copy().footer.installGuide }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div
+    class="flex flex-col gap-2 border-t border-base-300 px-6 py-3 text-xs opacity-60 md:flex-row md:items-center md:justify-between"
+  >
+    <span>© 2026 @koalarx/utils</span>
+    <span>{{ copy().footer.tagline }}</span>
+  </div>
+</footer>

@@ -1,0 +1,71 @@
+/* Subset mínimo do Font Awesome — apenas ícones usados na documentação */
+
+@font-face {
+  font-family: 'Font Awesome 6 Free';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./icons/font-awesome/webfonts/fa-regular-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Font Awesome 6 Free';
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url('./icons/font-awesome/webfonts/fa-solid-900.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Font Awesome 6 Brands';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./icons/font-awesome/webfonts/fa-brands-400.woff2') format('woff2');
+}
+
+.fa,
+.fa-solid,
+.fa-regular,
+.fa-brands {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-rendering: auto;
+}
+
+.fa-solid,
+.fas {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+}
+
+.fa-regular,
+.far {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 400;
+}
+
+.fa-brands,
+.fab {
+  font-family: 'Font Awesome 6 Brands';
+  font-weight: 400;
+}
+
+.fa-solid.fa-arrow-right::before { content: '\f061'; }
+.fa-solid.fa-arrow-up-long::before { content: '\f176'; }
+.fa-solid.fa-bars::before { content: '\f0c9'; }
+.fa-solid.fa-check::before { content: '\f00c'; }
+.fa-solid.fa-circle::before { content: '\f111'; }
+.fa-solid.fa-circle-info::before { content: '\f05a'; }
+.fa-solid.fa-code::before { content: '\f121'; }
+.fa-solid.fa-magnifying-glass::before { content: '\f002'; }
+.fa-solid.fa-terminal::before { content: '\f120'; }
+
+.fa-regular.fa-clipboard::before { content: '\f328'; }
+.fa-regular.fa-file-code::before { content: '\f1c9'; }
+
+.fa-brands.fa-github::before { content: '\f09b'; }
