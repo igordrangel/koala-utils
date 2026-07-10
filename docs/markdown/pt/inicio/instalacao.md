@@ -17,6 +17,13 @@ bun add @koalarx/utils
 
 ## Feriados (opcional)
 
+`date-holidays` é uma **peer dependency opcional**, não uma dependência direta do pacote.
+
+Assim, quem não usa feriados não instala (nem carrega) essa lib — ela traz dados de vários países e aumentaria o tamanho para todo mundo. Quem precisa:
+
+1. Instala o peer no próprio projeto
+2. Importa o side-effect `@koalarx/utils/holidays` no bootstrap
+
 ```bash
 npm install date-holidays
 ```
@@ -24,6 +31,8 @@ npm install date-holidays
 ```ts
 import '@koalarx/utils/holidays';
 ```
+
+Sem o import, `isHoliday` / `skipHolidays` lançam erro de propósito (opt-in explícito).
 
 ## Subpaths
 

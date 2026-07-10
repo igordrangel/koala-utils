@@ -27,4 +27,4 @@ Não existe `pipe()`. Em operators, comece na função: `format(date).split('/')
 - Node `>=20.18.0`
 - Bun `>=1.2.0`
 - Dependências: `date-fns`, `validation-br`
-- Peer opcional: `date-holidays` (feriados)
+- Peer opcional: `date-holidays` (feriados; não é `dependency` para não inflar quem não usa)

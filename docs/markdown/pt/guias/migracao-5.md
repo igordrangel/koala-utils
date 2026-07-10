@@ -10,7 +10,7 @@ description: Breaking changes e novidades da major 5.0.
 # Migração 5.0
 
 1. Remoção de `@koalarx/utils/light`
-2. Feriados opt-in (`date-holidays` + `@koalarx/utils/holidays`)
+2. Feriados opt-in: `date-holidays` vira peer opcional (instale no projeto + `import '@koalarx/utils/holidays'`)
 3. `KlArray.map` / `KlString.split` retornam `KlArray`
 4. Novos subpaths `operators` e `prototypes`
 5. Layout interno `core/` (imports públicos estáveis)

@@ -9,7 +9,9 @@ description: Opt-in de date-holidays para isHoliday e skipHolidays.
 
 # Feriados
 
-1. `npm install date-holidays`
+`date-holidays` é peer opcional: não vem em `dependencies` do `@koalarx/utils`, para não obrigar quem só usa o core a instalar dados de feriados.
+
+1. `npm install date-holidays` no seu projeto
 2. `import '@koalarx/utils/holidays'` no bootstrap
 
 Sem o import, `isHoliday` / `skipHolidays` lançam erro.

@@ -27,4 +27,4 @@ There is no `pipe()`. With operators, start from the function: `format(date).spl
 - Node `>=20.18.0`
 - Bun `>=1.2.0`
 - Dependencies: `date-fns`, `validation-br`
-- Optional peer: `date-holidays` (holidays)
+- Optional peer: `date-holidays` (holidays; not a hard dependency, so unused installs stay lean)
