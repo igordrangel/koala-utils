@@ -4,13 +4,34 @@ import { KlDateCountry } from "./types/KlDateCountry";
 import { KlDateDateType } from "./types/KlDateDateType";
 import { KlDateTimeZone } from "./types/KlDateTimeZone";
 
-const Holidays = require("date-holidays");
-
 interface KlDateOptions {
   skipHolidays?: {
     country: KlDateCountry;
   };
   skipDays?: KlDateDayEnum[];
+}
+
+export type HolidayChecker = (date: Date, country: KlDateCountry) => boolean;
+
+let holidayChecker: HolidayChecker | undefined;
+
+/**
+ * Registra (ou remove) o verificador de feriados usado por `isHoliday` e `skipHolidays`.
+ * Em geral, prefira `import "@koalarx/utils/holidays"` em vez de chamar esta função diretamente.
+ * @param checker Função que determina se uma data é feriado, ou `undefined` para desabilitar.
+ */
+export function registerHolidayChecker(checker?: HolidayChecker) {
+  holidayChecker = checker;
+}
+
+function requireHolidayChecker(): HolidayChecker {
+  if (!holidayChecker) {
+    throw new Error(
+      'Holiday support requires importing "@koalarx/utils/holidays" and installing the optional peer dependency "date-holidays".',
+    );
+  }
+
+  return holidayChecker;
 }
 
 export class KlDate extends Date {
@@ -151,23 +172,22 @@ export class KlDate extends Date {
 
   /**
    * Verifica se a data atual é um feriado no país especificado.
+   * Requer `import "@koalarx/utils/holidays"` e a peer dependency opcional `date-holidays`.
    * @param country Código do país (ex.: 'BR' para Brasil).
    * @returns `true` se a data atual for um feriado no país especificado, caso contrário `false`.
-   *
-   * Esta função utiliza a biblioteca `date-holidays` para determinar se a data atual
-   * corresponde a um feriado oficial no país informado. A data é ajustada para garantir
-   * que a verificação seja precisa, mesmo em diferentes fusos horários.
+   * @throws Se o suporte a feriados não tiver sido habilitado.
    */
   isHoliday(country: KlDateCountry = "BR") {
-    const hd = new Holidays(country);
+    const check = requireHolidayChecker();
     const date = new Date(this.toDateString());
     date.setHours(1);
-    return !!hd.isHoliday(date);
+    return check(date, country);
   }
 }
 
 /**
  * Função utilitária para verificar se uma data específica é um feriado em um país.
+ * Requer `import "@koalarx/utils/holidays"` e a peer dependency opcional `date-holidays`.
  * @param date Instância de `KlDate` ou `Date` para verificar.
  * @param country Código do país (ex.: 'BR' para Brasil).
  * @returns `true` se a data for um feriado no país especificado, caso contrário `false`.

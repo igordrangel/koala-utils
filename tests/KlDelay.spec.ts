@@ -1,4 +1,4 @@
-import { delay } from "./KlDelay";
+import { delay } from "../src/core/KlDelay";
 
 describe("KlDelay", () => {
   it("delay", async () => {

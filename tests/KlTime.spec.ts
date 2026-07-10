@@ -1,4 +1,4 @@
-import { KlTime } from "./KlTime";
+import { KlTime } from "../src/core/KlTime";
 
 describe("KlTime", () => {
   it("compare time", () => {

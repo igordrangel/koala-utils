@@ -1,5 +1,6 @@
 import * as cnpj from "validation-br/dist/cnpj";
-import { KlString } from "./KlString";
+import { KlArray } from "../src/core/KlArray";
+import { KlString } from "../src/core/KlString";
 
 describe("KlString", () => {
   it("clear", () => {
@@ -52,7 +53,27 @@ describe("KlString", () => {
   });
 
   it("split", () => {
-    expect(new KlString("1,2").split(",")).toStrictEqual(["1", "2"]);
+    const result = new KlString("1,2").split(",");
+    expect(result).toBeInstanceOf(KlArray);
+    expect(result).toStrictEqual(["1", "2"]);
+  });
+
+  it("split chains with KlArray", () => {
+    expect(new KlString("1,2,3,4").split(",").split(2)).toEqual([
+      ["1", "2"],
+      ["3", "4"],
+    ]);
+  });
+
+  it("removeSpaces returns KlString", () => {
+    const result = new KlString("a b c").removeSpaces("-");
+    expect(result).toBeInstanceOf(KlString);
+    expect(result.toString()).toBe("a-b-c");
+  });
+
+  it("native transforms return KlString", () => {
+    expect(new KlString("  AbC  ").trim().toLowerCase().toString()).toBe("abc");
+    expect(new KlString("hello").replace("h", "H").toString()).toBe("Hello");
   });
 
   it("unmaskCoin", () => {

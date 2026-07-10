@@ -1,5 +1,5 @@
-import { delay } from "./KlDelay";
-import { KlCron } from "./KlCron";
+import { delay } from "../src/core/KlDelay";
+import { KlCron } from "../src/core/KlCron";
 
 describe("KlCron", () => {
   it("timer execution cron", async () => {

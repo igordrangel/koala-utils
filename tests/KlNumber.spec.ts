@@ -1,4 +1,4 @@
-import { KlNumber, maskCoin } from "./KlNumber";
+import { KlNumber, maskCoin } from "../src/core/KlNumber";
 
 describe("KlNumber", () => {
   it("random", () => {

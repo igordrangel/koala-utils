@@ -1,4 +1,5 @@
 import { isCNPJ, isCPF } from "validation-br";
+import { KlArray } from "./KlArray";
 import { KlNumber } from "./KlNumber";
 
 interface KlStringRandomOptions {
@@ -10,9 +11,138 @@ interface KlStringRandomOptions {
 
 export class KlString extends String {
   /**
+   * Divide a string em um `KlArray` de substrings.
+   * @param separator Separador (string ou expressão regular).
+   * @param limit Número máximo de divisões.
+   * @returns Um `KlArray` contendo as partes da string.
+   */
+  // @ts-expect-error String retorna string[]; KlString retorna KlArray para encadeamento fluente.
+  split(separator: string | RegExp, limit?: number): KlArray<string> {
+    return new KlArray(Array.from(super.split(separator as any, limit)));
+  }
+
+  /**
+   * Substitui ocorrências na string e retorna um novo `KlString`.
+   * @param searchValue Valor ou expressão a ser substituído.
+   * @param replaceValue Valor de substituição ou função replacer.
+   * @returns Uma nova instância de `KlString` com as substituições aplicadas.
+   */
+  // @ts-expect-error String retorna string; KlString retorna wrapper para encadeamento fluente.
+  replace(
+    searchValue: string | RegExp,
+    replaceValue: string | ((substring: string, ...args: any[]) => string),
+  ): KlString {
+    return new KlString(super.replace(searchValue as any, replaceValue as any));
+  }
+
+  /**
+   * Substitui todas as ocorrências na string e retorna um novo `KlString`.
+   * @param searchValue Valor ou expressão a ser substituído.
+   * @param replaceValue Valor de substituição ou função replacer.
+   * @returns Uma nova instância de `KlString` com as substituições aplicadas.
+   */
+  // @ts-expect-error String retorna string; KlString retorna wrapper para encadeamento fluente.
+  replaceAll(
+    searchValue: string | RegExp,
+    replaceValue: string | ((substring: string, ...args: any[]) => string),
+  ): KlString {
+    return new KlString(
+      super.replaceAll(searchValue as any, replaceValue as any),
+    );
+  }
+
+  /**
+   * Remove espaços em branco do início e do fim da string.
+   * @returns Uma nova instância de `KlString` sem espaços nas extremidades.
+   */
+  // @ts-expect-error String retorna string; KlString retorna wrapper para encadeamento fluente.
+  trim(): KlString {
+    return new KlString(super.trim());
+  }
+
+  /**
+   * Remove espaços em branco do início da string.
+   * @returns Uma nova instância de `KlString` sem espaços no início.
+   */
+  // @ts-expect-error String retorna string; KlString retorna wrapper para encadeamento fluente.
+  trimStart(): KlString {
+    return new KlString(super.trimStart());
+  }
+
+  /**
+   * Remove espaços em branco do fim da string.
+   * @returns Uma nova instância de `KlString` sem espaços no fim.
+   */
+  // @ts-expect-error String retorna string; KlString retorna wrapper para encadeamento fluente.
+  trimEnd(): KlString {
+    return new KlString(super.trimEnd());
+  }
+
+  /**
+   * Converte a string para minúsculas.
+   * @returns Uma nova instância de `KlString` em minúsculas.
+   */
+  // @ts-expect-error String retorna string; KlString retorna wrapper para encadeamento fluente.
+  toLowerCase(): KlString {
+    return new KlString(super.toLowerCase());
+  }
+
+  /**
+   * Converte a string para maiúsculas.
+   * @returns Uma nova instância de `KlString` em maiúsculas.
+   */
+  // @ts-expect-error String retorna string; KlString retorna wrapper para encadeamento fluente.
+  toUpperCase(): KlString {
+    return new KlString(super.toUpperCase());
+  }
+
+  /**
+   * Extrai uma porção da string.
+   * @param start Índice inicial.
+   * @param end Índice final (exclusivo).
+   * @returns Uma nova instância de `KlString` com a porção selecionada.
+   */
+  // @ts-expect-error String retorna string; KlString retorna wrapper para encadeamento fluente.
+  slice(start?: number, end?: number): KlString {
+    return new KlString(super.slice(start, end));
+  }
+
+  /**
+   * Extrai caracteres entre dois índices.
+   * @param start Índice inicial.
+   * @param end Índice final (exclusivo).
+   * @returns Uma nova instância de `KlString` com a porção selecionada.
+   */
+  // @ts-expect-error String retorna string; KlString retorna wrapper para encadeamento fluente.
+  substring(start: number, end?: number): KlString {
+    return new KlString(super.substring(start, end));
+  }
+
+  /**
+   * Concatena a string atual com outras strings (API nativa de `String`).
+   * @param strings Strings a serem concatenadas.
+   * @returns Uma nova instância de `KlString` com o resultado.
+   */
+  // @ts-expect-error String retorna string; KlString retorna wrapper para encadeamento fluente.
+  concat(...strings: string[]): KlString {
+    return new KlString(super.concat(...strings));
+  }
+
+  /**
+   * Normaliza a string de acordo com a forma Unicode informada.
+   * @param form Forma de normalização Unicode.
+   * @returns Uma nova instância de `KlString` normalizada.
+   */
+  // @ts-expect-error String retorna string; KlString retorna wrapper para encadeamento fluente.
+  normalize(form?: "NFC" | "NFD" | "NFKC" | "NFKD"): KlString {
+    return new KlString(super.normalize(form));
+  }
+
+  /**
    * Normaliza a string atual e remove caracteres especiais, como acentos.
    * @returns Uma nova instância de `KlString` contendo a string normalizada e sem caracteres especiais.
    */
+  // @ts-expect-error Conflito com String.prototype (prototypes); KlString preserva wrapper fluente.
   normalizeAndRemoveSpecialChars() {
     return new KlString(this.normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
   }
@@ -22,8 +152,9 @@ export class KlString extends String {
    * @param delimiter O delimitador que substituirá os espaços (padrão: '').
    * @returns Uma nova instância de `KlString` sem espaços.
    */
+  // @ts-expect-error Conflito com String.prototype (prototypes); KlString preserva wrapper fluente.
   removeSpaces(delimiter = "") {
-    return this.normalize("NFD").replace(/\s/g, delimiter);
+    return new KlString(this.normalize("NFD").replace(/\s/g, delimiter));
   }
 
   /**
@@ -31,6 +162,7 @@ export class KlString extends String {
    * @param delimiter O delimitador que substituirá os espaços e caracteres especiais (padrão: ' ').
    * @returns Uma nova instância de `KlString` contendo a string limpa.
    */
+  // @ts-expect-error Conflito com String.prototype (prototypes); KlString preserva wrapper fluente.
   clear(delimiter = " ") {
     return new KlString(
       this.normalizeAndRemoveSpecialChars()
@@ -44,6 +176,7 @@ export class KlString extends String {
    * Converte a string atual para o formato camelCase.
    * @returns Uma nova instância de `KlString` no formato camelCase.
    */
+  // @ts-expect-error Conflito com String.prototype (prototypes); KlString preserva wrapper fluente.
   toCamelCase() {
     // Primeiro, normaliza e remove caracteres especiais
     const cleaned = this.normalizeAndRemoveSpecialChars().toString();
@@ -75,6 +208,7 @@ export class KlString extends String {
    * @param decimalCount Número de casas decimais (padrão: 2).
    * @returns Uma instância de `KlNumber` contendo o valor numérico sem a máscara.
    */
+  // @ts-expect-error Conflito com String.prototype (prototypes); KlString preserva wrapper fluente.
   unmaskCoin(decimalCount = 2) {
     return new KlNumber(
       parseFloat(
@@ -107,6 +241,7 @@ export class KlString extends String {
    * @param value A string a ser adicionada no início.
    * @returns Uma nova instância de `KlString` com a string concatenada.
    */
+  // @ts-expect-error Conflito com String.prototype (prototypes); KlString preserva wrapper fluente.
   concatenateToStart(value: string) {
     return new KlString(`${value}${this}`);
   }
@@ -146,6 +281,7 @@ export class KlString extends String {
    * Aplica a máscara de CPF à string atual.
    * @returns Uma nova instância de `KlString` formatada como CPF (ex.: '123.456.789-00').
    */
+  // @ts-expect-error Conflito com String.prototype (prototypes); KlString preserva wrapper fluente.
   maskCpf() {
     return new KlString(
       this.leftPad(this.onlyNumbers(), 11)
@@ -160,6 +296,7 @@ export class KlString extends String {
    * Aplica a máscara de CNPJ à string atual.
    * @returns Uma nova instância de `KlString` formatada como CNPJ (ex.: '12.345.678/0001-00').
    */
+  // @ts-expect-error Conflito com String.prototype (prototypes); KlString preserva wrapper fluente.
   maskCnpj() {
     return new KlString(
       this.leftPad(this, 14).replace(
@@ -189,6 +326,7 @@ export class KlString extends String {
    * Remove todos os caracteres não numéricos da string.
    * @returns Uma nova instância de `KlString` contendo apenas os números.
    */
+  // @ts-expect-error Conflito com String.prototype (prototypes); KlString preserva wrapper fluente.
   onlyNumbers() {
     return new KlString(this.replace(/\D/g, ""));
   }
@@ -197,6 +335,7 @@ export class KlString extends String {
    * Substitui quebras de linha (`\n`, `\r\n`, `\r`) por tags HTML `<br/>`.
    * @returns Uma nova instância de `KlString` com as quebras de linha substituídas.
    */
+  // @ts-expect-error Conflito com String.prototype (prototypes); KlString preserva wrapper fluente.
   nbl2br() {
     return new KlString(this.replace(/\r\n|\r|\n/gi, "<br/>"));
   }
@@ -205,6 +344,7 @@ export class KlString extends String {
    * Converte a string atual para Base64.
    * @returns Uma nova instância de `KlString` contendo a string codificada em Base64.
    */
+  // @ts-expect-error Conflito com String.prototype (prototypes); KlString preserva wrapper fluente.
   toBase64() {
     return new KlString(Buffer.from(this).toString("base64"));
   }

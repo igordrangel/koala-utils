@@ -4,134 +4,113 @@ Biblioteca TypeScript publicada no npm com validadores, conversores e abstraçõ
 
 ## Visão geral da arquitetura
 
-- Cada módulo principal vive em `src/Kl{Nome}.ts` (ex.: `KlString`, `KlDate`, `KlNumber`).
-- Classes `Kl*` **estendem tipos nativos** do JavaScript (`String`, `Number`, `Date`, `Array`) para oferecer métodos encadeáveis.
-- Cada módulo expõe **duas formas de uso**:
-  1. **Classe** — `new KlString("valor").maskCpf().toString()`
-  2. **Funções utilitárias** — wrappers que delegam à classe e retornam primitivos (`maskCpf("123")`, `delay(1000)`)
-- Tipos compartilhados ficam em `src/types/`; enums em `src/enums/`.
-- O barrel `src/index.ts` reexporta todos os módulos públicos.
-- Variante **light** em `src/light/`: mesma API, sem dependências pesadas (ex.: `KlDate` sem `date-holidays`). Reexportada por `src/light/index.ts`.
+```
+src/
+  index.ts              # barrel (core)
+  core/                 # classes Kl* + funções primitivas + holidays
+    types/
+    enums/
+  operators/            # entradas fluentes (retorno Kl*)
+  prototypes/           # patches opt-in de String/Number/Date/Array
+tests/                  # specs (fora de src/)
+docs/llms.md            # doc condensada para LLMs
+```
 
-## Módulos existentes
+- Classes `Kl*` **estendem tipos nativos** (`String`, `Number`, `Date`, `Array`) para métodos encadeáveis.
+- Cada módulo core expõe **classe + funções utilitárias** que retornam primitivos.
+- **Operators** (`@koalarx/utils/operators`): mesmas operações começando na função, retorno `Kl*` para fluent; **sem `pipe()`**.
+- **Prototypes** (`@koalarx/utils/prototypes`): side-effect opt-in; não entra no barrel principal.
+- Feriados: `src/core/holidays.ts` via `@koalarx/utils/holidays`.
+
+Doc para LLMs: [`docs/llms.md`](../docs/llms.md) (também publicada no npm). Manter README e `llms.md` alinhados e detalhados; versão atual do pacote é `5.0.0` (operators/prototypes entram nesta major ainda não publicada).
+
+## Módulos core
 
 | Módulo   | Estende | Responsabilidade principal                     |
 | -------- | ------- | ---------------------------------------------- |
 | KlString | String  | Máscaras/validação CPF/CNPJ, camelCase, base64 |
 | KlNumber | Number  | Formatação monetária, números aleatórios       |
-| KlDate   | Date    | Formatação, fuso, add/sub, feriados (BR)       |
+| KlDate   | Date    | Formatação, fuso, add/sub; feriados via opt-in |
 | KlTime   | Date    | Manipulação de horários                        |
 | KlArray  | Array   | split, orderBy, shuffle, clearEmptyValues      |
 | KlDelay  | —       | `delay()` / `KlDelay.waitFor()` assíncrono     |
 | KlCron   | —       | Medição de duração de execução                 |
 
+## Operators vs prototypes vs core
+
+| Camada | Import | Uso típico |
+|--------|--------|------------|
+| Core funções | `@koalarx/utils/KlString` | `maskCpf(s)` → `string` (FE tree-shake) |
+| Operators | `@koalarx/utils/operators` | `format(d).split("/")` (FE fluente) |
+| Prototypes | `@koalarx/utils/prototypes` | `"…".maskCpf()` (BE / main) |
+
+Não reexportar operators no barrel raiz (conflito de nomes com funções primitivas).
+
 ## Padrões de implementação
 
 ### Nomenclatura
 
-- Prefixo `Kl` em classes, tipos e enums (`KlDateDateType`, `KlDateDayEnum`).
-- Arquivo de teste colocado ao lado do fonte: `KlString.spec.ts`.
-- Imports internos usam caminhos relativos (`./KlNumber`, `../types/...`).
+- Prefixo `Kl` em classes, tipos e enums.
+- Testes em `tests/*.spec.ts`.
+- Imports internos relativos (`../core/KlNumber`, `./types/...`).
 
 ### Imutabilidade vs mutação
 
-- Métodos de transformação em `KlString`, `KlNumber` e `KlArray` retornam **nova instância** (`return new KlString(...)`).
-- `KlDate.add()` e `KlDate.sub()` **mutam** `this` e retornam `this` (encadeamento in-place).
-- Funções utilitárias no final do arquivo delegam à classe e retornam primitivos (`string`, `number`, `boolean`, `Promise`).
+- Transformações em `KlString` / `KlNumber` / `KlArray` retornam **nova instância**.
+- Overrides nativos em `KlArray` / `KlString` preservam tipo `Kl*`.
+- `KlDate.add` / `sub` **mutam** `this`.
+- Funções core no final do arquivo retornam primitivos.
+- Operators retornam `Kl*` (exceto boolean/`maskCoin` string/`diff` number).
 
 ### Documentação
 
-- JSDoc em **português brasileiro** em todos os métodos e funções exportados (`@param`, `@returns`, `@throws` quando aplicável).
-- Mensagens de erro em inglês (`throw new Error("The cron is not started.")`).
+- JSDoc em **português brasileiro**.
+- Mensagens de erro em inglês.
+- Manter `docs/llms.md` alinhado à API pública.
 
-### Dependências externas
+### Dependências
 
-- `validation-br` — validação CPF/CNPJ em `KlString`.
-- `date-fns` — formatação de datas em `KlDate` e `KlTime`.
-- `date-holidays` — feriados em `KlDate` (apenas na versão completa, não em `light`).
-- Base64 em `KlString.toBase64()` usa `Buffer` nativo do Node (sem dependência externa).
+- `validation-br`, `date-fns`; `date-holidays` peer opcional via holidays.
 
-Ao adicionar dependência, avalie se faz sentido manter uma versão **light** sem ela.
+## Como adicionar um novo módulo core
 
-## Como adicionar um novo módulo
-
-1. Criar `src/Kl{Nome}.ts` com a classe estendendo o tipo nativo adequado (ou classe utilitária, como `KlCron`).
-2. Exportar funções utilitárias no mesmo arquivo, delegando à classe.
-3. Criar `src/Kl{Nome}.spec.ts` com testes Bun (`describe`/`it`/`expect`).
-4. Adicionar `export * from "./Kl{Nome}"` em `src/index.ts`.
-5. Atualizar `README.md` com seção do novo módulo (métodos + exemplos).
-6. Se o módulo tiver variante sem dependência pesada, considerar `src/light/Kl{Nome}.ts` e atualizar `src/light/index.ts`.
+1. Criar `src/core/Kl{Nome}.ts`.
+2. Funções utilitárias no mesmo arquivo (primitivos).
+3. Se couber: operator em `src/operators/` e/ou patch em `src/prototypes/`.
+4. Teste em `tests/Kl{Nome}.spec.ts`.
+5. `export *` em `src/index.ts` + entry em `package.json` `exports`.
+6. Atualizar `README.md` e `docs/llms.md`.
 
 ## Testes
 
-- Framework: **Bun test** nativo (`describe`, `it`, `expect` sem import).
-- Config: `bunfig.toml` com `root = "src"`.
-- Executar: `bun run test` (CI) ou `bun run test:watch` (desenvolvimento).
-- Cobrir métodos da classe e funções utilitárias exportadas.
-- Usar dados reais quando possível (ex.: CPF/CNPJ válidos); `validation-br/dist/cnpj` oferece `fake()` nos testes.
+- Bun test; `bun run test` (root `tests/` via `bunfig.toml`).
+- Cobrir classe, funções, operators e prototypes quando aplicável.
 
 ## Pull requests e versionamento
 
-Toda PR para `main` **deve incluir bump de versão** no `package.json`, escolhendo o comando conforme o tipo de mudança (SemVer):
+| Tipo | Comando |
+|------|---------|
+| Correção | `bun run deploy:hotfix` (patch) |
+| Feature | `bun run deploy:feature` (minor) |
+| Breaking | `bun run deploy:release` (major) |
 
-| Tipo de mudança                  | Comando                  | Exemplo de uso            |
-| -------------------------------- | ------------------------ | ------------------------- |
-| Correção / deps / tooling        | `bun run deploy:hotfix`  | patch (`4.2.4` → `4.2.5`) |
-| Nova funcionalidade (compatível) | `bun run deploy:feature` | minor (`4.2.4` → `4.3.0`) |
-| Breaking change na API pública   | `bun run deploy:release` | major (`4.2.4` → `5.0.0`) |
-
-Cada script roda os testes antes de versionar. Na PR, use `--no-git-tag-version` para atualizar só o `package.json` sem tag/push automático:
-
-```bash
-bun run test && bun pm version patch --no-git-tag-version   # equiv. deploy:hotfix
-bun run test && bun pm version minor --no-git-tag-version   # equiv. deploy:feature
-bun run test && bun pm version major --no-git-tag-version   # equiv. deploy:release
-```
-
-Inclua a alteração de versão no mesmo commit ou branch da PR antes de abrir/atualizar.
+Na PR: `bun pm version … --no-git-tag-version` para só atualizar `package.json`.
 
 ## Build e publicação
 
-- `bun run build` executa `tsc` e copia `package.json` (sem scripts/devDependencies), `README.md` e `LICENSE` para `dist/`.
-- O pacote publicado sai de `dist/`; consumidores importam por subpath:
-  ```typescript
-  import { KlString, maskCpf } from "@koalarx/utils/KlString";
-  import { delay } from "@koalarx/utils/KlDelay";
-  ```
-- `prepublishOnly` roda os testes; `preversion` roda o lint.
-- Runtimes suportados: Node `>=20.18.0` e Bun `>=1.2.0` (ver `engines` no `package.json`).
+- `bun run build` → `tsc` + copia `package.json`, `README.md`, `LICENSE`, `docs/` para `dist/`.
+- `exports` aponta `Kl*` e `holidays` para `./core/…`; `./operators` e `./prototypes*`.
+- `sideEffects`: holidays + prototypes.
 
-## Qualidade de código
+## Qualidade
 
-- TypeScript com `strict: true`; `noImplicitAny: false` (legado).
-- ESLint flat config (`eslint.config.mts`) com `typescript-eslint` + Prettier.
-- Lint/format: `bun run lint` (Prettier + ESLint fix em `src/**/*.ts`).
-- Não commitar `dist/` — gerado no build/CI.
-- Evitar `any` desnecessário; `@typescript-eslint/no-explicit-any` está desligado, mas prefira tipos explícitos.
-- Variáveis não usadas são erro (`@typescript-eslint/no-unused-vars`).
-
-## Convenções de estilo
-
-- Aspas duplas e ponto e vírgula no código principal (`KlString.ts`, `KlDate.ts`).
-- A variante `light/` usa aspas simples e trailing commas (seguir o estilo do arquivo ao editar).
-- LF como fim de linha (Prettier `--end-of-line lf`).
-
-## O que evitar
-
-- Não quebrar a API pública sem bump de versão major.
-- Não adicionar dependências sem avaliar impacto no bundle e na variante light.
-- Não remover JSDoc ao refatorar.
-- Não usar frameworks de teste além do Bun test.
-- Não alterar o fluxo de build (`tsc` → `dist/`) sem atualizar o workflow `.github/workflows/npm-publish.yml`.
+- TypeScript `strict`; ESLint + Prettier; não commitar `dist/`.
 
 ## Comandos úteis
 
 ```bash
-bun run test              # rodar testes
-bun run test:watch        # testes em modo watch
-bun run lint              # formatar e corrigir lint
-bun run build             # compilar para dist/
-bun run deploy:hotfix     # patch + testes (publicação)
-bun run deploy:feature    # minor + testes (publicação)
-bun run deploy:release    # major + testes (publicação)
+bun run test
+bun run test:watch
+bun run lint
+bun run build
 ```
