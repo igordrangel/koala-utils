@@ -1,0 +1,34 @@
+@if (doc(); as page) {
+  <section class="relative flex py-4">
+    <article #articleRef class="min-w-0 w-full xl:w-[calc(100%-16rem)]">
+      <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-6 gap-4">
+        <div class="flex flex-col">
+          <h1 class="text-4xl sm:text-5xl font-bold">{{ page.title }}</h1>
+          <small class="text-base font-light opacity-75">{{ page.description }}</small>
+        </div>
+
+        <app-copy-feedback-button
+          variant="outline"
+          class="shrink-0 self-start sm:self-auto mt-0 sm:mt-1"
+          [label]="copy().copyForAi"
+          [copiedLabel]="copy().copied"
+          [getText]="docAiUrl"
+        />
+      </div>
+
+      <app-markdown-content [content]="content()" (rendered)="onMarkdownReady()" />
+    </article>
+
+    <app-doc-on-this-page
+      [contentRoot]="articleElement()"
+      [refreshToken]="markdownReady()"
+    />
+  </section>
+} @else {
+  <div class="py-20 text-center">
+    <p class="opacity-70 mb-4">{{ copy().notFound }}</p>
+    <a [routerLink]="installGuideLink()" class="btn btn-primary btn-sm">
+      {{ copy().goToInstallGuide }}
+    </a>
+  </div>
+}

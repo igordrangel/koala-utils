@@ -1,0 +1,44 @@
+@if (visible()) {
+  <div class="fixed inset-0 z-50 flex items-start justify-center bg-black/50 p-4 pt-[12vh]">
+    <button
+      class="absolute inset-0"
+      (click)="close()"
+      aria-label="Fechar busca"
+      type="button"
+    ></button>
+
+    <div
+      class="relative w-full max-w-xl rounded-xl border border-base-300 bg-base-100 shadow-2xl overflow-hidden"
+    >
+      <div class="flex items-center gap-3 border-b border-base-300 px-4 py-3">
+        <i class="fa-solid fa-magnifying-glass opacity-50"></i>
+        <input
+          class="flex-1 bg-transparent outline-none text-sm"
+          [placeholder]="copy().searchPlaceholder"
+          [value]="query()"
+          (input)="onQueryChange($any($event.target).value)"
+          autofocus
+        />
+        <kbd class="text-xs opacity-50">Esc</kbd>
+      </div>
+
+      <ul class="max-h-80 overflow-y-auto py-2">
+        @if (query() && results().length === 0) {
+          <li class="px-4 py-6 text-sm opacity-60 text-center">{{ copy().searchNoResults }}</li>
+        }
+        @for (result of results(); track result.route) {
+          <li>
+            <button
+              class="w-full text-left px-4 py-2.5 hover:bg-base-200 transition-colors"
+              (click)="goTo(result.route)"
+              type="button"
+            >
+              <p class="text-sm font-medium">{{ result.title }}</p>
+              <p class="text-xs opacity-60 line-clamp-1">{{ result.description }}</p>
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+}

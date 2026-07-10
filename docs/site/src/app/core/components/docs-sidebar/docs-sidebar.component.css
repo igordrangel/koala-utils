@@ -1,0 +1,41 @@
+:host {
+  width: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+
+:host::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  :host {
+    width: 15rem;
+    max-width: 15rem;
+    flex: none;
+    height: calc(100vh - 4rem);
+    box-sizing: border-box;
+  }
+}
+
+.docs-sidebar-nav {
+  width: 100%;
+}
+
+.menu-title {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+  margin-top: 0.75rem;
+}
+
+.docs-sidebar-nav a {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}

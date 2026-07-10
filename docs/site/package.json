@@ -1,0 +1,67 @@
+{
+  "name": "site",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "vitest run && playwright test",
+    "e2e": "playwright test",
+    "e2e:headed": "playwright test --headed",
+    "e2e:ui": "playwright test --ui",
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest",
+    "prestart": "node generate-icons.js",
+    "prebuild": "node generate-icons.js",
+    "build:dev": "node generate-icons.js && ng build --configuration development",
+    "build:prod": "node generate-icons.js && ng build --configuration production && node scripts/post-build.mjs",
+    "serve:ssr:site": "node dist/site/server/server.mjs"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "private": true,
+  "packageManager": "bun@1.3.6",
+  "dependencies": {
+    "@angular/common": "^21.1.0",
+    "@angular/compiler": "^21.1.0",
+    "@angular/core": "^21.1.0",
+    "@angular/platform-browser": "^21.1.0",
+    "@angular/platform-server": "^21.1.0",
+    "@angular/router": "^21.1.0",
+    "@angular/ssr": "^21.2.15",
+    "daisyui": "^5.5.23",
+    "express": "^5.1.0",
+    "marked": "^18.0.5",
+    "mermaid": "^11.12.0",
+    "ngx-markdown": "^22.0.0",
+    "prism-themes": "^1.9.0",
+    "prismjs": "^1.30.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^21.1.0",
+    "@angular/cli": "^21.1.0",
+    "@angular/compiler-cli": "^21.1.0",
+    "@playwright/test": "^1.60.0",
+    "@tailwindcss/postcss": "^4.3.1",
+    "@types/express": "^5.0.1",
+    "@types/node": "^20.17.19",
+    "jsdom": "^29.1.1",
+    "postcss": "^8.5.15",
+    "tailwindcss": "^4.3.1",
+    "typescript": "~5.9.2",
+    "vitest": "^4.1.8"
+  }
+}

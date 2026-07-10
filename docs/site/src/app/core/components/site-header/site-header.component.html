@@ -1,0 +1,169 @@
+<ng-template #logotype>
+  <a [routerLink]="homeLink()">
+    <span class="flex items-center gap-3 mr-6">
+      <i class="app-icon kl-logotype size-6!"></i>
+      <span class="badge badge-sm badge-soft bg-neutral-800 font-semibold sm:inline-flex">
+        {{ version }}
+      </span>
+    </span>
+  </a>
+</ng-template>
+
+<ng-template #navButtons>
+  <a
+    class="opacity-60 justify-start lg:justify-center md:inline-flex"
+    appButton
+    btnSize="sm"
+    btnVariant="ghost"
+    [routerLink]="homeLink()"
+    routerLinkActive="opacity-100"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    {{ copy().home }}
+  </a>
+
+  <a
+    class="opacity-60 justify-start lg:justify-center md:inline-flex"
+    appButton
+    btnSize="sm"
+    btnVariant="ghost"
+    [routerLink]="docsNavLink()"
+    routerLinkActive="opacity-100"
+    [routerLinkActiveOptions]="{ exact: false }"
+  >
+    {{ copy().docs }}
+  </a>
+</ng-template>
+
+<ng-template #externalLinks>
+  <a
+    href="https://www.npmjs.com/package/@koalarx/utils"
+    target="_blank"
+    appButton
+    class="justify-start lg:justify-center md:inline-flex"
+    btnSize="sm"
+    btnVariant="ghost"
+    (click)="closeMobileMenu()"
+  >
+    @koalarx/utils
+    <i class="fa-solid fa-arrow-up-long opacity-50 rotate-45 text-[0.6rem]"></i>
+  </a>
+  <a
+    href="https://www.npmjs.com/package/@koalarx/utils"
+    target="_blank"
+    appButton
+    class="justify-start lg:justify-center md:inline-flex"
+    btnSize="sm"
+    btnVariant="ghost"
+    (click)="closeMobileMenu()"
+  >
+    @koalarx/utils
+    <i class="fa-solid fa-arrow-up-long opacity-50 rotate-45 text-[0.6rem]"></i>
+  </a>
+  <a
+    href="https://koalarx.com"
+    target="_blank"
+    appButton
+    class="justify-start lg:justify-center md:inline-flex"
+    btnSize="sm"
+    btnVariant="ghost"
+    (click)="closeMobileMenu()"
+  >
+    @koalarx/ui-cli
+    <i class="fa-solid fa-arrow-up-long opacity-50 rotate-45 text-[0.6rem]"></i>
+  </a>
+</ng-template>
+
+@if (mobileMenuVisible()) {
+  <button
+    class="fixed inset-y-0 right-0 z-40 bg-black/40 transition-opacity duration-200 ease-out lg:hidden pointer-events-auto"
+    [style.left]="'min(85vw, 18rem)'"
+    [class.opacity-100]="mobileMenuOpen()"
+    [class.opacity-0]="!mobileMenuOpen()"
+    (click)="closeMobileMenu()"
+    aria-label="Fechar menu"
+    type="button"
+  ></button>
+}
+
+<aside
+  class="fixed left-0 top-0 z-50 h-full w-72 max-w-[85vw] bg-base-100 border-r border-base-300 shadow-xl transition-transform duration-200 ease-out lg:hidden flex flex-col"
+  [class.translate-x-0]="mobileMenuOpen()"
+  [class.-translate-x-full]="!mobileMenuOpen()"
+>
+  <div class="px-4 py-4 border-b border-base-300 flex items-center justify-between gap-3 shrink-0">
+    <ng-container *ngTemplateOutlet="logotype" />
+  </div>
+
+  <app-docs-sidebar class="block flex-1 min-h-0" />
+
+  <div class="px-3 py-3 border-t border-base-300 shrink-0">
+    <div class="grid grid-cols-1 gap-2">
+      <ng-container *ngTemplateOutlet="navButtons" />
+      <ng-container *ngTemplateOutlet="externalLinks" />
+    </div>
+
+    <div class="flex items-center justify-between gap-2 mt-3 pt-3 border-t border-base-300">
+      <span class="text-xs opacity-60">{{ copy().language }}</span>
+      <span class="px-2 py-1 text-xs rounded-md bg-base-200">PT</span>
+    </div>
+  </div>
+</aside>
+
+<div class="flex h-16 items-center justify-between w-full bg-base-100 min-w-0 shrink-0">
+  <button
+    class="lg:hidden flex items-center gap-2 rounded-lg border border-base-300 bg-base-100 px-3 py-1.5 text-sm font-medium shrink-0"
+    (click)="toggleMobileMenu()"
+    aria-label="Abrir menu"
+    type="button"
+  >
+    <i class="fa-solid fa-bars"></i>
+    Menu
+  </button>
+
+  <div class="hidden lg:flex items-center shrink-0">
+    <ng-container *ngTemplateOutlet="logotype" />
+    <ng-container *ngTemplateOutlet="navButtons" />
+  </div>
+
+  <div class="flex items-center min-w-0 gap-1 ml-auto shrink-0">
+    <button
+      class="flex md:hidden items-center justify-center rounded-lg border border-base-300 bg-base-200/60 size-8 opacity-70 hover:opacity-100 transition-opacity mr-1"
+      (click)="triggerSearch()"
+      [attr.aria-label]="copy().search"
+      type="button"
+    >
+      <i class="fa-solid fa-magnifying-glass text-xs"></i>
+    </button>
+
+    <button
+      class="hidden md:flex items-center gap-2 rounded-lg border border-base-300 bg-base-200/60 px-3 py-1.5 text-sm opacity-70 hover:opacity-100 transition-opacity mr-2"
+      (click)="triggerSearch()"
+      type="button"
+    >
+      <i class="fa-solid fa-magnifying-glass text-xs"></i>
+      <span>{{ copy().search }}</span>
+      <kbd class="text-xs opacity-60">Ctrl K</kbd>
+    </button>
+
+    <div class="hidden md:flex items-center gap-1">
+      <ng-container *ngTemplateOutlet="externalLinks" />
+    </div>
+
+    <div class="hidden md:flex items-center gap-0.5 ml-1 mr-1 rounded-lg border border-base-300 p-0.5">
+      <span class="px-2 py-1 text-xs rounded-md bg-base-200">PT</span>
+    </div>
+
+    <span class="ml-2 mr-1 opacity-20 hidden lg:inline">|</span>
+
+    <app-copy-feedback-button
+      variant="ghost"
+      [label]="copy().copyAiIndex"
+      [shortLabel]="copy().copyAiShort"
+      [copiedLabel]="copy().copied"
+      [getText]="llmsUrl"
+    />
+
+    <app-github-stars class="w-auto" />
+  </div>
+</div>

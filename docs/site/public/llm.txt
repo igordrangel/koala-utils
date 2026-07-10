@@ -1,0 +1,41 @@
+# @koalarx/utils
+
+> Biblioteca utilitária TypeScript/JavaScript para máscaras, datas, arrays e conversões do ecossistema Koala.
+
+Documentação otimizada para LLMs. Cada tópico aponta para o arquivo Markdown correspondente — sem duplicar conteúdo.
+
+Site: https://utils.koalarx.com
+
+## Introdução
+
+- [Visão geral](markdown/pt/intro/visao-geral.md): O que é o @koalarx/utils e quando usar.
+
+## Primeiros passos
+
+- [Instalação](markdown/pt/inicio/instalacao.md): Instale o pacote e o peer opcional de feriados.
+- [Frontend vs backend](markdown/pt/inicio/frontend-vs-backend.md): Quando usar operators, prototypes ou funções core.
+
+## Core
+
+- [KlString](markdown/pt/core/kl-string.md): Máscaras CPF/CNPJ, camelCase, moeda, Base64 e split fluente.
+- [KlNumber](markdown/pt/core/kl-number.md): Formatação monetária e números aleatórios.
+- [KlDate](markdown/pt/core/kl-date.md): Formatação, fuso, add/sub e feriados opt-in.
+- [KlTime](markdown/pt/core/kl-time.md): Manipulação de horários com format/add/sub.
+- [KlArray](markdown/pt/core/kl-array.md): clearEmptyValues, split, orderBy e shuffle tipados.
+- [KlDelay e KlCron](markdown/pt/core/kl-delay-cron.md): delay assíncrono e medição de duração.
+- [Feriados](markdown/pt/core/holidays.md): Opt-in de date-holidays para isHoliday e skipHolidays.
+
+## Operators
+
+- [Operators — visão geral](markdown/pt/operators/visao-geral.md): Entradas fluentes tree-shakeable para o frontend.
+- [Catálogo de operators](markdown/pt/operators/catalogo.md): Lista completa de funções operators e retornos.
+
+## Prototypes
+
+- [Prototypes — visão geral](markdown/pt/prototypes/visao-geral.md): Extensão opt-in de String, Number, Date e Array.
+- [Catálogo de prototypes](markdown/pt/prototypes/catalogo.md): Métodos adicionados aos protótipos nativos.
+
+## Guias
+
+- [Para LLMs](markdown/pt/guias/para-llms.md): Como alimentar assistentes com a documentação.
+- [Migração 5.0](markdown/pt/guias/migracao-5.md): Breaking changes e novidades da major 5.0.

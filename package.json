@@ -18,7 +18,11 @@
     "postversion": "git push && git push --tags",
     "deploy:hotfix": "bun run test && bun pm version patch",
     "deploy:feature": "bun run test && bun pm version minor",
-    "deploy:release": "bun run test && bun pm version major"
+    "deploy:release": "bun run test && bun pm version major",
+    "doc:manifest": "bun scripts/build-doc-manifest.mjs",
+    "dev:docs": "bun run doc:manifest && cd docs/site && bun start",
+    "build:docs": "bun run doc:manifest && cd docs/site && bun run build:prod",
+    "preview:docs": "bunx serve docs/site/dist/site/browser -p 4321"
   },
   "repository": {
     "type": "git",
