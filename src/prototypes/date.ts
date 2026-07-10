@@ -26,7 +26,9 @@ Date.prototype.add = function (
   type: KlDateDateType,
   options?: KlDateOptions,
 ) {
-  return new KlDate(this).add(qty, type, options);
+  const result = new KlDate(this).add(qty, type, options);
+  this.setTime(result.getTime());
+  return this;
 };
 
 Date.prototype.sub = function (
@@ -34,7 +36,9 @@ Date.prototype.sub = function (
   type: KlDateDateType,
   options?: KlDateOptions,
 ) {
-  return new KlDate(this).sub(qty, type, options);
+  const result = new KlDate(this).sub(qty, type, options);
+  this.setTime(result.getTime());
+  return this;
 };
 
 Date.prototype.diff = function (date: Date, type: KlDateDateType) {

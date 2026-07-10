@@ -21,6 +21,13 @@ describe("prototypes", () => {
     const date = new Date("2023-10-01T00:00:00");
     expect(date.format("dd/MM/yyyy")).toBe("01/10/2023");
     expect(date.add(1, "days").format("dd/MM/yyyy")).toBe("02/10/2023");
+    expect(date.format("dd/MM/yyyy")).toBe("02/10/2023");
+  });
+
+  it("Date.sub mutates receiver", () => {
+    const date = new Date("2023-10-03T00:00:00");
+    date.sub(1, "days");
+    expect(date.format("dd/MM/yyyy")).toBe("02/10/2023");
   });
 
   it("Array.split chunks", () => {

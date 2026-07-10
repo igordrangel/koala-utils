@@ -16,6 +16,11 @@ export const routes: Routes = [
     pathMatch: "full",
   },
   {
+    path: "en/docs",
+    redirectTo: "en/docs/getting-started/installation",
+    pathMatch: "full",
+  },
+  {
     path: ":locale",
     component: LandingPageComponent,
     canActivate: [localeGuard],
