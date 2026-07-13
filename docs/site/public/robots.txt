@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nest.koalarx.com/sitemap.xml
+# Raw markdown and LLM indexes are for agents/tools, not search results.
+Disallow: /markdown/
+Disallow: /llm.txt
+Disallow: /llm-en.txt
+Disallow: /llms.txt
+Disallow: /llms-en.txt
+
+Sitemap: https://utils.koalarx.com/sitemap.xml

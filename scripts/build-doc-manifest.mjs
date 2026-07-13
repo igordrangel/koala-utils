@@ -240,3 +240,8 @@ console.log(
 );
 console.log(`Versão da doc sincronizada: v${appVersion}`);
 console.log(`Markdown publicado: ${markdownFiles} arquivos`);
+
+const { generatePublicSitemap } = await import(
+  "../docs/site/scripts/generate-sitemap.mjs"
+);
+generatePublicSitemap();
