@@ -49,6 +49,5 @@ Thumbs.db
 # Generated markdown for LLMs (synced from libs/doc/markdown on build)
 /public/markdown/
 
-# Generated at build time (see scripts/post-build.mjs and scripts/build-doc-manifest.mjs)
-/public/sitemap.xml
+# Generated at build time (see scripts/build-doc-manifest.mjs)
 /prerender-routes.txt

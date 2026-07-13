@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://utils.koalarx.com/pt/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/pt/docs/intro/visao-geral/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/intro/visao-geral/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/intro/overview/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/intro/visao-geral/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/pt/docs/inicio/instalacao/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/inicio/instalacao/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/getting-started/installation/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/inicio/instalacao/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/pt/docs/inicio/frontend-vs-backend/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/inicio/frontend-vs-backend/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/getting-started/frontend-vs-backend/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/inicio/frontend-vs-backend/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/pt/docs/core/kl-string/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/core/kl-string/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/core/kl-string/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/core/kl-string/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/pt/docs/core/kl-number/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/core/kl-number/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/core/kl-number/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/core/kl-number/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/pt/docs/core/kl-date/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/core/kl-date/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/core/kl-date/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/core/kl-date/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/pt/docs/core/kl-time/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/core/kl-time/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/core/kl-time/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/core/kl-time/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/pt/docs/core/kl-array/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/core/kl-array/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/core/kl-array/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/core/kl-array/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/pt/docs/core/kl-delay-cron/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/core/kl-delay-cron/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/core/kl-delay-cron/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/core/kl-delay-cron/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/pt/docs/core/holidays/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/core/holidays/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/core/holidays/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/core/holidays/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/pt/docs/operators/visao-geral/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/operators/visao-geral/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/operators/overview/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/operators/visao-geral/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/pt/docs/operators/catalogo/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/operators/catalogo/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/operators/catalog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/operators/catalogo/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/pt/docs/prototypes/visao-geral/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/prototypes/visao-geral/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/prototypes/overview/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/prototypes/visao-geral/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/pt/docs/prototypes/catalogo/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/prototypes/catalogo/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/prototypes/catalog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/prototypes/catalogo/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/pt/docs/guias/para-llms/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/guias/para-llms/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/guides/for-llms/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/guias/para-llms/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/pt/docs/guias/migracao-5/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/guias/migracao-5/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/guides/migration-5/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/guias/migracao-5/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/docs/intro/overview/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/intro/visao-geral/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/intro/overview/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/intro/visao-geral/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/docs/getting-started/installation/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/inicio/instalacao/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/getting-started/installation/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/inicio/instalacao/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/docs/getting-started/frontend-vs-backend/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/inicio/frontend-vs-backend/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/getting-started/frontend-vs-backend/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/inicio/frontend-vs-backend/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/docs/core/kl-string/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/core/kl-string/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/core/kl-string/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/core/kl-string/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/docs/core/kl-number/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/core/kl-number/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/core/kl-number/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/core/kl-number/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/docs/core/kl-date/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/core/kl-date/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/core/kl-date/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/core/kl-date/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/docs/core/kl-time/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/core/kl-time/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/core/kl-time/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/core/kl-time/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/docs/core/kl-array/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/core/kl-array/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/core/kl-array/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/core/kl-array/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/docs/core/kl-delay-cron/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/core/kl-delay-cron/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/core/kl-delay-cron/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/core/kl-delay-cron/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/docs/core/holidays/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/core/holidays/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/core/holidays/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/core/holidays/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/docs/operators/overview/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/operators/visao-geral/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/operators/overview/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/operators/visao-geral/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/docs/operators/catalog/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/operators/catalogo/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/operators/catalog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/operators/catalogo/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/docs/prototypes/overview/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/prototypes/visao-geral/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/prototypes/overview/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/prototypes/visao-geral/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/docs/prototypes/catalog/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/prototypes/catalogo/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/prototypes/catalog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/prototypes/catalogo/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/docs/guides/for-llms/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/guias/para-llms/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/guides/for-llms/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/guias/para-llms/" />
+  </url>
+  <url>
+    <loc>https://utils.koalarx.com/en/docs/guides/migration-5/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://utils.koalarx.com/pt/docs/guias/migracao-5/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://utils.koalarx.com/en/docs/guides/migration-5/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utils.koalarx.com/pt/docs/guias/migracao-5/" />
+  </url>
+</urlset>
