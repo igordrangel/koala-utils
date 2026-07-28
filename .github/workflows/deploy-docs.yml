@@ -33,7 +33,7 @@ jobs:
           bun-version: latest
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v6
 
       - name: Install docs site dependencies
         run: cd docs/site && bun install --frozen-lockfile
@@ -42,7 +42,7 @@ jobs:
         run: bun run build:docs
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: docs/site/dist/site/browser
 
@@ -56,4 +56,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
