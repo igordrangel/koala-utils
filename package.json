@@ -147,7 +147,7 @@
   },
   "dependencies": {
     "date-fns": "^4.4.0",
-    "validation-br": "^1.6.4"
+    "validation-br": "^2.0.0"
   },
   "peerDependencies": {
     "date-holidays": "^3.36.1"
