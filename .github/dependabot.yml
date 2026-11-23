@@ -4,6 +4,8 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # Evita várias PRs bumpando a mesma patch em paralelo.
+    open-pull-requests-limit: 1
     versioning-strategy: increase
     groups:
       production-dependencies:

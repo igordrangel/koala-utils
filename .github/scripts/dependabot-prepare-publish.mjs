@@ -3,11 +3,11 @@
  * Prepara PRs do Dependabot para publish:
  * - alinha ranges do package.json com versões resolvidas no bun.lock (increase)
  * - espelha peerDependencies.date-holidays com devDependencies
- * - sobe patch se a versão ainda não estiver à frente de BASE_VERSION
+ * - sobe patch acima de BASE_VERSION e do latest no npm (evita colisão entre PRs)
  * - sincroniza APP_VERSION via doc:manifest
  *
  * Env:
- *   BASE_VERSION — versão em main (ex.: 5.0.3). Se ausente, sempre sobe patch.
+ *   BASE_VERSION — versão em main (ex.: 5.0.3). Se ausente, usa só npm/current.
  *   SKIP_VERSION_BUMP — se "1", não altera package.json#version.
  */
 import { spawnSync } from "node:child_process";
@@ -90,43 +90,86 @@ if (
 const skipBump = process.env.SKIP_VERSION_BUMP === "1";
 const baseVersion = process.env.BASE_VERSION || null;
 const currentVersion = packageJson.version;
-const alreadyAhead =
-  baseVersion != null && cmpSemver(currentVersion, baseVersion) > 0;
 
-if (!skipBump && !alreadyAhead) {
-  const parsed = parseSemver(currentVersion);
-  if (!parsed) {
-    throw new Error(`Versão inválida em package.json: ${currentVersion}`);
+async function npmLatestVersion(name) {
+  try {
+    const url = `https://registry.npmjs.org/${encodeURIComponent(name)}`;
+    const response = await fetch(url, {
+      headers: { accept: "application/vnd.npm.install-v1+json" },
+    });
+    if (!response.ok) return null;
+    const body = await response.json();
+    const version = body?.["dist-tags"]?.latest;
+    return parseSemver(version) ? version : null;
+  } catch {
+    return null;
   }
-  packageJson.version = `${parsed.major}.${parsed.minor}.${parsed.patch + 1}`;
-  changed = true;
-  console.log(
-    `version: ${currentVersion} → ${packageJson.version}` +
-      (baseVersion ? ` (base ${baseVersion})` : ""),
-  );
-} else if (alreadyAhead) {
-  console.log(
-    `version: ${currentVersion} já à frente de ${baseVersion}; sem novo patch`,
-  );
 }
 
-if (changed) {
-  fs.writeFileSync(
-    packageJsonPath,
-    `${JSON.stringify(packageJson, null, 2)}\n`,
-    "utf8",
-  );
-  console.log("package.json atualizado");
-} else {
-  console.log("package.json já alinhado");
+function nextPatchAbove(...versions) {
+  let best = null;
+  for (const version of versions) {
+    if (!version || !parseSemver(version)) continue;
+    if (best == null || cmpSemver(version, best) > 0) best = version;
+  }
+  if (!best) {
+    throw new Error("Não foi possível determinar a próxima versão patch");
+  }
+  const parsed = parseSemver(best);
+  return `${parsed.major}.${parsed.minor}.${parsed.patch + 1}`;
 }
 
-const manifest = spawnSync("bun", ["run", "doc:manifest"], {
-  cwd: root,
-  stdio: "inherit",
-});
-if (manifest.status !== 0) {
-  process.exit(manifest.status ?? 1);
+async function main() {
+  if (!skipBump) {
+    const npmLatest = await npmLatestVersion(packageJson.name);
+    const floorVersions = [baseVersion, npmLatest].filter(Boolean);
+    const alreadyAheadOfFloor =
+      floorVersions.length > 0 &&
+      floorVersions.every((floor) => cmpSemver(currentVersion, floor) > 0);
+
+    if (!alreadyAheadOfFloor) {
+      packageJson.version = nextPatchAbove(currentVersion, ...floorVersions);
+      changed = true;
+      const context = [
+        baseVersion ? `base ${baseVersion}` : null,
+        npmLatest ? `npm ${npmLatest}` : null,
+      ]
+        .filter(Boolean)
+        .join(", ");
+      console.log(
+        `version: ${currentVersion} → ${packageJson.version}` +
+          (context ? ` (${context})` : ""),
+      );
+    } else {
+      console.log(
+        `version: ${currentVersion} já à frente de` +
+          (baseVersion ? ` base ${baseVersion}` : "") +
+          (npmLatest ? ` npm ${npmLatest}` : "") +
+          "; sem novo patch",
+      );
+    }
+  }
+
+  if (changed) {
+    fs.writeFileSync(
+      packageJsonPath,
+      `${JSON.stringify(packageJson, null, 2)}\n`,
+      "utf8",
+    );
+    console.log("package.json atualizado");
+  } else {
+    console.log("package.json já alinhado");
+  }
+
+  const manifest = spawnSync("bun", ["run", "doc:manifest"], {
+    cwd: root,
+    stdio: "inherit",
+  });
+  if (manifest.status !== 0) {
+    process.exit(manifest.status ?? 1);
+  }
+
+  console.log("dependabot-prepare-publish: ok");
 }
 
-console.log("dependabot-prepare-publish: ok");
+await main();

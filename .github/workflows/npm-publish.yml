@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
 jobs:
-  build:
+  publish:
     name: "npm publish library"
     runs-on: ubuntu-latest
     env:
@@ -34,7 +34,67 @@ jobs:
       - name: Build project
         run: bun run build
 
+      - name: Read package version
+        id: version
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "Package version: $version"
+
+      - name: Ensure version is not already on npm
+        run: |
+          version="${{ steps.version.outputs.version }}"
+          if npm view "@koalarx/utils@${version}" version >/dev/null 2>&1; then
+            echo "::error::Versão ${version} já existe no npm. Faça bump em package.json antes de publicar (PRs Dependabot em paralelo costumam colidir na mesma patch)."
+            exit 1
+          fi
+
       - name: Publish npm package
+        id: publish
         run: cd ./dist && npm publish --access public --ignore-scripts
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  deploy-docs:
+    name: Deploy docs after publish
+    needs: publish
+    if: needs.publish.result == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v6
+
+      - name: Install docs site dependencies
+        run: cd docs/site && bun install --frozen-lockfile
+
+      - name: Build documentation
+        run: bun run build:docs
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: docs/site/dist/site/browser
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

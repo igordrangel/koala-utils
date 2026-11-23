@@ -1,11 +1,12 @@
 name: Deploy Documentation
 
+# Docs ligados a bump de versão (package.json) sobem só após npm publish
+# bem-sucedido — ver job deploy-docs em npm-publish.yml.
 on:
   push:
     branches: [main]
     paths:
       - "docs/**"
-      - "package.json"
       - "scripts/build-doc-manifest.mjs"
       - ".github/workflows/deploy-docs.yml"
 

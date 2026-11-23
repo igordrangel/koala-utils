@@ -1,4 +1,4 @@
-import * as cnpj from "validation-br/dist/cnpj";
+import { CNPJ } from "validation-br/cnpj";
 import { KlArray } from "../src/core/KlArray";
 import { KlString } from "../src/core/KlString";
 
@@ -21,12 +21,14 @@ describe("KlString", () => {
 
   it("maskCnpj", () => {
     expect(
-      new KlString(cnpj.fake({ alphanumeric: false }))
+      new KlString(CNPJ.fake({ alphanumeric: false }).value)
         .maskCnpj()
         .validateCnpj(),
     ).toBe(true);
     expect(
-      new KlString(cnpj.fake({ alphanumeric: true })).maskCnpj().validateCnpj(),
+      new KlString(CNPJ.fake({ alphanumeric: true }).value)
+        .maskCnpj()
+        .validateCnpj(),
     ).toBe(true);
   });
 
@@ -42,9 +44,9 @@ describe("KlString", () => {
 
   it("validateCnpj", () => {
     expect(new KlString("05.581.451/0001-83").validateCnpj()).toBe(true);
-    expect(new KlString(cnpj.fake({ alphanumeric: true })).validateCnpj()).toBe(
-      true,
-    );
+    expect(
+      new KlString(CNPJ.fake({ alphanumeric: true }).value).validateCnpj(),
+    ).toBe(true);
   });
 
   it("toCamelCase", () => {
