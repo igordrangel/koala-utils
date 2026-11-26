@@ -132,25 +132,25 @@
   ],
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/bun": "^1.4.3",
+    "@types/bun": "^1.4.5",
     "@types/node": "^20.19.43",
-    "date-holidays": "^3.37.0",
-    "eslint": "^10.13.0",
+    "date-holidays": "^3.39.2",
+    "eslint": "^10.15.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.7",
-    "globals": "^17.13.0",
+    "globals": "^17.14.0",
     "jiti": "^2.7.0",
-    "prettier": "^3.9.10",
+    "prettier": "^3.10.1",
     "tsup": "^8.5.1",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.71.2"
+    "typescript-eslint": "^8.73.0"
   },
   "dependencies": {
     "date-fns": "^4.4.0",
     "validation-br": "^2.0.1"
   },
   "peerDependencies": {
-    "date-holidays": "^3.37.0"
+    "date-holidays": "^3.39.2"
   },
   "peerDependenciesMeta": {
     "date-holidays": {
